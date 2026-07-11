@@ -1,0 +1,154 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Chowdown//Events//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Tequilas Tacos & Bar - Charlotte Events
+X-WR-CALDESC:Upcoming events at Tequilas Tacos & Bar - Charlotte
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:national-tequila-day-0@tequilastacosbar.com
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20260724
+DTEND;VALUE=DATE:20260725
+SUMMARY:NATIONAL TEQUILA DAY
+LOCATION:8650 University City Blvd\, Charlotte\, NC\, 28213
+URL:https://tequilastacosbar.com/events/
+END:VEVENT
+BEGIN:VEVENT
+UID:national-fajitas-day-1@tequilastacosbar.com
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20260818
+DTEND;VALUE=DATE:20260819
+SUMMARY:NATIONAL FAJITAS DAY
+LOCATION:8650 University City Blvd\, Charlotte\, NC\, 28213
+URL:https://tequilastacosbar.com/events/
+END:VEVENT
+BEGIN:VEVENT
+UID:labor-day-2@tequilastacosbar.com
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20260907
+DTEND;VALUE=DATE:20260908
+SUMMARY:LABOR DAY
+LOCATION:8650 University City Blvd\, Charlotte\, NC\, 28213
+URL:https://tequilastacosbar.com/events/
+END:VEVENT
+BEGIN:VEVENT
+UID:grandparents-day-3@tequilastacosbar.com
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20260908
+DTEND;VALUE=DATE:20260909
+SUMMARY:GRANDPARENTS DAY
+LOCATION:8650 University City Blvd\, Charlotte\, NC\, 28213
+URL:https://tequilastacosbar.com/events/
+END:VEVENT
+BEGIN:VEVENT
+UID:independence-day-mx-4@tequilastacosbar.com
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20260916
+DTEND;VALUE=DATE:20260917
+SUMMARY:INDEPENDENCE DAY (MX)
+LOCATION:8650 University City Blvd\, Charlotte\, NC\, 28213
+URL:https://tequilastacosbar.com/events/
+END:VEVENT
+BEGIN:VEVENT
+UID:national-quesadilla-day-5@tequilastacosbar.com
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20260925
+DTEND;VALUE=DATE:20260926
+SUMMARY:NATIONAL QUESADILLA DAY
+LOCATION:8650 University City Blvd\, Charlotte\, NC\, 28213
+URL:https://tequilastacosbar.com/events/
+END:VEVENT
+BEGIN:VEVENT
+UID:national-chimichanga-day-6@tequilastacosbar.com
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20260926
+DTEND;VALUE=DATE:20260927
+SUMMARY:NATIONAL CHIMICHANGA DAY
+LOCATION:8650 University City Blvd\, Charlotte\, NC\, 28213
+URL:https://tequilastacosbar.com/events/
+END:VEVENT
+BEGIN:VEVENT
+UID:national-vegetarian-day-7@tequilastacosbar.com
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261002
+SUMMARY:NATIONAL VEGETARIAN DAY
+LOCATION:8650 University City Blvd\, Charlotte\, NC\, 28213
+URL:https://tequilastacosbar.com/events/
+END:VEVENT
+BEGIN:VEVENT
+UID:national-taco-day-8@tequilastacosbar.com
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261005
+SUMMARY:NATIONAL TACO DAY
+LOCATION:8650 University City Blvd\, Charlotte\, NC\, 28213
+URL:https://tequilastacosbar.com/events/
+END:VEVENT
+BEGIN:VEVENT
+UID:columbus-day-9@tequilastacosbar.com
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20261014
+DTEND;VALUE=DATE:20261015
+SUMMARY:COLUMBUS DAY
+LOCATION:8650 University City Blvd\, Charlotte\, NC\, 28213
+URL:https://tequilastacosbar.com/events/
+END:VEVENT
+BEGIN:VEVENT
+UID:halloween-10@tequilastacosbar.com
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20261031
+DTEND;VALUE=DATE:20261101
+SUMMARY:HALLOWEEN
+LOCATION:8650 University City Blvd\, Charlotte\, NC\, 28213
+URL:https://tequilastacosbar.com/events/
+END:VEVENT
+BEGIN:VEVENT
+UID:veterans-day-11@tequilastacosbar.com
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20261111
+DTEND;VALUE=DATE:20261112
+SUMMARY:VETERANS DAY
+LOCATION:8650 University City Blvd\, Charlotte\, NC\, 28213
+URL:https://tequilastacosbar.com/events/
+END:VEVENT
+BEGIN:VEVENT
+UID:thanksgiving-day-12@tequilastacosbar.com
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20261128
+DTEND;VALUE=DATE:20261129
+SUMMARY:THANKSGIVING DAY
+LOCATION:8650 University City Blvd\, Charlotte\, NC\, 28213
+URL:https://tequilastacosbar.com/events/
+END:VEVENT
+BEGIN:VEVENT
+UID:christmas-eve-13@tequilastacosbar.com
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20261224
+DTEND;VALUE=DATE:20261225
+SUMMARY:CHRISTMAS EVE
+LOCATION:8650 University City Blvd\, Charlotte\, NC\, 28213
+URL:https://tequilastacosbar.com/events/
+END:VEVENT
+BEGIN:VEVENT
+UID:christmas-day-14@tequilastacosbar.com
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20261225
+DTEND;VALUE=DATE:20261226
+SUMMARY:CHRISTMAS DAY
+LOCATION:8650 University City Blvd\, Charlotte\, NC\, 28213
+URL:https://tequilastacosbar.com/events/
+END:VEVENT
+BEGIN:VEVENT
+UID:new-year-s-eve-15@tequilastacosbar.com
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20261231
+DTEND;VALUE=DATE:20270101
+SUMMARY:NEW YEAR’S EVE
+LOCATION:8650 University City Blvd\, Charlotte\, NC\, 28213
+URL:https://tequilastacosbar.com/events/
+END:VEVENT
+END:VCALENDAR

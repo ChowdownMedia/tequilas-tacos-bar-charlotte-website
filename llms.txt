@@ -1,0 +1,18 @@
+# Tequilas Tacos & Bar - Charlotte
+
+> Tequilas Tacos & Bar - Charlotte — authentic Thai cuisine in Charlotte.
+
+## Pages
+
+- [Home](/)
+- [Drinks](/drinks/)
+- [Events](/events/)
+- [Menu](/menu/)
+- [Seafood](/seafood/)
+- [Careers](/careers/)
+- [Become a VIP](/vip/)
+
+## Contact
+
+- Address: 8650 University City Blvd, Charlotte, NC
+- Phone: (980) 226-5008

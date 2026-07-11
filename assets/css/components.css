@@ -1,0 +1,421 @@
+/* ==========================================================================
+   Takeover template — components for single-restaurant pages
+   (menu/tabs, food items, events, hours, specials, lead forms, sub-page hero)
+   Uses brand tokens from brand-tokens.css. Layout-agnostic; design-matched to chassis.
+   ========================================================================== */
+
+/* --- Sub-page hero banner --- */
+.page-hero {
+  margin-top: var(--nav-height, 70px);
+  background: var(--bg);                 /* flows into the page below the solid nav (no blue bleed) */
+  color: var(--secondary);
+  padding: 56px 0 28px;
+  text-align: center;
+}
+.page-hero h1 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  font-size: clamp(2rem, 1.5rem + 2vw, 3.2rem);
+  margin: 0;
+  color: var(--secondary);
+}
+.page-hero p { font-family: var(--font-body); color: #555; margin-top: 8px; }
+
+/* --- Promo bar --- */
+.promo-bar {
+  margin-top: var(--nav-height, 70px);
+  background: var(--secondary);
+  color: #fff;
+  text-align: center;
+  padding: 10px 16px;
+  font-family: var(--font-body);
+  font-size: .95rem;
+}
+.promo-bar + .page-hero, .promo-bar + main .page-hero { margin-top: 0; }
+.promo-bar a { color: #fff; text-decoration: underline; font-weight: 700; }
+
+/* --- Menu page --- */
+.menu-section { padding: 20px 0 56px; background: var(--bg); position: relative; }
+/* Whisper-subtle floral texture: brand cream shows through at low opacity; the
+   menu content sits above it. No slot -> no .has-texture -> plain cream. */
+.menu-section.has-texture::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: var(--menu-tex); background-size: 360px; background-repeat: repeat;
+  opacity: .05;
+}
+.menu-section > .container { position: relative; z-index: 1; }
+/* Connected segmented control — reads as one centered unit, not three floating
+   pills, so unequal label widths look intentional. */
+.menu-tabs {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 0; margin: 0 auto 28px;
+  width: max-content; max-width: 100%;
+  border: 2px solid var(--primary); border-radius: 999px; overflow: hidden;
+  background: #fff;
+}
+.menu-tab {
+  font-family: var(--font-heading); text-transform: uppercase; letter-spacing: .03em;
+  background: transparent; color: var(--primary); border: 0; border-left: 1px solid var(--primary);
+  padding: 12px 28px; cursor: pointer; font-size: .95rem; transition: all .2s; white-space: nowrap;
+}
+.menu-tab:first-child { border-left: 0; }
+.menu-tab:hover { background: color-mix(in srgb, var(--primary) 10%, transparent); }
+.menu-tab.active { background: var(--primary); color: var(--on-primary, #fff); }
+.menu-tab.active:hover { background: var(--primary); }
+.menu-panel { display: none; }
+.menu-panel.active { display: block; }
+
+/* Sticky section FILTER bar — chips reveal one section at a time */
+.menu-rail {
+  position: sticky; top: var(--menu-hdr, 92px); z-index: 30;
+  margin: 0 0 32px; padding: 8px 0;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(1.1) blur(6px);
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
+.menu-rail-track {
+  display: flex; gap: 8px; justify-content: safe center; overflow-x: auto; scrollbar-width: none;
+  max-width: 1100px; margin: 0 auto; padding: 2px 4px;
+  -webkit-overflow-scrolling: touch;
+}
+.menu-rail-track::-webkit-scrollbar { display: none; }
+.menu-chip {
+  flex: 0 0 auto; font-family: var(--font-heading); text-transform: uppercase;
+  letter-spacing: .03em; font-size: .8rem; white-space: nowrap; cursor: pointer; appearance: none;
+  padding: 8px 16px; border-radius: 999px; text-decoration: none;
+  color: var(--secondary); background: transparent; border: 1.5px solid rgba(0,0,0,.14);
+  transition: all .2s; min-height: 36px; display: flex; align-items: center;
+}
+.menu-chip:hover { border-color: var(--primary); color: var(--primary); }
+.menu-chip.active { background: var(--primary); color: var(--on-primary, #fff); border-color: var(--primary); }
+body:has(.promo-bar) .menu-rail { top: calc(var(--menu-hdr, 92px) + 36px); }
+
+.menu-category { margin-bottom: 16px; }
+.menu-category.is-hidden { display: none; }   /* filter: only the active section shows */
+.menu-category > h2 {
+  font-family: var(--font-heading); text-transform: uppercase; color: var(--secondary);
+  font-size: 1.8rem; text-align: center; margin-bottom: 6px;
+}
+.menu-category-rule {
+  width: 60px; height: 3px; background: var(--accent); margin: 0 auto 14px; border-radius: 2px;
+}
+.menu-cat-desc {
+  max-width: 760px; margin: 0 auto 26px; text-align: center; font-family: var(--font-body);
+  font-weight: 300; color: #555; font-size: .92rem; line-height: 1.55;
+}
+/* Masonry columns: one section at a time, so items (some with inline photos)
+   pack cleanly without the ragged row-height gaps a grid would create. */
+.menu-items { column-count: 3; column-gap: 40px; max-width: 1100px; margin: 0 auto; }
+@media (max-width: 992px) { .menu-items { column-count: 2; } }
+@media (max-width: 600px) { .menu-items { column-count: 1; } }
+.menu-item { break-inside: avoid; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px dashed rgba(0,0,0,.12); }
+.menu-item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.menu-item-name { font-family: var(--font-body); font-weight: 700; color: var(--text); font-size: 1.05rem; }
+.menu-item-price { font-family: var(--font-heading); color: var(--primary); white-space: nowrap; font-size: 1rem; }
+.menu-item-desc { font-family: var(--font-body); font-weight: 300; color: #555; font-size: .92rem; line-height: 1.5; margin-top: 4px; }
+.menu-item-photo { width: 100%; height: 210px; object-fit: cover; border-radius: 12px; margin-top: 12px; display: block; box-shadow: 0 4px 14px rgba(0,0,0,.1); }
+/* Full-menu "All" view is text-only; photos appear when a single section is picked. */
+.menu-panel.all-mode .menu-item-photo { display: none; }
+/* Allergen/legal note as a footnote at the bottom of the menu, not wedged
+   between the tabs and the section rail. */
+.menu-allergen { max-width: 820px; margin: 48px auto 0; padding-top: 22px; border-top: 1px solid rgba(0,0,0,.1);
+  font-size: .78rem; color: #888; font-style: italic; text-align: center; line-height: 1.5; font-family: var(--font-body); }
+
+/* === Large menus (GHL/Mexican: 20-30 sections) — scoped to .menu-large so small
+   menus (SpotHopper/Lotus, ~7 sections) are byte-identical (class never added).
+   1. Section pill row scrolls horizontally with a slim scrollbar + a peeking next
+      pill as the cue (default rail is centered + assumes few sections).
+   2. Long multi-variant prices wrap to their own line instead of bleeding across
+      the masonry columns (default white-space:nowrap can't wrap them). */
+.menu-large .menu-rail-track { justify-content: flex-start; scrollbar-width: thin; padding-bottom: 8px; }
+.menu-large .menu-rail-track::-webkit-scrollbar { display: block; height: 4px; }
+.menu-large .menu-rail-track::-webkit-scrollbar-track { background: transparent; }
+.menu-large .menu-rail-track::-webkit-scrollbar-thumb { background: rgba(0,0,0,.13); border-radius: 2px; }
+.menu-large .menu-item-head { flex-wrap: wrap; }
+.menu-large .menu-item-name { min-width: 0; flex: 1 1 auto; overflow-wrap: anywhere; }
+.menu-large .menu-item-price { white-space: normal; flex: 0 1 auto; text-align: right; overflow-wrap: anywhere; }
+
+/* --- Empty state (e.g. specials) --- */
+.empty-state { text-align: center; padding: 90px 20px 110px; background: var(--bg); }
+.empty-state h2 { font-family: var(--font-heading); text-transform: uppercase; color: var(--secondary); font-size: 2rem; }
+.empty-state p { font-family: var(--font-body); color: #666; margin-top: 10px; }
+
+/* --- Events --- */
+/* Parallax hero with event cards overlaid — reuses the home reviews treatment
+   exactly (brand-blue base + the blue-tinted reviewsBg image, no dark overlay). */
+.events-hero { position: relative; background: var(--primary) center/cover fixed; color: #fff; padding: 130px 0 84px; overflow: hidden; }
+.events-hero-inner { position: relative; z-index: 1; }
+.events-title { font-family: var(--font-heading); text-transform: uppercase; color: #fff; text-align: center;
+  font-size: clamp(2rem, 1.5rem + 2vw, 3.2rem); letter-spacing: .02em; margin: 0 0 38px; }
+.events-empty { text-align: center; color: #fff; }
+.events-empty h2 { font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 6px; }
+body:has(.promo-bar) .events-hero { padding-top: 166px; }
+@media (max-width: 768px) { .events-hero { background-attachment: scroll; } }
+/* Subscribe-to-events feed CTA (the gap SpotHopper/GHL miss) */
+.events-subscribe { max-width: 560px; margin: 0 auto 40px; text-align: center; }
+.events-sub-label { color: #fff; font-family: var(--font-body); opacity: .95; line-height: 1.5; margin-bottom: 18px; }
+.events-sub-btn { display: inline-block; background: #fff; color: var(--primary); border: none; padding: 11px 26px; font-size: .9rem; }
+.events-sub-btn:hover { background: var(--accent); color: #fff; }
+.events-sub-secondary { margin-top: 14px; font-size: .85rem; font-family: var(--font-body); }
+.events-sub-secondary a { color: #fff; opacity: .85; text-decoration: underline; }
+.events-sub-secondary a:hover { opacity: 1; }
+.events-sub-secondary .sep { color: #fff; opacity: .45; margin: 0 10px; }
+.evt-add { display: inline-block; margin-top: 12px; font-family: var(--font-body); font-weight: 700; font-size: .82rem; color: var(--primary); text-decoration: none; }
+.evt-add:hover { text-decoration: underline; }
+.events-list { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; }
+.events-feed-loading { color: #fff; opacity: .8; text-align: center; font-family: var(--font-body); }
+.event-card {
+  display: grid; grid-template-columns: 110px 1fr; gap: 22px; align-items: start;
+  background: #fff; border-radius: 14px; padding: 22px 26px; box-shadow: 0 6px 22px var(--shadow-light, rgba(0,0,0,.1));
+  border-left: 5px solid var(--accent);
+}
+.event-date {
+  font-family: var(--font-heading); text-transform: uppercase; color: var(--primary);
+  text-align: center; line-height: 1.15;
+}
+.event-date .ev-day { display: block; font-size: 1.5rem; }
+.event-body h2 { font-family: var(--font-heading); text-transform: uppercase; color: var(--secondary); font-size: 1.4rem; }
+.event-time { font-family: var(--font-body); font-weight: 700; color: var(--primary); font-size: .9rem; margin: 2px 0 8px; }
+.event-body p { font-family: var(--font-body); font-weight: 300; color: #555; line-height: 1.55; }
+
+/* --- Event cards with a poster image (GHL Elfsight event-calendar) --- */
+.events-list:has(.event-card.has-media) {
+  max-width: 1060px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 26px;
+}
+.event-card.has-media {
+  display: block; grid-template-columns: none; padding: 0; overflow: hidden; border-left: none;
+  border-top: 5px solid var(--accent);
+}
+.event-media { width: 100%; background: #f2f2f2; line-height: 0; }
+.event-media .event-img, .event-media img { display: block; width: 100%; height: auto; }
+.event-card.has-media .event-date { text-align: left; padding: 18px 24px 0; font-size: 1.05rem; letter-spacing: .04em; }
+.event-card.has-media .event-body { padding: 4px 24px 22px; }
+.event-card[hidden] { display: none; }
+
+/* --- Lead forms (catering / parties) --- */
+.form-section { padding: 48px 0 80px; background: var(--bg); }
+.form-intro { max-width: 720px; margin: 0 auto 30px; text-align: center; font-family: var(--font-body); color: #555; line-height: 1.6; }
+.lead-form {
+  max-width: 640px; margin: 0 auto; background: #fff; padding: 34px; border-radius: 16px;
+  box-shadow: 0 10px 30px var(--shadow-light, rgba(0,0,0,.1));
+}
+.lead-form .form-group { margin-bottom: 18px; }
+.lead-form label { display: block; font-family: var(--font-body); font-weight: 700; font-size: .85rem; margin-bottom: 6px; color: var(--text); }
+.lead-form input, .lead-form textarea, .lead-form select {
+  width: 100%; padding: 11px 13px; border: 1px solid #ccc; border-radius: 8px;
+  font-family: var(--font-body); font-size: .95rem;
+}
+.lead-form input:focus, .lead-form textarea:focus, .lead-form select:focus { outline: none; border-color: var(--primary); }
+.lead-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.lead-form input[type="file"] { padding: 8px; font-family: var(--font-body); font-size: .92rem; }
+.form-error { color: #b00020; font-family: var(--font-body); margin-top: 10px; display: none; }
+
+/* --- VIP loyalty signup: on-site wallet-pass result --- */
+.vip-result { max-width: 560px; margin: 24px auto 0; text-align: center; background: #fff; padding: 34px;
+  border-radius: 16px; box-shadow: 0 10px 30px var(--shadow-light, rgba(0,0,0,.1)); }
+.vip-result-h { font-family: var(--font-heading); text-transform: uppercase; color: var(--primary); font-size: 1.5rem; margin: 0 0 6px; }
+.vip-result-sub { font-family: var(--font-body); color: #555; margin: 0 0 20px; }
+.vip-wallet-btns { display: flex; flex-direction: column; gap: 12px; max-width: 300px; margin: 0 auto; }
+.vip-wallet { display: block; text-decoration: none; text-align: center; }
+.vip-sub { font-size: .92rem; color: #666; margin-top: -14px; }
+.form-error.visible { display: block; }
+/* honeypot: hidden from humans, catches bots that auto-fill every field */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.lead-form .btn[disabled] { opacity: .55; cursor: not-allowed; }
+.form-note {
+  margin-top: 14px; text-align: center; font-family: var(--font-body); font-size: .85rem; color: #777;
+}
+.form-note strong { color: var(--secondary); }
+
+@media (max-width: 768px) {
+  .menu-items { grid-template-columns: 1fr; }
+  .event-card { grid-template-columns: 80px 1fr; gap: 14px; padding: 18px; }
+  .lead-form .form-row { grid-template-columns: 1fr; }
+}
+
+/* --- Home: hero overlay, teaser cards, reviews (override Westfield bg-image deps) --- */
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,.15), rgba(0,0,0,.4)); }
+.logo-text { font-family: var(--font-heading); color: #fff; font-size: 1.3rem; text-transform: uppercase; }
+
+.section-teasers { padding: 60px 0; background: var(--bg); }
+.teaser-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 1000px; margin: 0 auto; }
+.teaser-card {
+  background: #fff; border-radius: 16px; padding: 38px 34px; text-align: center; text-decoration: none; display: block;
+  box-shadow: 0 8px 26px var(--shadow-light, rgba(0,0,0,.1)); border-top: 4px solid var(--accent); transition: transform .25s, box-shadow .25s;
+}
+.teaser-card:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0,0,0,.16); }
+.teaser-card h2 { font-family: var(--font-heading); text-transform: uppercase; color: var(--secondary); margin-bottom: 10px; font-size: 1.6rem; }
+.teaser-card p { font-family: var(--font-body); color: #555; margin-bottom: 20px; line-height: 1.55; }
+
+.section-reviews { position: relative; background: var(--primary); color: #fff; padding: 64px 0 84px; text-align: center; background-image: none; }
+.reviews-overlay { display: none; }
+.section-reviews .reviews-inner { position: relative; max-width: 820px; }
+.reviews-title { font-family: var(--font-heading); text-transform: uppercase; font-size: clamp(1.6rem,1.2rem + 1.5vw,2.4rem); margin-bottom: 30px; }
+.review-slide { display: none; }
+.review-slide.active { display: block; animation: fadeIn .4s ease; }
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+.reviews-source { font-family: var(--font-body); font-weight: 700; opacity: .85; font-size: .9rem; }
+.review-author { font-family: var(--font-body); font-weight: 700; margin: 6px 0 14px; }
+.review-author .stars { color: var(--accent); margin-left: 6px; }
+.review-body { position: relative; max-width: 680px; margin: 0 auto; }
+.review-body p { font-family: var(--font-body); font-weight: 300; font-size: 1.1rem; line-height: 1.7; font-style: italic; }
+.review-body .quote-mark { opacity: .65; color: #fff; font-size: 1.4rem; }
+.review-pause-btn { background: rgba(255,255,255,.15); border: none; color: #fff; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; margin: 18px 6px 0; }
+.review-pause-btn:hover { background: rgba(255,255,255,.3); }
+/* arrows: no circle, just the glyph */
+.review-arrow { background: none !important; border: none; color: #fff; width: 40px; height: 40px; border-radius: 0; cursor: pointer; margin: 18px 6px 0; font-size: 1.6rem; line-height: 1; transition: opacity .2s; }
+.review-arrow:hover { background: none !important; opacity: .65; }
+.review-dots { margin-top: 22px; display: flex; gap: 6px; justify-content: center; }
+/* 24x24 tap target (a11y) with a small 10px visible dot via content-box padding */
+.review-dots .dot { width: 24px; height: 24px; box-sizing: border-box; padding: 7px; background-clip: content-box; border-radius: 50%; border: none; background-color: rgba(255,255,255,.45); cursor: pointer; }
+.review-dots .dot.active { background-color: var(--accent); }
+
+/* Section welcome (about) + gallery polish for single-restaurant layout */
+.section-welcome { padding: 64px 0; background: var(--bg); }
+.welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; }
+.welcome-title { font-family: var(--font-heading); text-transform: uppercase; color: var(--secondary); font-size: clamp(1.8rem,1.4rem + 1.6vw,2.8rem); margin-bottom: 16px; }
+.welcome-text p { font-family: var(--font-body); font-weight: 300; line-height: 1.7; color: #444; margin-bottom: 14px; }
+.welcome-image img { width: 100%; border-radius: 16px; object-fit: cover; box-shadow: 0 10px 30px var(--shadow-light, rgba(0,0,0,.1)); }
+.section-gallery { padding: 10px 0 64px; background: var(--bg); }
+.gallery-heading { font-family: var(--font-heading); text-transform: uppercase; text-align: center; color: var(--secondary); font-size: clamp(1.6rem,1.2rem + 1.5vw,2.4rem); margin-bottom: 28px; }
+/* .btn.btn-yellow beats both single-class .btn and .btn-yellow (the collision that
+   left blue bg + dark text). bg + computed contrasting text resolved together. */
+.btn.btn-yellow, .btn-yellow { background: var(--accent); border-color: var(--accent); color: var(--on-accent, #1a1a1a); }
+.btn.btn-yellow:hover, .btn-yellow:hover { background: #fff; color: var(--secondary); border-color: var(--secondary); }
+
+@media (max-width: 768px) {
+  .teaser-grid { grid-template-columns: 1fr; }
+  .welcome-grid { grid-template-columns: 1fr; gap: 24px; }
+  .newsletter-map-grid { grid-template-columns: 1fr !important; }
+}
+
+/* a11y: contact tel/mailto links were ~22px tall inline text — just under
+   Lighthouse's 24px tap-target minimum. Pad them into real tap targets with
+   spacing. (The only remaining accessibility deduction; closes 95 -> 100.) */
+.contact-col a[href^="tel:"], .contact-col a[href^="mailto:"],
+.contact-map-side a[href^="tel:"], .contact-map-side a[href^="mailto:"] {
+  display: inline-block; min-height: 24px; padding: 8px 4px; line-height: 1.4;
+}
+
+.welcome-eyebrow, .teaser-eyebrow { font-family: var(--font-body); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; color: var(--accent); margin-bottom: 6px; }
+.teaser-eyebrow { color: var(--primary); }
+
+/* ===== Faithful page-aware nav (v9): transparent royal-blue over the HOME hero,
+   solid blue everywhere else; logo 100->80 on scroll; white links; social icons ===== */
+.site-header { background: var(--primary); box-shadow: none; top: 0; }            /* solid default (subpages) */
+body:has(.hero) .site-header:not(.scrolled) {                                     /* transparent only over home hero */
+  background: color-mix(in srgb, var(--primary) 55%, transparent); box-shadow: none; }
+.site-header.scrolled { background: var(--primary); box-shadow: 0 2px 12px rgba(0,0,0,.22); }
+.nav-logo img { height: 100px !important; width: auto !important; transition: height .3s ease; }
+.site-header.scrolled .nav-logo img { height: 80px !important; }
+.nav-left a, .nav-right a, .nav-left > li > a, .nav-right > li > a { color: #fff !important; }
+.nav-left a:hover, .nav-right a:hover,
+.nav-left > li > a:hover, .nav-right > li > a:hover { color: var(--accent) !important; }
+.nav-toggle span { background: #fff; }
+/* Pinned to the right edge, OUT of the flex flow, so nav-left/logo/nav-right stay
+   symmetric and the logo sits at true center (aligned with the page content below). */
+.nav-social { position: absolute; right: 0; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 14px; }
+.nav-social a { color: #fff; font-size: 1.05rem; line-height: 1; text-decoration: none; transition: opacity .2s; }
+.nav-social a:hover { opacity: .6; }
+
+/* slim announcement bar pinned above the nav (production-style) */
+.promo-bar { position: fixed; top: 0; left: 0; width: 100%; z-index: 1100; margin: 0 !important;
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  background: #2b2b2b; color: #fff; padding: 7px 14px; font-family: var(--font-body); font-size: .85rem; text-align: center; }
+.promo-bar .promo-text { color: #fff; }
+.promo-bar .promo-cta { color: #fff; border: 1px solid rgba(255,255,255,.6); padding: 3px 12px;
+  border-radius: 4px; text-decoration: none; font-weight: 600; white-space: nowrap; }
+.promo-bar .promo-cta:hover { background: #fff; color: #2b2b2b; }
+body:has(.promo-bar) .site-header { top: 36px; }
+
+/* home hero sits at the very top, behind the transparent nav */
+.hero { margin-top: 0 !important; }
+/* inner-page hero clears the taller (100px-logo) nav */
+.page-hero { margin-top: 0 !important; padding-top: 132px !important; }
+body:has(.promo-bar) .page-hero { padding-top: 168px !important; }
+
+/* ============================================================================
+   Faithful home (slot-driven). Decorative bg images are injected INLINE by the
+   generator from captured design slots; CSS here is layout + graceful fallback.
+   ============================================================================ */
+/* cuisine strip + medallion bridge */
+.cuisine-strip { position: relative; background: var(--primary); padding: 34px 16px 60px; overflow: visible; text-align: center; }
+.cuisine-strip-img { display: block; width: 92%; max-width: 1100px; height: auto; margin: 0 auto; }
+.cuisine-strip .cs-text { max-width: 1120px; margin: 0 auto; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 26px; color: #fff; text-decoration: none; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: .04em; font-size: clamp(1rem,1.6vw,1.4rem); }
+.cuisine-strip .cs-text span { position: relative; }
+.cuisine-strip .cs-text b { font-weight: 700; font-style: normal; }
+.cuisine-strip .cs-text span:not(:last-child)::after { content: "|"; position: absolute; right: -15px; opacity: .45; }
+.cuisine-medallion { position: absolute; left: 50%; bottom: 0; transform: translate(-50%,50%); width: 120px; height: 120px; border-radius: 50%; background: #fff; padding: 8px; box-shadow: 0 6px 18px rgba(0,0,0,.18); z-index: 5; object-fit: contain; }
+/* centered floral About (bg image inline; fallback cream) */
+.about-floral { background: var(--bg) center/cover; padding-top: 78px; }
+.welcome-centered { max-width: 900px; margin: 0 auto; text-align: center; padding: 84px 22px; }
+.about-heading { font-family: var(--font-heading); text-transform: uppercase; font-size: clamp(2rem,4vw,3.2rem); color: var(--secondary); line-height: 1.05; }
+.about-sub { font-family: var(--font-heading); text-transform: uppercase; color: var(--primary); letter-spacing: .06em; margin: 12px 0 22px; font-size: 1.1rem; }
+.about-body { line-height: 1.85; max-width: 760px; margin: 0 auto 18px; color: #3a3a3a; }
+.welcome-centered .btn { margin-top: 14px; }
+/* Catering/Parties image bands (floral bg inline; section-icon slot; curved; swoop-in) */
+.feature-bands { background: var(--bg) center/cover; display: flex; flex-direction: column; }
+.feature-band { display: grid; grid-template-columns: 1fr 1fr; min-height: 430px; opacity: 0; transform: translateX(-56px); transition: opacity .75s ease, transform .75s cubic-bezier(.22,1,.36,1); }
+.feature-band.reverse { transform: translateX(56px); }
+.feature-band.reverse .fb-media { order: 2; }
+.feature-band.in-view { opacity: 1; transform: none; }
+.fb-media { background-size: cover; background-position: center; min-height: 300px; }
+.feature-band:not(.reverse) .fb-media { border-top-left-radius: 46% 60%; border-bottom-left-radius: 46% 60%; }
+.feature-band.reverse .fb-media { border-top-right-radius: 46% 60%; border-bottom-right-radius: 46% 60%; }
+.fb-text { display: flex; flex-direction: column; justify-content: center; padding: 60px clamp(24px,5vw,80px); background: transparent; }
+.fb-icon { width: 60px; height: 60px; object-fit: contain; margin-bottom: 12px; }
+.fb-eyebrow { font-family: var(--font-body); text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; color: var(--primary); font-weight: 700; margin-bottom: 10px; }
+.fb-text h2 { font-family: var(--font-heading); text-transform: uppercase; font-size: clamp(1.8rem,3vw,2.8rem); color: var(--secondary); margin-bottom: 14px; line-height: 1.05; }
+.fb-text p { line-height: 1.7; margin-bottom: 24px; max-width: 46ch; color: #3a3a3a; }
+.fb-text .btn { align-self: flex-start; }
+/* full-bleed gallery mosaic (our spin) */
+.gallery-mosaic { display: grid; grid-template-columns: repeat(4,1fr); grid-auto-rows: clamp(180px,15vw,270px); gap: 6px; grid-auto-flow: dense; width: 100%; margin: 0; padding: 0; }
+.gallery-mosaic .gm-cell { overflow: hidden; display: block; }
+.gallery-mosaic img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+.gallery-mosaic .gm-cell:hover img { transform: scale(1.06); }
+.gallery-mosaic .gm-cell:nth-child(1), .gallery-mosaic .gm-cell:nth-child(6) { grid-column: span 2; grid-row: span 2; }
+/* reviews parallax bg (image inline; fallback solid primary) */
+.section-reviews { background: var(--primary) center/cover fixed; color: #fff; }
+.section-reviews .reviews-overlay { display: none; }
+/* Stay in Touch newsletter (floral inline on panel) */
+.newsletter-map-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.newsletter-panel { background: var(--bg) center/cover; padding: 64px clamp(28px,5vw,72px); display: flex; flex-direction: column; justify-content: center; }
+.newsletter-panel h2 { font-family: var(--font-heading); text-transform: uppercase; font-size: clamp(1.8rem,3vw,2.6rem); color: #1f1f1f; margin-bottom: 12px; }
+.newsletter-panel .nl-sub { line-height: 1.6; color: #444; margin-bottom: 26px; max-width: 42ch; }
+.newsletter-form label { display: block; font-family: var(--font-heading); font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; color: #333; margin-bottom: 8px; }
+.nl-row { display: flex; max-width: 520px; align-items: stretch; }
+.nl-row input { flex: 1; border: 0; border-bottom: 2px solid #333; background: transparent; padding: 10px 4px; font-family: var(--font-body); font-size: 1rem; outline: none; }
+.nl-row .btn { border-radius: 0 8px 8px 0; }
+.nl-note { font-size: .78rem; color: #666; margin-top: 12px; }
+.newsletter-panel .visit-phone { margin-top: 4px; }
+.newsletter-panel .visit-phone a { color: var(--secondary); font-weight: 700; font-size: 1.05rem; text-decoration: none; }
+/* black business-details footer zone */
+.section-contact { background: #0a0a0a; }
+.section-contact, .section-contact h2, .section-contact h4, .section-contact p, .section-contact strong,
+.section-contact address, .section-contact .contact-col, .section-contact .contact-col p,
+.section-contact .contact-col address p, .section-contact a, .section-contact .contact-col a { color: #fff !important; }
+.section-contact a:hover, .section-contact .contact-col a:hover { color: var(--accent) !important; }
+@media (max-width: 768px) {
+  .newsletter-map-grid { grid-template-columns: 1fr; }
+  .feature-band, .feature-band.reverse { grid-template-columns: 1fr; opacity: 1; transform: none; }
+  .feature-band.reverse .fb-media { order: 0; }
+  .gallery-mosaic { grid-template-columns: repeat(2,1fr); }
+  .gallery-mosaic .gm-cell:nth-child(1), .gallery-mosaic .gm-cell:nth-child(6) { grid-column: span 2; grid-row: span 1; }
+  .section-reviews { background-attachment: scroll; }
+}
+@media (prefers-reduced-motion: reduce) { .feature-band { opacity: 1; transform: none; transition: none; } }
+
+/* a11y: touch-target size (Lighthouse) — nav social icons + mobile toggle */
+.nav-social a { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; }
+.nav-social { gap: 8px; }
+.nav-toggle { min-width: 48px; min-height: 48px; }
+.review-arrow { min-width: 48px; min-height: 48px; }
+.review-pause-btn { min-width: 48px; min-height: 48px; }
+.contact-social a { display: inline-flex; align-items: center; justify-content: center; min-width: 48px; min-height: 48px; }
+.contact-social { gap: 6px; }
+.review-dots .dot { min-width: 24px; min-height: 24px; }
+.review-dots { gap: 12px; }
+
+/* a11y: hide nav social icons on mobile (they crowd the hamburger -> tap-target
+   collision; they remain in the footer + desktop nav) */
+@media (max-width: 768px) { .nav-social { display: none; } }

@@ -1,0 +1,8 @@
+:root{
+  --primary:#48a8bb;--primary-dark:#388392;--secondary:#ff0003;--accent:#ca6717;
+  --on-primary:#ffffff;--on-secondary:#ffffff;--on-accent:#ffffff;--bg:#f5f0e8;--text:#2a2a2a;
+  --font-heading:'Font Awesome\ 5 Free',system-ui,sans-serif;--font-body:'Font Awesome\ 5 Brands',system-ui,sans-serif;--font-script:'Font Awesome\ 5 Free',sans-serif;
+  --custom-dark-blue:var(--primary);--custom-blue:var(--secondary);--custom-yellow:var(--accent);
+  --base:#ffffff;--contrast:#000000;--radius-btn:10px;--nav-height:70px;
+}
+body{background:var(--bg)}
