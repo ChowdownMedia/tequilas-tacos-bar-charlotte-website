@@ -169,8 +169,13 @@ def utility():
     chips = "".join(f'<button class="mchip" type="button" data-t="{e(f)}" aria-pressed="false">{e(f)}</button>' for f in FILTERS)
     return ('<div class="mutil"><label class="msearch"><span>&#8981;</span>'
             '<input id="msearch" type="search" placeholder="Search the menu" aria-label="Search the menu"></label>'
-            f'<div id="mchips">{chips}</div>'
-            '<button class="msurprise" id="msurprise" type="button">Surprise me</button></div>'
+            '<button class="mfilter-toggle" type="button" aria-label="Filters" aria-expanded="false" aria-controls="mfilters" '
+            'onclick="var u=this.closest(&#39;.mutil&#39;);var o=u.classList.toggle(&#39;filters-open&#39;);this.setAttribute(&#39;aria-expanded&#39;,o)">'
+            '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">'
+            '<line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/>'
+            '<circle cx="9" cy="8" r="2.7" fill="currentColor"/><circle cx="15" cy="16" r="2.7" fill="currentColor"/></svg></button>'
+            f'<div class="mfilters" id="mfilters"><div id="mchips">{chips}</div>'
+            '<button class="msurprise" id="msurprise" type="button">Surprise me</button></div></div>'
             '<div id="mresults" hidden></div>')
 
 def item_row(it, cat):
@@ -316,7 +321,7 @@ def page_menu_landing():
                       f'<div class="mc-b"><div class="mc-h"><span class="mc-n">{e(label_of(c))}</span>'
                       f'<span class="mc-p">{n}</span></div></div></a>')
         groups_html += (f'<section class="mlgroup"><div class="msec-ey">{e(g)}</div>'
-                        f'<div class="mfeat" style="margin:14px 0 0">{cards}</div></section>')
+                        f'<div class="mfeat mfeat-cats" style="margin:14px 0 0">{cards}</div></section>')
     full_menu_ld = {"@context": "https://schema.org", "@type": "Menu", "@id": f"{DOMAIN}/menu/#menu",
                     "name": f"{BRAND} Menu", "hasMenuSection": [section_ld(c["name"]) for c in CATS_LIST]}
     intro = (f'<section id="mspread"><div class="msec-ey">Kitchen &amp; cantina &middot; {total} items</div>'
