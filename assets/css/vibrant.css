@@ -367,3 +367,28 @@ footer::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:no
 /* page never scrolls sideways: pre-animation reveal-l/r transforms sit off-canvas
    and otherwise widen the scrollable area (54px wobble on iOS) */
 html,body{overflow-x:clip}
+
+/* hero CTA: "See the Menus" must read on top of photos (was blue on photo) */
+.hero-cta .btn-outline{color:#fff;border-color:#fff;background:rgba(27,16,48,.45)}
+.hero-cta .btn-outline:hover{background:#fff;color:var(--plum,#1b1030);border-color:#fff}
+
+@media(max-width:900px){
+  /* open nav: full-sheet panel that never covers the logo, consistent left list */
+  .nav-logo{position:relative;z-index:62}
+  .nav-toggle{position:relative;z-index:62}
+  .nav-links{inset:0 0 auto 0;min-height:100dvh;z-index:60;background:#2f5ee0;
+    padding:150px 30px 46px;align-items:stretch;gap:0;overflow-y:auto;
+    transform:translateY(-105%)}
+  .nav.open .nav-links{transform:none}
+  .nav-links a{font-size:19px;letter-spacing:.12em;padding:16px 2px;text-align:left;
+    color:#fff;border-bottom:1px solid rgba(255,255,255,.18)}
+  .nav-links a.vip{color:var(--gold,#F9E87C)}
+  .nav-dd{width:100%;padding:0;margin:0}
+  .nav-dd-top{display:flex;justify-content:flex-start;width:100%}
+  .nav-dd-panel{position:static;transform:none;display:flex;background:transparent;
+    border:0;box-shadow:none;min-width:0;margin:0;padding:0 0 0 20px}
+  .nav-dd-panel a{color:#fff;font-size:17px;padding:14px 2px;border-radius:0}
+  .nav-dd-panel a:hover{background:transparent;color:var(--gold,#F9E87C)}
+  /* vip/hero ghost frame: the -1.4deg tilt reads as an off-center card on phones */
+  .hero-media .frame{transform:none;inset:-8px}
+}
