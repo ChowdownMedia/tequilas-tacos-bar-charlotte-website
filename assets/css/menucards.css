@@ -8,7 +8,7 @@
   --mb-text:#1b1030;--mb-muted:rgba(27,16,48,.72);--mb-warm:rgba(27,16,48,.55);
   --mb-leader:rgba(27,16,48,.25)}
 
-.mboard{max-width:1460px;margin:0 auto;padding:18px 26px 0;
+.mboard{max-width:1460px;margin:0 auto;padding:18px 26px 0;overflow-x:clip;
   display:grid;grid-template-columns:minmax(0,250px) minmax(0,1fr);align-items:start;gap:0;
   background:var(--cream,#FFF7EF)}
 .mrail{position:sticky;top:0;max-height:100vh;

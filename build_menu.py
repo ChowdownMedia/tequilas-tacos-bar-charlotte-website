@@ -10,7 +10,7 @@ import json, os, re, html, unicodedata
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://tequilastacosbar.com"
 IMG = "/assets/images/menu"
-CSS_VER = "mc4"
+CSS_VER = "mc5"
 ORDER_URL = "https://tequilastacosbar.com/comingsoon"
 BRAND = "Tequilas Tacos & Bar"
 
@@ -104,33 +104,48 @@ def pic(base, ratio, sizes, alt="", eager=False):
             f'alt="{e(alt)}" {load} decoding="async"></div>')
 
 # ---------------------------------------------------------------- price / tags
-_MONEY = re.compile(r"\d+(?:\.\d{1,2})?")
+_MONEY = re.compile(r"\$\s*(\d+(?:\.\d{1,2})?)")
+_BARE = re.compile(r"(?<![\d($])(\d+\.\d{2})\b")
+def _find_money(s):
+    m = _MONEY.search(s)
+    if m: return m, "$" + m.group(1)
+    m = _BARE.search(s)
+    if m: return m, "$" + m.group(1)
+    return None, None
 def parse_price(raw):
-    raw = (raw or "").strip().lstrip("$")
-    amounts = [float(x) for x in _MONEY.findall(raw)]
+    raw = (raw or "").strip()
+    amounts = [float(x) for x in _MONEY.findall(raw)] or \
+              [float(x) for x in _BARE.findall(raw)]
     minp = min(amounts) if amounts else None
     variants = []
-    if "/" in raw:
-        for part in raw.split("/"):
-            part = part.strip()
-            m = _MONEY.search(part)
-            if m:
-                price = "$" + m.group()
-                lab = (part[:m.start()] + part[m.end():]).strip().strip("()$").strip() or "Price"
-            else:
-                price, lab = part, "Price"
-            variants.append({"label": lab, "price": price})
-    else:
-        m = _MONEY.search(raw)
+    for part in (raw.split("/") if "/" in raw else [raw]):
+        part = part.strip()
+        if not part: continue
+        m, price = _find_money(part)
         if m:
-            variants.append({"label": "Price", "price": "$" + m.group()})
+            lab = (part[:m.start()] + part[m.end():]).strip().strip("-–").strip()
+            lab = lab.strip("$").strip() or "Price"
+            variants.append({"label": lab, "price": price})
         else:
-            variants.append({"label": "Price", "price": raw or "—"})
+            variants.append({"label": "Price", "price": part or "—"})
+    if not variants:
+        variants = [{"label": "Price", "price": raw or "—"}]
+    # unsplittable junk (e.g. "1/2 DOZEN $$$"): fall back to the raw string
+    if len(variants) > 1 and any(v["price"] == v["label"] == "Price" for v in variants):
+        variants = [{"label": "Price", "price": raw}]
     return variants, minp
+
 def price_str(variants):
     if len(variants) == 1 and variants[0]["label"] == "Price":
         return variants[0]["price"]
     return "  ".join(f'{v["label"]} {v["price"]}' for v in variants)
+def row_price(variants, minp):
+    if len(variants) == 1:
+        return variants[0]["price"]
+    if minp is not None:
+        s = f"{minp:.2f}".rstrip("0").rstrip(".")
+        return f"from ${s}"
+    return ""
 
 _SEAFOOD = ["shrimp", "camaron", "pulpo", "octopus", "fish", "tilapia", "mojarra", "scallop",
             "crab", "ceviche", "aguachile", "mariscos", "seafood", "del mar", "jaiba", "louisiana"]
@@ -186,7 +201,7 @@ def item_row(it, cat):
     data = {"n": name, "c": label_of(cat), "d": desc, "vars": variants, "tags": tags,
             "img": (IMG + "/" + base) if base else "", "order": ORDER_URL}
     data_attr = e(json.dumps(data, ensure_ascii=False))
-    ename, epr, islug = e(name), e(price_str(variants)), slug(name)
+    ename, epr, islug = e(name), e(row_price(variants, minp)), slug(name)
     tag_html = ('<div class="mr-tags">' + "".join(f'<span class="mtag">{e(t)}</span>' for t in tags) + "</div>") if tags else ""
     desc_html = f'<p class="mr-desc">{e(desc)}</p>' if desc else ""
     return (f'<div class="mrow" id="{islug}" data-item=\'{data_attr}\' tabindex="0" role="button" aria-label="{ename}">'
@@ -194,8 +209,8 @@ def item_row(it, cat):
             f'{tag_html}{desc_html}</div>')
 
 def feat_card(it, cat, base):
-    variants, _ = parse_price(it.get("price", ""))
-    ename, epr, islug = e(it["name"]), e(price_str(variants)), slug(it["name"])
+    variants, minp = parse_price(it.get("price", ""))
+    ename, epr, islug = e(it["name"]), e(row_price(variants, minp)), slug(it["name"])
     desc = (it.get("description") or "").strip()
     desc_html = f'<p class="mc-d">{e(desc)}</p>' if desc else ""
     return (f'<a class="mcard" href="/menu/{slug(cat)}/#{islug}">'
@@ -290,7 +305,7 @@ def page_category(cat, prev_c, next_c):
     nextlink = f'<a href="/menu/{slug(next_c)}/">{e(label_of(next_c))} &rarr;</a>' if next_c else "<span></span>"
     spread = (f'<section id="mspread"><div class="msec-ey">{e(grp)} &middot; {len(items)} items</div>'
               f'<h1 class="msec-h">{e(lab.upper())}</h1>{note_html}{band}{feat_html}{rows}'
-              f'<div class="mnav">{prevlink}{nextlink}</div></section>')
+              f'<div class="mnav">{prevlink}<a href="/menu/">All</a>{nextlink}</div></section>')
     body = ('<main class="mboard">' + rail(cat) + '<div class="mcontent">' + utility() + spread
             + "</div></main>" + sheet_html())
     top, tail = chrome(f"{lab} | {BRAND} Menu",
@@ -349,7 +364,7 @@ def build_search_index():
             tags = derive_tags(it["name"], it.get("description", ""), cat)
             idx.append({"n": it["name"], "c": label_of(cat),
                         "u": f"/menu/{slug(cat)}/#{slug(it['name'])}",
-                        "p": minp, "v": price_str(variants), "t": "|".join(tags),
+                        "p": minp, "v": row_price(variants, minp), "t": "|".join(tags),
                         "f": 1 if item_photo(cat, it["name"]) else 0,
                         "d": it.get("description", "")})
     os.makedirs(os.path.join(ROOT, "assets", "js"), exist_ok=True)
