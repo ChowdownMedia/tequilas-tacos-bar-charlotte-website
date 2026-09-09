@@ -10,7 +10,7 @@ import json, os, re, html, unicodedata
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://tequilastacosbar.com"
 IMG = "/assets/images/menu"
-CSS_VER = "mc15"
+CSS_VER = "mc16"
 ORDER_URL = "https://tequilastacosbar.com/comingsoon"
 BRAND = "Tequilas Tacos & Bar"
 
@@ -440,6 +440,32 @@ def build_search_index():
         "window.MENU_INDEX=" + json.dumps(idx, ensure_ascii=False, separators=(",", ":")) + ";")
     return len(idx)
 
+
+# ---------------------------------------------------------------- gallery
+GALLERY_SHOTS = [
+    "tacos-asada", "quesabirria", "trompo-tower", "loaded-fries",
+    "carne-asada", "steak-shrimp", "camarones-diabla", "skillet-alambre",
+    "elote-hand", "burrito-queso", "quesadilla-board", "combo-board",
+    "pollo-plate", "menudo", "paleta-margarita", "tropical-margarita",
+    "mexican-lollipop", "chamochela", "tres-leches", "lava-cake",
+    "hero-interior", "hero-photoroom",
+]
+def page_gallery():
+    tiles = "".join(pic(bs, "1/1", "(max-width:860px) 45vw, 22vw", alt="Tequilas Tacos & Bar")
+                    for bs in GALLERY_SHOTS if _has(bs))
+    body = ('<main class="galmain"><div class="wrap">'
+            '<div class="msec-ey">From the kitchen &amp; cantina</div>'
+            '<h1 class="msec-h" style="font-size:clamp(58px,13vw,170px);line-height:.8">GALLERY</h1>'
+            '<p class="mintro">Every shot below was taken here - the food, the drinks, the room.</p>'
+            f'<div class="gal-grid">{tiles}</div></div></main>')
+    top, tail = chrome(f"Gallery | {BRAND} - Charlotte",
+                       "Photos from Tequilas Tacos & Bar in Charlotte: tacos, quesabirria, the trompo, "
+                       "margaritas, desserts and the dining room.",
+                       f"{DOMAIN}/gallery/")
+    ld = ld_block([breadcrumb_ld([("Home", "/"), ("Gallery", "/gallery/")])])
+    d = os.path.join(ROOT, "gallery"); os.makedirs(d, exist_ok=True)
+    open(os.path.join(d, "index.html"), "w").write(top + ld + body + tail)
+
 if __name__ == "__main__":
     n = build_search_index()
     names = [c["name"] for c in CATS_LIST]
@@ -447,6 +473,7 @@ if __name__ == "__main__":
     dup = [s for s in slugs if slugs.count(s) > 1]
     assert not dup, f"SLUG COLLISION: {set(dup)}"
     page_menu_landing()
+    page_gallery()
     for i, cat in enumerate(names):
         page_category(cat, names[i-1] if i > 0 else None,
                       names[i+1] if i < len(names)-1 else None)
