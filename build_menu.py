@@ -10,7 +10,7 @@ import json, os, re, html, unicodedata
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://tequilastacosbar.com"
 IMG = "/assets/images/menu"
-CSS_VER = "mc16"
+CSS_VER = "mc18"
 ORDER_URL = "https://tequilastacosbar.com/comingsoon"
 BRAND = "Tequilas Tacos & Bar"
 
@@ -442,17 +442,33 @@ def build_search_index():
 
 
 # ---------------------------------------------------------------- gallery
+# Mi Jalapeno live pattern: portrait tiles in pairs, seamless, full-width
+# landscape breaks; images keep natural orientation. Curated distinct scenes.
 GALLERY_SHOTS = [
-    "tacos-asada", "quesabirria", "trompo-tower", "loaded-fries",
-    "carne-asada", "steak-shrimp", "camarones-diabla", "skillet-alambre",
-    "elote-hand", "burrito-queso", "quesadilla-board", "combo-board",
-    "pollo-plate", "menudo", "paleta-margarita", "tropical-margarita",
-    "mexican-lollipop", "chamochela", "tres-leches", "lava-cake",
-    "hero-interior", "hero-photoroom",
+    "tacos-asada",            # wide
+    "quesabirria", "trompo-tower",
+    "loaded-fries", "carne-asada",
+    "camarones-diabla",       # wide
+    "paleta-margarita", "tropical-margarita",
+    "burrito-queso", "pollo-plate",
+    "skillet-alambre",        # wide
+    "mexican-lollipop", "chamochela",
+    "menudo",                 # wide
+    "quesadilla-board", "loaded-fries-corona",
+    "tres-leches",            # wide
+    "hero-photoroom",         # wide
+    "lava-cake",              # wide
+    "hero-interior",          # wide
 ]
 def page_gallery():
-    tiles = "".join(pic(bs, "1/1", "(max-width:860px) 45vw, 22vw", alt="Tequilas Tacos & Bar")
-                    for bs in GALLERY_SHOTS if _has(bs))
+    tiles = ""
+    for bs in GALLERY_SHOTS:
+        if not _has(bs): continue
+        wide = catalog[bs]["orientation"] == "landscape"
+        cls = "gal-w" if wide else "gal-t"
+        ratio = "16/9" if wide else "4/5"
+        sizes = "(max-width:860px) 96vw, 1200px" if wide else "(max-width:860px) 48vw, 300px"
+        tiles += f'<div class="{cls}">{pic(bs, ratio, sizes, alt="Tequilas Tacos & Bar")}</div>'
     body = ('<main class="galmain"><div class="wrap">'
             '<div class="msec-ey">From the kitchen &amp; cantina</div>'
             '<h1 class="msec-h" style="font-size:clamp(58px,13vw,170px);line-height:.8">GALLERY</h1>'
