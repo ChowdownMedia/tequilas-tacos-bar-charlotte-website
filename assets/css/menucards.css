@@ -8,8 +8,8 @@
   --mb-text:#1b1030;--mb-muted:rgba(27,16,48,.72);--mb-warm:rgba(27,16,48,.55);
   --mb-leader:rgba(27,16,48,.25)}
 
-.mboard{max-width:1460px;margin:0 auto;padding:18px 26px 0;overflow-x:clip;
-  display:grid;grid-template-columns:minmax(0,285px) minmax(0,1fr);align-items:start;gap:0;
+.mboard{width:100%;max-width:2200px;margin:0 auto;padding:18px clamp(26px,3vw,52px) 0;overflow-x:clip;
+  display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);align-items:start;gap:0;
   background:var(--cream,#FFF7EF)}
 .mrail{position:sticky;top:0;max-height:100vh;
   overflow-y:auto;border-right:1px solid var(--mb-rule);padding:22px 26px 40px 0}
@@ -29,7 +29,7 @@
 .mrg a:hover{color:var(--blue,#3B69E6)}
 .mrg a.on{border-left-color:var(--pink,#FE49DB);background:rgba(59,105,230,.08);color:var(--mb-text)}
 .mrg a .ct{font:800 14px/1.32 var(--ui);color:#5a5370}
-.mcontent{padding:22px 0 90px 34px;min-width:0}
+.mcontent{padding:22px 0 90px clamp(34px,3vw,56px);min-width:0}
 .mcontent section{padding:0;margin:0}
 .mcontent .mlgroup{margin:0 0 40px}
 
@@ -37,7 +37,7 @@
 .mutil{position:sticky;top:0;z-index:40;background:var(--cream,#FFF7EF);
   border-bottom:1px solid var(--mb-rule);display:flex;
   flex-wrap:wrap;gap:10px;align-items:center;padding:12px 0;margin-bottom:6px}
-.msearch{flex:1 1 260px;display:flex;align-items:center;gap:8px;
+.msearch{flex:1 1 420px;display:flex;align-items:center;gap:8px;
   border:2px solid var(--mb-rule);background:var(--mb-panel);border-radius:10px;padding:0 12px}
 .msearch span{color:var(--mb-warm)}
 .msearch input{flex:1;background:none;border:0;color:var(--mb-text);
@@ -97,7 +97,7 @@
 .mcard .mc-d{margin:8px 0 0;font:400 14.5px/1.55 var(--ui);color:var(--mb-warm)}
 
 /* landing category cards — Tony's treatment: photo is the card, name overlaid */
-.mfeat-cats{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.mfeat-cats{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
 .mfeat-cats .mcard{position:relative;aspect-ratio:16/11;overflow:hidden;border:0;
   border-radius:14px;background:linear-gradient(150deg,var(--blue,#3B69E6),#20418f 58%,var(--pink,#FE49DB))}
 .mfeat-cats .mcard .mph{position:absolute;inset:0;aspect-ratio:auto!important;background:none}
