@@ -391,7 +391,7 @@ def page_category(cat, prev_c, next_c):
 def page_board_landing(path, hero, groups_subset, title, desc, blurb=None):
     cats_in = [c for g, cats in COURSE_GROUPS if g in groups_subset for c in cats if c in CAT_BY_NAME]
     total = sum(len(CAT_BY_NAME[c]["items"]) for c in cats_in)
-    eager_left = 4
+    eager_left = 0
     groups_html = ""
     for g, cats in COURSE_GROUPS:
         if g not in groups_subset: continue
