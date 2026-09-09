@@ -85,14 +85,24 @@ Required local iteration:
 - Header nav and hamburger contain the same valid destinations.
 - No internal nav links should use `/index.html` on Cloudflare Pages when a clean slash URL exists.
 
-## 9. Deployment
+
+## 9. `llms.txt` And AI Discovery
+
+- `llms.txt` must be valid Markdown, not plain text with bare URLs.
+- Required shape: one `#` H1, one `>` blockquote summary, then `##` sections with bulleted Markdown links.
+- Links must use Markdown syntax: `- [Label](https://example.com/path/): optional description`.
+- Bare URLs can look correct to humans but fail audits that parse Markdown links.
+- Verify the exact deployed `/llms.txt` URL, not only a cache-busted URL.
+- After deploy, compare `/llms.txt` and `/llms.txt?cb=<random>` if an audit still fails. If they differ, wait for Cloudflare edge cache before rewriting working code.
+
+## 10. Deployment
 
 - Commit after validation.
 - Push to GitHub to trigger Cloudflare Pages unless the project explicitly uses Wrangler direct deploy.
 - After deploy, test the Cloudflare preview URL with cache-busting.
 - Run PSI against the deployed preview for final client-facing score.
 
-## 10. Final Handoff
+## 11. Final Handoff
 
 Report:
 

@@ -119,6 +119,27 @@ def check_forms(files: list[Path]) -> None:
         add_warn('VIP copy/page detected, but no client config string was obvious.')
 
 
+
+def check_llms_txt() -> None:
+    p = ROOT / 'llms.txt'
+    if not p.exists():
+        add_warn('llms.txt is missing. Add it for production AI-discovery readiness.')
+        return
+    text = p.read_text(errors='ignore').strip()
+    if not re.search(r'^#\s+\S+', text, re.M):
+        add_fail('llms.txt needs a Markdown H1, e.g. # Restaurant Name.')
+    if not re.search(r'^>\s+\S+', text, re.M):
+        add_fail('llms.txt needs a blockquote summary line starting with >.')
+    if not re.search(r'^##\s+\S+', text, re.M):
+        add_fail('llms.txt needs Markdown ## sections.')
+    md_links = re.findall(r'\[[^\]]+\]\(https?://[^)]+\)', text)
+    bare_urls = re.findall(r'(?<!\()https?://[^\s)]+', text)
+    if not md_links:
+        add_fail('llms.txt has no Markdown links. Bare URLs do not satisfy the audit; use - [Label](https://example.com/).')
+    if bare_urls and len(bare_urls) > len(md_links):
+        add_warn('llms.txt appears to contain bare URLs outside Markdown link syntax.')
+    print(f'llms_markdown_links={len(md_links)}')
+
 def check_menu_generator() -> None:
     if (ROOT / 'build_menu.py').exists():
         generated = ROOT / 'assets' / 'js' / 'menu-index.js'
@@ -138,6 +159,7 @@ def main() -> int:
     check_assets(files)
     check_forms(files)
     check_menu_generator()
+    check_llms_txt()
 
     print(f'public_html_files={len(files)}')
     print(f'warnings={len(warnings)}')

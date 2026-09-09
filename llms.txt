@@ -1,18 +1,25 @@
 # Tequilas Tacos & Bar - Charlotte
 
-> Tequilas Tacos & Bar - Charlotte — authentic Thai cuisine in Charlotte.
+> Tequilas Tacos & Bar - Charlotte is a Mexican restaurant in Charlotte, NC serving tacos, tequila, margaritas, molcajetes, and Louisiana-style Mexican seafood.
 
-## Pages
+## Core Pages
 
-- [Home](/)
-- [Drinks](/drinks/)
-- [Events](/events/)
-- [Menu](/menu/)
-- [Seafood](/seafood/)
-- [Careers](/careers/)
-- [Become a VIP](/vip/)
+- [Home](https://tequilastacosbar.com/): Restaurant overview, signatures, gallery preview, reviews, hours, and contact details.
+- [Food menu](https://tequilastacosbar.com/menu/): Full kitchen and cantina food menu with tacos, fajitas, burritos, enchiladas, lunch, kids, sides, and desserts.
+- [Seafood menu](https://tequilastacosbar.com/seafood/): Seafood-focused menu with mariscos, camarones, aguachiles, ceviches, mojarras, molcajetes, and caldos.
+- [Drinks menu](https://tequilastacosbar.com/drinks/): Margaritas, frozen specials, tequila flights, beers, micheladas, cocktails, wines, sangria, and aguas.
+- [Gallery](https://tequilastacosbar.com/gallery/): Food, drink, interior, and restaurant photography.
+- [Events](https://tequilastacosbar.com/events/): Restaurant events and calendar links.
+- [Become a VIP](https://tequilastacosbar.com/vip/): VIP club signup for rewards and offers.
+- [Careers](https://tequilastacosbar.com/careers/): Hiring and job interest page.
 
-## Contact
+## Ordering And Contact
 
-- Address: 8650 University City Blvd, Charlotte, NC
-- Phone: (980) 226-5008
+- [Order online](https://tequilastacosbar.com/comingsoon): Online ordering destination.
+- [Google Maps directions](https://www.google.com/maps/search/?api=1&query=Google&query_place_id=ChIJpTAzUaceVIgRkeVtc24T1k4): Directions to 8650 University City Blvd, Charlotte, NC 28213.
+
+## Menu PDFs
+
+- [Food menu PDF](https://storage.googleapis.com/msgsndr/r38meFSUdG3vciQdiMyJ/media/6724df528bde643e984199e4.pdf): Full food menu PDF.
+- [Seafood menu PDF](https://storage.googleapis.com/msgsndr/r38meFSUdG3vciQdiMyJ/media/68273a85a3fbc69b120a9d06.pdf): Seafood menu PDF.
+- [Drinks menu PDF](https://storage.googleapis.com/msgsndr/r38meFSUdG3vciQdiMyJ/media/68273a85bb183352e7966c7e.pdf): Drinks menu PDF.

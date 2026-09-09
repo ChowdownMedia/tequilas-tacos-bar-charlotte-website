@@ -23,6 +23,7 @@ Read this file before starting any site build, redesign, menu rebuild, deploy, o
 - Wire forms to ChowdownOS/GHL with the correct client IDs and endpoints.
 - VIP/Boomerang flows must be configured and tested when included.
 - Check desktop and mobile UX, including tap targets, menu switching, category back paths, readable side rails, and PDF downloads.
+- Maintain `llms.txt` as valid Markdown with real `[label](url)` links, and verify the exact uncached `/llms.txt` after deploy.
 
 ## Done Done Gate
 
