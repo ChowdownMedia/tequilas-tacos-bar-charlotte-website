@@ -10,7 +10,7 @@ import json, os, re, html, unicodedata
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://tequilastacosbar.com"
 IMG = "/assets/images/menu"
-CSS_VER = "mc8"
+CSS_VER = "mc9"
 ORDER_URL = "https://tequilastacosbar.com/comingsoon"
 BRAND = "Tequilas Tacos & Bar"
 

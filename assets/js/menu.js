@@ -57,7 +57,11 @@
   if (chipwrap) $$(".mchip", chipwrap).forEach(function (b) {
     b.addEventListener("click", function () {
       var t = b.getAttribute("data-t");
-      if (t === "All") { clearAll(); return; }
+      if (t === "All") {
+        var onLanding = location.pathname.replace(/\/+$/, "") === "/menu";
+        if (!onLanding) { location.href = "/menu/"; return; }
+        clearAll(); return;
+      }
       active[t] = !(b.getAttribute("aria-pressed") === "true");
       b.setAttribute("aria-pressed", active[t] ? "true" : "false"); syncAll(); render();
     });
