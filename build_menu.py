@@ -10,7 +10,7 @@ import json, os, re, html, unicodedata
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://tequilastacosbar.com"
 IMG = "/assets/images/menu"
-CSS_VER = "mc9"
+CSS_VER = "mc12"
 ORDER_URL = "https://tequilastacosbar.com/comingsoon"
 BRAND = "Tequilas Tacos & Bar"
 
@@ -19,6 +19,12 @@ content = json.load(open(os.path.join(ROOT, ".chowdown/content.json")))
 catalog = json.load(open(os.path.join(ROOT, ".chowdown/photo_catalog.json")))["dishes"]
 
 CATS_LIST = [c for t in content["menu"]["tabs"] for c in t["categories"]]
+_DROP = {"Mariscos Tequilas (Seafood)", "Mojarras", "Aguachiles", "Ceviches", "Seafood (Entrées)"}
+CATS_LIST = [c for c in CATS_LIST if c["name"] not in _DROP]
+seafood = json.load(open(os.path.join(ROOT, ".chowdown/seafood.json")))
+CATS_LIST += seafood["categories"]
+drinks = json.load(open(os.path.join(ROOT, ".chowdown/drinks.json")))
+CATS_LIST += drinks["categories"]
 CAT_BY_NAME = {c["name"]: c for c in CATS_LIST}
 
 def slug(s):
@@ -29,8 +35,25 @@ def slug(s):
             "lunch-time": "lunch",
             "combinations-make-your-own-combo": "combos",
             "house-specials-molcajete": "house-specials",
-            "mariscos-tequilas": "mariscos",
-            "side-orders-add-ons": "add-ons"}.get(s, s)
+            "mariscos-especialidades": "mariscos",
+            "camarones-variedades": "camarones",
+            "cocteles-micheladas": "cocteles",
+            "aguas-frescas-jarritos": "aguas-frescas",
+            "molcajetes-especiales": "molcajetes",
+            "fried-grilled-entrees-combos": "grill-combos",
+            "other-noted-items-specials": "specials",
+            "sopes-small-tacos": "sopes",
+            "ceviches-vinagretas": "ceviches",
+            "mojarras-fish": "mojarras",
+            "soups-caldos": "caldos",
+            "side-orders-add-ons": "add-ons",
+            "margaritas-frozen-specials": "margaritas",
+            "flights-frozen-samplers": "flights",
+            "beers-micheladas": "beers",
+            "tequilas-specialty-high-end-drinks": "tequilas",
+            "mimosas-mojitos": "mimosas",
+            "wines-sangria": "wines",
+            "aguas-de-sabor": "aguas"}.get(s, s)
 
 def label_of(name):
     if name == "Lunch Time (Mon-Fri 11:00am-2:00pm)": return "Lunch Time"
@@ -43,10 +66,19 @@ COURSE_GROUPS = [
                 "Enchiladas", "Sizzling Fajitas", "Fajitas Specialties", "Steak Entrees",
                 "Chicken Entrees", "House Specials / Molcajete", "Specialties (General)",
                 "All Time Favorites", "Combinations / Make Your Own Combo", "Vegetarian"]),
-    ("Mariscos", ["Mariscos Tequilas (Seafood)", "Mojarras", "Aguachiles", "Ceviches",
-                  "Seafood (Entrées)"]),
     ("Lunch, kids & sides", ["Lunch Time (Mon-Fri 11:00am-2:00pm)", "Kids", "Eggs",
                              "Side Orders", "Side Orders / Add-Ons"]),
+    ("Seafood House", ["Mariscos (Especialidades)", "Camarones - Variedades (Shell on or off where noted)",
+                       "Aguachiles", "Ceviches & Vinagretas", "Mojarras & Fish",
+                       "Cocteles & Micheladas", "Molcajetes & Especiales (Choice of two sides)",
+                       "Soups & Caldos", "Fried / Grilled Entrees & Combos",
+                       "Sopes & Small Tacos", "Sides", "Aguas Frescas & Jarritos",
+                       "Other Noted Items / Specials"]),
+    ("Cantina", ["Margaritas & Frozen Specials", "Flights & Frozen Samplers",
+                 "Beers & Micheladas", "Cocktails", "Other Cocktails",
+                 "Tequilas & Specialty High-End Drinks", "Mimosas & Mojitos",
+                 "Wines & Sangria", "Aguas de Sabor (Flavored Waters)"]),
+    ("Desserts", ["Desserts"]),
 ]
 GROUP_OF = {c: g for g, cats in COURSE_GROUPS for c in cats}
 
@@ -61,8 +93,16 @@ PHOTO_RULES = [
     ("All Time Favorites", "lunch quesabirria", "quesabirria"),
     ("Steak Entrees", "carne asada", "carne-asada"),
     ("Sizzling Fajitas", "steak and shrimp", "steak-shrimp"),
-    ("Seafood (Entrées)", "camarones a la diabla", "camarones-diabla"),
+    ("Camarones - Variedades (Shell on or off where noted)", "camarones a la diabla", "camarones-diabla"),
+    ("Soups & Caldos", "menudo", "menudo"),
     ("Specialties (General)", "trompo de pastor", "trompo-tower"),
+    ("Margaritas & Frozen Specials", "la paleta margarita", "paleta-margarita"),
+    ("Margaritas & Frozen Specials", "mexican lollipop", "mexican-lollipop"),
+    ("Margaritas & Frozen Specials", "tropical margarita", "tropical-margarita"),
+    ("Beers & Micheladas", "chamochela", "chamochela"),
+    ("Desserts", "tres leches", "tres-leches"),
+    ("Desserts", "lava cake", "lava-cake"),
+    ("Desserts", "brownie", "lava-cake"),
 ]
 def _has(base): return base in catalog
 def item_photo(cat, name):
@@ -86,10 +126,17 @@ CATEGORY_PHOTO = {
     "Sizzling Fajitas": "skillet-held", "Steak Entrees": "carne-asada",
     "House Specials / Molcajete": "steak-shrimp",
     "Combinations / Make Your Own Combo": "combo-elote",
-    "Mariscos Tequilas (Seafood)": "camarones-diabla",
-    "Seafood (Entrées)": "camarones-close",
+    "Mariscos (Especialidades)": "camarones-diabla",
+    "Camarones - Variedades (Shell on or off where noted)": "camarones-close",
+    "Cocteles & Micheladas": "chamochela", "Soups & Caldos": "menudo",
     "Lunch Time (Mon-Fri 11:00am-2:00pm)": "quesabirria",
     "Chimichangas": "burrito-queso-2", "Chicken Entrees": "pollo-plate",
+    "Margaritas & Frozen Specials": "paleta-margarita",
+    "Flights & Frozen Samplers": "tequila-reposado",
+    "Beers & Micheladas": "chamochela", "Cocktails": "tropical-margarita",
+    "Other Cocktails": "mexican-lollipop",
+    "Tequilas & Specialty High-End Drinks": "tequila-blanco",
+    "Mimosas & Mojitos": "marg-spicy", "Desserts": "tres-leches",
 }
 def card_photo(cat):
     b = CATEGORY_PHOTO.get(cat) or cat_photo(cat)
@@ -234,6 +281,8 @@ KEYWORD_PHOTO = [
     ("elote", "elote-hand"), ("esquite", "elote-hand"),
     ("camaron", "camarones-diabla"), ("taco", "tacos-asada"),
     ("shrimp", "camarones-close"), ("fries", "loaded-fries"),
+    ("margarita", "paleta-margarita"), ("michelada", "chamochela"),
+    ("tres leches", "tres-leches"),
 ]
 def schema_photo(cat, name):
     n = name.lower()

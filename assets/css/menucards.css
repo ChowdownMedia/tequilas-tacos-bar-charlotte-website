@@ -83,6 +83,27 @@
 .mcard .mc-p{font:800 14px/1 var(--ui);color:var(--blue,#3B69E6);white-space:nowrap}
 .mcard .mc-d{margin:8px 0 0;font:400 14.5px/1.55 var(--ui);color:var(--mb-warm)}
 
+/* landing category cards — Tony's treatment: photo is the card, name overlaid */
+.mfeat-cats{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.mfeat-cats .mcard{position:relative;aspect-ratio:16/11;overflow:hidden;border:0;
+  border-radius:14px;background:linear-gradient(150deg,var(--blue,#3B69E6),#20418f 58%,var(--pink,#FE49DB))}
+.mfeat-cats .mcard .mph{position:absolute;inset:0;aspect-ratio:auto!important;background:none}
+.mfeat-cats .mcard .mph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform .5s ease}
+.mfeat-cats .mcard:hover .mph img{transform:scale(1.06)}
+.mfeat-cats .mcard::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(27,16,48,0) 38%,rgba(27,16,48,.88));z-index:1}
+.mfeat-cats .mcard .mc-b{position:absolute;left:0;right:0;bottom:0;z-index:2;
+  padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+.mfeat-cats .mcard .mc-n{font-family:var(--disp);font-weight:400;font-size:24px;
+  line-height:1.05;color:var(--cream,#FFF7EF);letter-spacing:.01em}
+.mfeat-cats .mcard .mc-p{font:800 14px/1 var(--ui);color:var(--gold,#F9E87C)}
+/* photoless tiles: same geometry, faded initial centered */
+.mfeat-cats .mtile{min-height:0;justify-content:flex-end}
+.mfeat-cats .mtile .mti{top:50%;left:50%;transform:translate(-50%,-54%);font-size:96px;opacity:.28}
+.mfeat-cats .mtile .mcb,.mfeat-cats .mtile .mc-b{position:absolute;left:0;right:0;bottom:0;z-index:2;
+  padding:14px 16px}
+
 /* item rows */
 .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0 54px}
 .mrow{display:block;width:100%;text-align:left;border-top:1px solid var(--mb-rule);
@@ -147,15 +168,12 @@
   .mfilters{display:none;flex-basis:100%;width:100%}
   .mutil.filters-open .mfilters{display:block;margin-top:8px}
   .mutil.filters-open #mchips{margin-bottom:10px}
-  .mfeat-cats{grid-template-columns:1fr 1fr;gap:12px;margin:22px 0 30px}
   #mresults .rrow{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"n p" "c c";
     gap:3px 12px;padding:15px 0}
   #mresults .rn{grid-area:n;font-size:17.5px}
   #mresults .rp{grid-area:p;font-size:15px}
   #mresults .rc{grid-area:c;font-size:10.5px;letter-spacing:.14em}
-  .mcard .mc-b{padding:12px 13px 15px}
-  .mcard .mc-n{font-size:16px;line-height:1.1}
-  .mcard .mc-p{font-size:12px}
+  .mfeat-cats .mcard .mc-n{font-size:21px}
   .msec-h{font-size:clamp(34px,11vw,62px)}
   #msheet{width:100%}
 }

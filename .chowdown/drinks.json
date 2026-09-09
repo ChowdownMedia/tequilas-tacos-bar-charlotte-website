@@ -1,0 +1,694 @@
+{
+ "categories": [
+  {
+   "name": "Margaritas & Frozen Specials",
+   "description": "",
+   "items": [
+    {
+     "name": "House Lime Margarita",
+     "image": "",
+     "description": "House lime margarita.",
+     "price": "14oz $6.99 / Jumbo 21oz $11.99 / Large Pitcher 60oz $29.99"
+    },
+    {
+     "name": "Margaritas Texanas",
+     "image": "",
+     "description": "Very strong margarita. House margarita, Gran Gala, plus your choice of these specific tequila brands: (Chorritos, 1800 Reposado, Luna Azul Reposado, Sauza Reposado, Jose Cuervo Reposado). Premium tequila brands extra charge: (Don Julio, Patron, Herradura, Casamigos or Mezcal).",
+     "price": "Sm 14oz $12.99 / Jumbo 21oz $16.99 / Large Pitcher 60oz $39.99"
+    },
+    {
+     "name": "Mexican Lollipop",
+     "image": "",
+     "description": "Vodka, tamarind, lime juice, cranberry juice, Tajin, chamoy.",
+     "price": "$10.99"
+    },
+    {
+     "name": "Los Cabos Breeze",
+     "image": "",
+     "description": "Coconut liqueur, melon liqueur, pineapple juice and orange juice.",
+     "price": "$10.99"
+    },
+    {
+     "name": "Mamacita Margarita",
+     "image": "",
+     "description": "Jose Cuervo tequila, Cointreau, fresh lime juice, strawberry pulp, hibiscus salt.",
+     "price": "12oz $10.99 / 21oz $19.99"
+    },
+    {
+     "name": "La Paleta Margarita",
+     "image": "",
+     "description": "Luna Azul Reposado tequila, fresh lime, orange juice, triple sec, Gran Gala, salt, Tajin and ice pop.",
+     "price": "12oz $11.99"
+    },
+    {
+     "name": "Flavored Margarita (Margaritas with tequila)",
+     "image": "",
+     "description": "Margaritas with tequila. Flavors: Peach, Mango, Strawberry, Passion Fruit, Guava, Piña Colada, Pineapple, Blackberry.",
+     "price": "SM 14oz $8.49 / JUMBO 21oz $15.99 / LARGE PITCHER 60oz $35.99"
+    },
+    {
+     "name": "Daiquiris (with rum)",
+     "image": "",
+     "description": "Daiquiris made with rum. 14oz only.",
+     "price": "14oz only $9.49"
+    },
+    {
+     "name": "Tonys Margarita",
+     "image": "",
+     "description": "All frozen margarita flavors.",
+     "price": "JUMBO 21oz $19.99"
+    },
+    {
+     "name": "Sangria Swirl",
+     "image": "",
+     "description": "Two great tastes of Mexico, frozen lime margarita swirled with our homemade sangria.",
+     "price": "SM 14oz $10.99 / JUMBO 21oz $16.99"
+    },
+    {
+     "name": "Toronja Loca",
+     "image": "",
+     "description": "Crazy grapefruit — grape juice, Teremana Gold, Gran Gala, lime juice, triple sec, gin.",
+     "price": "SM 14oz $11.99 / JUMBO 21oz $19.99"
+    },
+    {
+     "name": "Tropical Margarita",
+     "image": "",
+     "description": "Pick any two margarita flavors. Frozen only. Flavors: Peach, Mango, Strawberry, Passion Fruit, Guava, Piña Colada, Pineapple, Blackberry.",
+     "price": "SM 16oz $13.99 / JUMBO 21oz $16.99"
+    },
+    {
+     "name": "Miami Vice Margarita",
+     "image": "",
+     "description": "Strawberry and Pina Colada margarita. Frozen only.",
+     "price": "SM 16oz $13.99 / JUMBO 21oz $16.99"
+    },
+    {
+     "name": "Enhance Your Drink",
+     "image": "",
+     "description": "Enhance your drink by upgrading your tequila or adding: jalapeño, flavor, cucumber or berries (for an extra charge).",
+     "price": "For an extra charge"
+    },
+    {
+     "name": "Corona-Rita",
+     "image": "",
+     "description": "Jumbo House Margarita with Coronarita",
+     "price": "Jumbo 21oz $15.99"
+    },
+    {
+     "name": "Cucumber Margarita",
+     "image": "",
+     "description": "House Margarita, and fresh cucumber",
+     "price": "SM 14oz $10.99 / JUMBO 21oz $16.49"
+    },
+    {
+     "name": "Sunburn Margarita",
+     "image": "",
+     "description": "House Margarita, cranberry juice",
+     "price": "SM 14oz $11.99 / JUMBO 21oz $16.99"
+    },
+    {
+     "name": "Jalapeno Margarita",
+     "image": "",
+     "description": "House Margarita, Gran Gala, fresh jalapeno",
+     "price": "SM 14oz $10.99 / JUMBO 21oz $16.49"
+    },
+    {
+     "name": "Mangonada",
+     "image": "",
+     "description": "Mango, chamoy, tajin",
+     "price": "SM 14oz $10.99 / JUMBO 21oz $15.99"
+    },
+    {
+     "name": "Organic Margarita",
+     "image": "",
+     "description": "Fresh lime juice, orange juice, agave nectar, Gran Gala, Triple Sec, Tajin rim. Your choice of these specific tequila brands: Luna Azul Blanco, Teremana Reposado, 1800 Reposado, Jose Cuervo",
+     "price": "SM 12oz $13.99 / JUMBO 21oz $19.99"
+    },
+    {
+     "name": "Blue Amor Margarita",
+     "image": "",
+     "description": "House Margarita, blue curacao",
+     "price": "SM 12oz $6.50 / 21oz $11.99"
+    },
+    {
+     "name": "Blue Margarita Shots",
+     "image": "",
+     "description": "House Margarita & Blue Curacao",
+     "price": "$2.99 each"
+    },
+    {
+     "name": "Milagro Margarita",
+     "image": "",
+     "description": "Milagro tequila, fresh lime juice, orange juice, agave nectar, Gran Gala, triple sec",
+     "price": "SM 14oz $13.99 / JUMBO 21oz $18.99"
+    },
+    {
+     "name": "Red Bull Energy Margarita",
+     "image": "",
+     "description": "Jumbo house margarita and Red Bull",
+     "price": "JUMBO 21oz $17.99"
+    },
+    {
+     "name": "Margarita Borracha",
+     "image": "",
+     "description": "Jose Cuervo, Bacardi, Cointreau, fresh lime juice, strawberry pulp, hibiscus salt",
+     "price": "SM 12oz $11.99 / JUMBO 21oz $20.99"
+    },
+    {
+     "name": "Red Bull Wings Margarita",
+     "image": "",
+     "description": "House margarita, blue curacao and Red Bull",
+     "price": "JUMBO 21oz $18.99"
+    },
+    {
+     "name": "Malibu Buckets",
+     "image": "",
+     "description": "Black Malibu rum, orange, pineapple and cranberry juice along with your choice of Malibu flavor",
+     "price": "32 oz $16.99"
+    },
+    {
+     "name": "Margarita Tower",
+     "image": "",
+     "description": "Flavors: Peach, Mango, Strawberry, Passion Fruit, Guava, Piña Colada, Pineapple, Blackberry",
+     "price": "$69.99"
+    },
+    {
+     "name": "La Millonaria",
+     "image": "",
+     "description": "Choice of Clase Azul or Don Julio 1942 tequila, fresh lime juice, orange juice, Cointreau, agave nectar, triple sec, salt.",
+     "price": "14oz $39.99"
+    },
+    {
+     "name": "Cadillac Margarita",
+     "image": "",
+     "description": "Patron Silver tequila, Gran Gala, agave nectar, fresh lime juice, orange juice, salt.",
+     "price": "14oz $15.99"
+    },
+    {
+     "name": "Mez-Tequi Margarita",
+     "image": "",
+     "description": "Mezcal, tequila, Gran Gala, agave nectar, fresh lime, orange juice.",
+     "price": "12oz $11.99"
+    },
+    {
+     "name": "La Toxica",
+     "image": "",
+     "description": "Hornitos, Vodka Titos, fresh lime juice, triple sec, Gran Gala, club soda and Tajin.",
+     "price": "12oz $10.99 / Jumbo 21oz $18.99"
+    },
+    {
+     "name": "Skinny Margarita",
+     "image": "",
+     "description": "Teremana tequila, fresh lime juice, triple sec, Gran Gala, club soda, Tajin.",
+     "price": "SM 12oz $10.99 / Jumbo 21oz $18.99"
+    },
+    {
+     "name": "The Tree of Life / El Arbol de la Vida",
+     "image": "",
+     "description": "Pick 5 flavors (frozen only). Flavors: Peach, Mango, Strawberry, Passion Fruit, Guava, Piña Colada, Pineapple, Blackberry, Mangonada. Sangria (on the rocks only).",
+     "price": "Pick 5 flavors / Frozen only $24.99"
+    }
+   ]
+  },
+  {
+   "name": "Flights & Frozen Samplers",
+   "description": "",
+   "items": [
+    {
+     "name": "Flight to Mexico (Frozen Only)",
+     "image": "",
+     "description": "Frozen only. Four shot-size frozen flavors served on plane sampler. Flavors (numbered 1-4): 1 - Mango - Guava; 2 - Strawberry - Lime; 3 - Passion Fruit - Lime; 4 - Piña Colada - Strawberry.",
+     "price": "$24.99"
+    },
+    {
+     "name": "Margarita Flight - 4 different flavors",
+     "image": "",
+     "description": "Margarita Flight (Frozen Only). Choose 4 different frozen margarita flavors. Available flavors: Lime, Peach, Mango, Strawberry, Passion Fruit, Guava, Piña Colada, Pineapple, Blackberry, Mangonada.",
+     "price": "$19.99"
+    },
+    {
+     "name": "Margarita Flight - 3 different flavors",
+     "image": "",
+     "description": "Margarita Flight (Frozen Only). Choose 3 different frozen margarita flavors. Available flavors: Lime, Peach, Mango, Strawberry, Passion Fruit, Guava, Piña Colada, Pineapple, Blackberry, Mangonada.",
+     "price": "$14.99"
+    },
+    {
+     "name": "Sweet Flight",
+     "image": "",
+     "description": "Includes: Sopapilla, Churros, Xango, Tres Leches Cake.",
+     "price": "$14"
+    }
+   ]
+  },
+  {
+   "name": "Beers & Micheladas",
+   "description": "",
+   "items": [
+    {
+     "name": "Cerveza Domestic & Imported",
+     "image": "",
+     "description": "Assorted domestic & imported bottled beers (selection pictured)",
+     "price": "$5"
+    },
+    {
+     "name": "Cerveza Draft",
+     "image": "",
+     "description": "Draft beer available in multiple sizes: 16oz, 25oz mug, and 60oz large pitcher",
+     "price": "16oz $4.50 / 25oz MUG $7.99 / LARGE 60oz PITCHER $13.99"
+    },
+    {
+     "name": "Michelada",
+     "image": "",
+     "description": "Choose any beer, lime juice, and assorted sauces, spices, and peppers. It is served in a chilled, Tajin & Chamoy rimmed glass.",
+     "price": "$13.99"
+    },
+    {
+     "name": "Add flavor to your Michelada",
+     "image": "",
+     "description": "Available flavors: Mango, Strawberry, Pineapple, Blackberry",
+     "price": "$2.00"
+    },
+    {
+     "name": "Draft Beer Towers",
+     "image": "",
+     "description": "Draft beer towers available (no price listed)",
+     "price": ""
+    },
+    {
+     "name": "Chamochela",
+     "image": "",
+     "description": "Chamochela (pictured specialty beer-cocktail)",
+     "price": "$19.99"
+    },
+    {
+     "name": "Six Especial",
+     "image": "",
+     "description": "*Six Especial (special platter/serving of six, pictured)",
+     "price": "$32.99"
+    }
+   ]
+  },
+  {
+   "name": "Cocktails",
+   "description": "",
+   "items": [
+    {
+     "name": "BAHAMA MAMA",
+     "image": "",
+     "description": "Rum, coconut flavored rum, banana liqueur, grenadine, orange juice, pineapple juice.",
+     "price": "14 oz $12.99"
+    },
+    {
+     "name": "CANTARITO",
+     "image": "",
+     "description": "Jose Cuervo, fresh lime juice, orange juice, grapefruit soda, chamoy, tajin, salt.",
+     "price": "20 oz $24.99 / 32 oz $36.99"
+    },
+    {
+     "name": "PALOMA",
+     "image": "",
+     "description": "Jose Cuervo, fresh lime juice, grapefruit soda, salt, tajin rim.",
+     "price": "16 oz $13.99"
+    },
+    {
+     "name": "HERRADURA SPLASH",
+     "image": "",
+     "description": "Herradura tequila, pineapple juice, cranberry juice, sour mix and a splash of Sprite.",
+     "price": "16 oz $14.99"
+    },
+    {
+     "name": "PASSION BERRY",
+     "image": "",
+     "description": "Disaronno, Gran Gala, Absolut Vodka, cranberry juice, and a splash of lemonade.",
+     "price": "16 oz $14.99"
+    },
+    {
+     "name": "TRASH CAN",
+     "image": "",
+     "description": "Gin, rum, triple sec, vodka, blue curacao, peach snapps, Red Bull, sour mix.",
+     "price": "25 oz $18.99"
+    },
+    {
+     "name": "LIQUID MARIGUANA",
+     "image": "",
+     "description": "Melon liqueur, blue curacao, pineapple juice, orange juice, coconut rum, Captain Morgan rum.",
+     "price": "14 oz $12.99"
+    },
+    {
+     "name": "SERENATE TROPICAL",
+     "image": "",
+     "description": "Jose Cuervo, grenadine, orange juice, pineapple juice and burgundy wine.",
+     "price": "16 oz $14.99"
+    },
+    {
+     "name": "ENHANCE YOUR DRINK (OPTION)",
+     "image": "",
+     "description": "Upgrading your tequila - Adding: jalapeno, flavor, cucumber or berries for an extra charge.",
+     "price": ""
+    }
+   ]
+  },
+  {
+   "name": "Other Cocktails",
+   "description": "",
+   "items": [
+    {
+     "name": "MALIBU PUNCH",
+     "image": "",
+     "description": "Black Malibu, coconut Malibu, cranberry juice, orange juice, pineapple juice, grenadine.",
+     "price": "21 oz $14.99"
+    },
+    {
+     "name": "LONG ISLAND ICED TEA",
+     "image": "",
+     "description": "Vodka, tequila, rum, gin, triple sec, sweet & sour mix and Coca-Cola.",
+     "price": "16 oz $11.99"
+    },
+    {
+     "name": "BLUE HAWAIIAN LONG ISLAND ICED TEA",
+     "image": "",
+     "description": "Vodka, tequila, rum, gin, triple sec, sweet & sour mix and Coca-Cola, blue curacao.",
+     "price": "16 oz $13.99"
+    },
+    {
+     "name": "SEX ON THE BEACH",
+     "image": "",
+     "description": "Vodka, peach schnapps, orange and cranberry juice, Chambord.",
+     "price": "16 oz $12.99"
+    }
+   ]
+  },
+  {
+   "name": "Tequilas & Specialty High-End Drinks",
+   "description": "",
+   "items": [
+    {
+     "name": "BLANCO SILVER",
+     "image": "",
+     "description": "Robust, unaged, white tequila",
+     "price": ""
+    },
+    {
+     "name": "REPOSADO",
+     "image": "",
+     "description": "Refined, aged 2-12 months in oak barrels",
+     "price": ""
+    },
+    {
+     "name": "AÑEJO",
+     "image": "",
+     "description": "Smooth, full bodied, aged at least one year in oak barrels",
+     "price": ""
+    },
+    {
+     "name": "House Tequila",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Don Julio",
+     "image": "",
+     "description": "Añejo (listed under Añejo)",
+     "price": ""
+    },
+    {
+     "name": "Herradura",
+     "image": "",
+     "description": "Añejo (listed under Añejo)",
+     "price": ""
+    },
+    {
+     "name": "Centenario",
+     "image": "",
+     "description": "Añejo (listed under Añejo)",
+     "price": ""
+    },
+    {
+     "name": "Milagro",
+     "image": "",
+     "description": "Blanco (listed under Blanco)",
+     "price": ""
+    },
+    {
+     "name": "Teremana",
+     "image": "",
+     "description": "Blanco (listed under Blanco)",
+     "price": ""
+    },
+    {
+     "name": "Casamigos",
+     "image": "",
+     "description": "Blanco (listed under Blanco)",
+     "price": ""
+    },
+    {
+     "name": "Hornitos",
+     "image": "",
+     "description": "Reposado (listed under Reposado)",
+     "price": ""
+    },
+    {
+     "name": "Patron",
+     "image": "",
+     "description": "Blanco (listed under Blanco)",
+     "price": ""
+    },
+    {
+     "name": "Don Julio 1942",
+     "image": "",
+     "description": "",
+     "price": "34.99"
+    },
+    {
+     "name": "Clase Azul",
+     "image": "",
+     "description": "",
+     "price": "34.99"
+    }
+   ]
+  },
+  {
+   "name": "Mimosas & Mojitos",
+   "description": "",
+   "items": [
+    {
+     "name": "Mimosas",
+     "image": "",
+     "description": "Champagne with your choice of flavor: Orange, Guava, Strawberry",
+     "price": "9.99"
+    },
+    {
+     "name": "Mojito Tradicional",
+     "image": "",
+     "description": "White rum, lime, mint, agave nectar, soda water, Sprite. Mojito flavor +1.00",
+     "price": "16oz 11.99"
+    },
+    {
+     "name": "Mojito Flavor Upcharge",
+     "image": "",
+     "description": "Additional charge to add a mojito flavor",
+     "price": "+1.00"
+    },
+    {
+     "name": "Mojito Sampler (Pick 4 Flavors)",
+     "image": "",
+     "description": "Pick 4 flavors: Classic, Pina Colada, Strawberry, Blackberry, Peach, Mango, Guava, Passion Fruit, Pineapple",
+     "price": "19.99"
+    },
+    {
+     "name": "Enhance Your Drink",
+     "image": "",
+     "description": "Upgrading your tequila - adding jalapeño, flavor, cucumber or berries for an extra charge",
+     "price": ""
+    }
+   ]
+  },
+  {
+   "name": "Wines & Sangria",
+   "description": "",
+   "items": [
+    {
+     "name": "Wines by the glass",
+     "image": "",
+     "description": "By the glass price (shown $5.99) applies to the listed varietals below: White Zinfandel, Pinot Grigio, Chardonnay, Merlot, Cabernet, Moscato, Champagne.",
+     "price": "$5.99"
+    },
+    {
+     "name": "White Zinfandel",
+     "image": "",
+     "description": "",
+     "price": "$5.99"
+    },
+    {
+     "name": "Pinot Grigio",
+     "image": "",
+     "description": "",
+     "price": "$5.99"
+    },
+    {
+     "name": "Chardonnay",
+     "image": "",
+     "description": "",
+     "price": "$5.99"
+    },
+    {
+     "name": "Merlot",
+     "image": "",
+     "description": "",
+     "price": "$5.99"
+    },
+    {
+     "name": "Cabernet",
+     "image": "",
+     "description": "",
+     "price": "$5.99"
+    },
+    {
+     "name": "Moscato",
+     "image": "",
+     "description": "",
+     "price": "$5.99"
+    },
+    {
+     "name": "Champagne",
+     "image": "",
+     "description": "",
+     "price": "$5.99"
+    },
+    {
+     "name": "Homemade Sangria (SM 14 OZ)",
+     "image": "",
+     "description": "Small 14 oz homemade sangria.",
+     "price": "$9.99"
+    },
+    {
+     "name": "Homemade Sangria (JUMBO 21 OZ)",
+     "image": "",
+     "description": "Jumbo 21 oz homemade sangria.",
+     "price": "$16.99"
+    },
+    {
+     "name": "Homemade Sangria (PITCHER 60 OZ)",
+     "image": "",
+     "description": "Pitcher 60 oz homemade sangria.",
+     "price": "$36.99"
+    },
+    {
+     "name": "Enhance your drink",
+     "image": "",
+     "description": "Options: Upgrading your tequila; adding jalapeño; adding flavor; adding cucumber; adding berries.",
+     "price": "For an extra charge"
+    }
+   ]
+  },
+  {
+   "name": "Aguas de Sabor (Flavored Waters)",
+   "description": "",
+   "items": [
+    {
+     "name": "Aguas de Sabor 25 OZ (No refill)",
+     "image": "",
+     "description": "25 oz, no refill. Flavors available: Strawberry, Peach, Mango, Guava, Passion Fruit, Pineapple, Blackberry (see Spanish names below).",
+     "price": "$4.99"
+    },
+    {
+     "name": "Strawberry / Fresa",
+     "image": "",
+     "description": "Strawberry (Fresa) flavored agua de sabor.",
+     "price": "$4.99"
+    },
+    {
+     "name": "Peach / Durazno",
+     "image": "",
+     "description": "Peach (Durazno) flavored agua de sabor.",
+     "price": "$4.99"
+    },
+    {
+     "name": "Mango / Mango",
+     "image": "",
+     "description": "Mango (Mango) flavored agua de sabor.",
+     "price": "$4.99"
+    },
+    {
+     "name": "Guava / Guayava",
+     "image": "",
+     "description": "Guava (Guayava) flavored agua de sabor.",
+     "price": "$4.99"
+    },
+    {
+     "name": "Passion Fruit / Maracuya",
+     "image": "",
+     "description": "Passion Fruit (Maracuya) flavored agua de sabor.",
+     "price": "$4.99"
+    },
+    {
+     "name": "Pineapple / Piña",
+     "image": "",
+     "description": "Pineapple (Piña) flavored agua de sabor.",
+     "price": "$4.99"
+    },
+    {
+     "name": "Blackberry / Mora",
+     "image": "",
+     "description": "Blackberry (Mora) flavored agua de sabor.",
+     "price": "$4.99"
+    }
+   ]
+  },
+  {
+   "name": "Desserts",
+   "description": "",
+   "items": [
+    {
+     "name": "Churros with Vanilla Ice Cream",
+     "image": "",
+     "description": "Churros served with vanilla ice cream.",
+     "price": "$8.99"
+    },
+    {
+     "name": "Churros with Cart",
+     "image": "",
+     "description": "Add the churros cart (price shown as + $2.00).",
+     "price": "$2.00"
+    },
+    {
+     "name": "Tres Leches Cake",
+     "image": "",
+     "description": "Sponge cake soaked in three kinds of milk.",
+     "price": "$7.99"
+    },
+    {
+     "name": "Cheese Cake Burrito",
+     "image": "",
+     "description": "Fried cheesecake burrito sprinkled with sugar and cinnamon, served with vanilla ice cream.",
+     "price": "$7.99"
+    },
+    {
+     "name": "Lava Cake",
+     "image": "",
+     "description": "Served with vanilla ice cream.",
+     "price": "$7.99"
+    },
+    {
+     "name": "Fried Ice Cream",
+     "image": "",
+     "description": "Fried ice cream.",
+     "price": "$7.99"
+    },
+    {
+     "name": "NY Cheesecake",
+     "image": "",
+     "description": "Served with strawberry topping.",
+     "price": "$6.99"
+    },
+    {
+     "name": "Flan",
+     "image": "",
+     "description": "Homemade flan.",
+     "price": "$7.99"
+    }
+   ]
+  }
+ ]
+}

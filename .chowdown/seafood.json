@@ -1,0 +1,640 @@
+{
+ "categories": [
+  {
+   "name": "Mariscos (Especialidades)",
+   "description": "",
+   "items": [
+    {
+     "name": "Camaron(es) Borrachos",
+     "image": "",
+     "description": "Sign text: 'Para los crudos' — shrimp served in a cocktail/glass with an inverted beer bottle (beer garnish), lime wedge; pictured with whole shrimp around glass.",
+     "price": "$10.99"
+    },
+    {
+     "name": "OSTIONES 12pcs",
+     "image": "",
+     "description": "12 raw oysters on the half shell on ice with cocktail sauce and lime wedges (as pictured)",
+     "price": "MKT $"
+    },
+    {
+     "name": "BOTANA CHELERA",
+     "image": "",
+     "description": "Seafood snack platter featuring shrimp over cucumber and tomato slices with lime wedges and chile/seasoning (as pictured)",
+     "price": "25.99"
+    },
+    {
+     "name": "Sampler de los Reyes",
+     "image": "",
+     "description": "Platter sampler of multiple small seafood preparations (assortment of shrimp and other seafood in several sauces) — pictured as six small dishes with various sauces and lime wedges.",
+     "price": "$43.99"
+    },
+    {
+     "name": "Milanesa de Res",
+     "image": "",
+     "description": "Choice of two sides",
+     "price": "$21.99"
+    },
+    {
+     "name": "El Empapelado",
+     "image": "",
+     "description": "Choice of two sides; 25-35 minutes cooking time",
+     "price": "$29.99"
+    },
+    {
+     "name": "La Casa de Bob Esponja",
+     "image": "",
+     "description": "Choice of two sides",
+     "price": "$29.99"
+    },
+    {
+     "name": "Pulpo Ursula",
+     "image": "",
+     "description": "Choice of two sides",
+     "price": "$29.99"
+    },
+    {
+     "description": "",
+     "image": "",
+     "name": "OSTIONES REGULARES",
+     "price": "1/2 DOZEN $$$ DOZEN $$$$"
+    },
+    {
+     "description": "Topped with ceviche.",
+     "image": "",
+     "name": "OSTIONES PREPARADOS",
+     "price": "1/2 DOZEN $$$ DOZEN $$$$"
+    },
+    {
+     "description": "",
+     "image": "",
+     "name": "AGUACHILE PETROLERO",
+     "price": "22.99"
+    }
+   ]
+  },
+  {
+   "name": "Aguachiles",
+   "description": "",
+   "items": [
+    {
+     "name": "El Seis de Zeus",
+     "image": "",
+     "description": "Sign text: 'Opción a escoger 2 estilos de Aguachiles: Verde, Rojo, Viagra, Mango, Petróleo' — pictured: six shrimp served with Modelo cans and lime; combo of two aguachile styles (choose two from the listed styles).",
+     "price": "$39.99"
+    },
+    {
+     "name": "Aguachile Rojo",
+     "image": "",
+     "description": "Shrimp with sliced cucumber, sliced onion, avocado slices and a lime wedge served in a red (spicy) aguachile sauce; garnished with chili powder (visual ingredients only).",
+     "price": "$21.99"
+    },
+    {
+     "name": "Aguachile Mango",
+     "image": "",
+     "description": "Shrimp with sliced cucumber, onion, avocado slices, mango pieces and a lime wedge in a mango-flavored aguachile sauce; garnished with chili powder (visual ingredients only).",
+     "price": "$21.99"
+    },
+    {
+     "name": "Aguachile Petroleo",
+     "image": "",
+     "description": "Shrimp with sliced cucumber, onion, avocado slices and visible green olives in a darker (petroleo) style aguachile sauce; garnished with chili powder (visual ingredients only).",
+     "price": "$21.99"
+    },
+    {
+     "name": "Aguachile Viagra",
+     "image": "",
+     "description": "Shrimp with sliced cucumber, sliced onion, avocado slices and a lime wedge in a light-colored aguachile sauce; garnished with chili powder (visual ingredients only).",
+     "price": "$21.99"
+    },
+    {
+     "name": "Aguachile Verde",
+     "image": "",
+     "description": "Shrimp with sliced cucumber, sliced onion, avocado slices and a lime wedge in a green (verde) aguachile sauce; garnished with chili powder (visual ingredients only).",
+     "price": "$21.99"
+    },
+    {
+     "name": "Aguachile Flight",
+     "image": "",
+     "description": "Three small shooter glasses of different aguachile varieties served together as a flight (visual presentation of multiple small glasses of aguachiles).",
+     "price": "$23.99"
+    }
+   ]
+  },
+  {
+   "name": "Camarones - Variedades (Shell on or off where noted)",
+   "description": "",
+   "items": [
+    {
+     "name": "Seis Mamalon",
+     "image": "",
+     "description": "Pictured: six large shrimp served in/around Modelo cans over tomatoes/onions/pico-style garnish with lime wedges (plate of shrimp ceviche-style).",
+     "price": "$33.99"
+    },
+    {
+     "name": "Camarones Borrachos",
+     "image": "",
+     "description": "(Duplicate visual entry on page) 'Para los crudos' — shrimp with inverted beer bottle garnish, lime.",
+     "price": "$10.99"
+    },
+    {
+     "name": "LOUSIANA",
+     "image": "",
+     "description": "Shrimp boil-style dish with corn on the cob and baby potatoes, seasoned (shell-on shrimp shown)",
+     "price": "24.99"
+    },
+    {
+     "name": "CAMARONES AHOGADOS",
+     "image": "",
+     "description": "Shrimp served in a creamy sauce with garlic and topped with red pepper flakes (as pictured)",
+     "price": "14.99"
+    },
+    {
+     "name": "CAMARONES CUCARACHA",
+     "image": "",
+     "description": "Large tray of spicy seasoned shrimp with onions and citrus (lime and orange slices) in a red-style sauce (shell-on shrimp shown)",
+     "price": "29.99"
+    },
+    {
+     "name": "Camarones Empanizados",
+     "image": "",
+     "description": "Choice of two sides",
+     "price": "$19.99"
+    },
+    {
+     "name": "Camarones al Coco",
+     "image": "",
+     "description": "Choice of two sides",
+     "price": "$20.99"
+    },
+    {
+     "name": "Camarones al Mojo de Ajo",
+     "image": "",
+     "description": "Choice of two sides. Sin cáscara o con cáscara. Shell on or Off.",
+     "price": "$20.99"
+    },
+    {
+     "name": "Camarones El Jefe",
+     "image": "",
+     "description": "Choice of two sides. Sin cáscara o con cáscara. Shell on or Off.",
+     "price": "$20.99"
+    },
+    {
+     "name": "Camarones Emperrados",
+     "image": "",
+     "description": "Choice of two sides. Sin cáscara o con cáscara. Shell on or Off.",
+     "price": "$20.99"
+    },
+    {
+     "description": "",
+     "image": "",
+     "name": "LOUISIANA SHRIMP",
+     "price": "26.99"
+    },
+    {
+     "description": "Your choice of Mild or Hot, delicious shrimp (10) cooked with our diablo chipotle sauce.",
+     "image": "",
+     "name": "CAMARONES A LA DIABLA",
+     "price": "20.99"
+    },
+    {
+     "description": "Shrimp (10) cooked in sourcream-cheese sauce.",
+     "image": "",
+     "name": "CAMARONES CON CREMA",
+     "price": "20.99"
+    },
+    {
+     "description": "Two flour tortillas filled with grilled shrimp, topped with cheese sauce, spinach and avocado slices.",
+     "image": "",
+     "name": "SHRIMP ENCHILADAS",
+     "price": "20.99"
+    }
+   ]
+  },
+  {
+   "name": "Cocteles & Micheladas",
+   "description": "",
+   "items": [
+    {
+     "name": "Michelada La Panzona",
+     "image": "",
+     "description": "Large michelada served in a bowl-style glass with ice, an inverted beer bottle (Corona), shrimp garnish, cucumber slices, lime wedges and a chili/salt rim.",
+     "price": "$26.99"
+    },
+    {
+     "name": "Michelada La Cabrona",
+     "image": "",
+     "description": "Large goblet-style michelada pictured with multiple small Corona bottles in ice, shrimp and avocado garnish, lime wedges and a chili/salt rim.",
+     "price": "$24.99"
+    },
+    {
+     "name": "Coctel Hawaiano",
+     "image": "",
+     "description": "Seafood cocktail (shrimp cocktail style) with avocado and other garnishes served with Saladitas crackers (pictured).",
+     "price": "$22.99"
+    },
+    {
+     "name": "Coctel Tradicional",
+     "image": "",
+     "description": "Traditional shrimp cocktail served with lime and Saladitas crackers (pictured).",
+     "price": "$22.99"
+    },
+    {
+     "name": "Coctel Verde",
+     "image": "",
+     "description": "Green-style seafood cocktail (green sauce/vinaigrette) with avocado and olives, served with Saladitas crackers (pictured).",
+     "price": "$22.99"
+    },
+    {
+     "description": "Shrimp, oyster, octopus.",
+     "image": "",
+     "name": "COCTEL CAMPECHANO",
+     "price": "22.99"
+    },
+    {
+     "description": "Shrimp (10) combined in a tomato-lime cocktail sauce, with chopped tomato, jalapeño, onion, cilantro and avocado.",
+     "image": "",
+     "name": "MEXICAN SHRIMP COCKTAIL",
+     "price": "21.99"
+    }
+   ]
+  },
+  {
+   "name": "Aguas Frescas & Jarritos",
+   "description": "",
+   "items": [
+    {
+     "name": "Aguas Frescas - Horchata",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Aguas Frescas - Jamaica",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Aguas Frescas - Mango",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Aguas Frescas - Fresa",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Aguas Frescas - Piña",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Aguas Frescas - Guava",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Aguas Frescas - Mora",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Aguas Frescas - Tamarindo",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Aguas Frescas - Durazno",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Aguas Frescas - Frambuesa",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Jarritos (bottled)",
+     "image": "",
+     "description": "Row of Jarritos bottles pictured with tagline 'WE'RE NOT FROM HERE'.",
+     "price": ""
+    }
+   ]
+  },
+  {
+   "name": "Other Noted Items / Specials",
+   "description": "",
+   "items": [
+    {
+     "name": "Add a street corn on cob to any meal",
+     "image": "",
+     "description": "Add-on to any meal",
+     "price": "$3.99 extra"
+    },
+    {
+     "name": "Cristobal Colon",
+     "image": "",
+     "description": "",
+     "price": "$23.99"
+    }
+   ]
+  },
+  {
+   "name": "Soups & Caldos",
+   "description": "",
+   "items": [
+    {
+     "name": "RAMEN BIRRIA",
+     "image": "",
+     "description": "Birria-style broth with shredded beef, ramen noodles, chopped onion, cilantro and lime (as pictured)",
+     "price": "15.99"
+    },
+    {
+     "name": "CALDO DE CAMARONES EN SU JUGO",
+     "image": "",
+     "description": "En su jugo. 25-35 minutes cooking time",
+     "price": "$24.99"
+    },
+    {
+     "name": "MENUDO",
+     "image": "",
+     "description": "Servido con arroz. 25-35 minutes cooking time",
+     "price": "$16.99"
+    },
+    {
+     "name": "POZOLE",
+     "image": "",
+     "description": "25-35 minutes cooking time",
+     "price": "$15.99"
+    },
+    {
+     "name": "CALDO VUELVE A LA VIDA",
+     "image": "",
+     "description": "25-35 minutes cooking time",
+     "price": "$28.99"
+    },
+    {
+     "name": "CALDO DE RES",
+     "image": "",
+     "description": "Servido con arroz. 25-35 minutes cooking time",
+     "price": "$16.99"
+    }
+   ]
+  },
+  {
+   "name": "Ceviches & Vinagretas",
+   "description": "",
+   "items": [
+    {
+     "name": "Ceviche Bandera",
+     "image": "",
+     "description": "Ceviche served with avocado slices on top, two salsas (green and red) down the sides, and served with Saladitas crackers (pictured).",
+     "price": "$24.99"
+    },
+    {
+     "name": "Ceviche Perico",
+     "image": "",
+     "description": "Mixed diced seafood ceviche with avocado slices on top and Saladitas crackers (pictured).",
+     "price": "$24.99"
+    },
+    {
+     "name": "Camarones y Pulpos a la Vinagreta",
+     "image": "",
+     "description": "Shrimp and octopus in vinagreta (vinaigrette) with olives, red onion and avocado (pictured).",
+     "price": "$22.99"
+    },
+    {
+     "description": "Shrimp cooked in lime juice topped with pico de gallo and avocado slices. Served with Mexican sauce.",
+     "image": "",
+     "name": "TORRE DE CEVICHE / TOWER",
+     "price": "23.99"
+    },
+    {
+     "description": "Choose four different flavors: Traditional, Tajin, Coconut, Mango, Tamarind, Strawberry, Guava, Passion Fruit.",
+     "image": "",
+     "name": "SHRIMP CEVICHE FLIGHT",
+     "price": "24.99"
+    },
+    {
+     "description": "Shrimp cooked in lime juice topped with pico de gallo and avocado slices.",
+     "image": "",
+     "name": "CEVICHE DE CAMARON",
+     "price": "20.99"
+    },
+    {
+     "description": "Shrimp cooked in lime juice topped with mango pico de gallo and avocado slices.",
+     "image": "",
+     "name": "CEVICHE TROPICAL",
+     "price": "22.99"
+    }
+   ]
+  },
+  {
+   "name": "Molcajetes & Especiales (Choice of two sides)",
+   "description": "",
+   "items": [
+    {
+     "name": "MOLCAJETE PERRON",
+     "image": "",
+     "description": "Choice of two sides",
+     "price": "$29.99"
+    },
+    {
+     "name": "MOLCAJETE DEL MAR",
+     "image": "",
+     "description": "Choice of two sides",
+     "price": "$34.99"
+    }
+   ]
+  },
+  {
+   "name": "Fried / Grilled Entrees & Combos",
+   "description": "",
+   "items": [
+    {
+     "name": "MILANESA DE POLLO",
+     "image": "",
+     "description": "Choice of two sides",
+     "price": "$19.99"
+    },
+    {
+     "name": "MILANESA DE POLLO AMERICANO",
+     "image": "",
+     "description": "Choice of two sides",
+     "price": "$22.99"
+    },
+    {
+     "name": "TRIO EMPANIZADO",
+     "image": "",
+     "description": "Choice of two sides",
+     "price": "$27.99"
+    }
+   ]
+  },
+  {
+   "name": "Sides",
+   "description": "",
+   "items": [
+    {
+     "name": "Mexican Rice",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "White Rice",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Refried Beans",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Black Beans",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Crema Salad",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "California Veggies",
+     "image": "",
+     "description": "(may vary by season)",
+     "price": ""
+    },
+    {
+     "name": "Steam Corn",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Guacamole Salad",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Spring Mix Salad",
+     "image": "",
+     "description": "(served with chipotle dressing)",
+     "price": ""
+    },
+    {
+     "name": "California Veggies (may vary by season)",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Spring Mix Salad (served with chipotle dressing)",
+     "image": "",
+     "description": "",
+     "price": ""
+    },
+    {
+     "name": "Sides",
+     "image": "",
+     "description": "Mexican rice, white rice, refried beans, black beans, crema, salad, California veggies (may vary by season), steam corn, guacamole salad, spring mix salad (served with chipotle dressing).",
+     "price": ""
+    }
+   ]
+  },
+  {
+   "name": "Sopes & Small Tacos",
+   "description": "",
+   "items": [
+    {
+     "name": "Sopes (1)",
+     "image": "",
+     "description": "Available fillings: Steak, Chicken, Chorizo, Carnitas, Al Pastor.",
+     "price": "$4.49"
+    },
+    {
+     "name": "Sopes (3)",
+     "image": "",
+     "description": "Available fillings: Steak, Chicken, Chorizo, Carnitas, Al Pastor.",
+     "price": "$11.49"
+    }
+   ]
+  },
+  {
+   "name": "Mojarras & Fish",
+   "description": "",
+   "items": [
+    {
+     "name": "MOJARRA LOCA",
+     "image": "",
+     "description": "Choice of two sides. Agrega 6 camarones por $5.99.",
+     "price": "$15.99"
+    },
+    {
+     "name": "MOJARRA LOCA AL MOJO DE AJO",
+     "image": "",
+     "description": "Al mojo de ajo preparation. Choice of two sides. Agrega 6 camarones por $5.99.",
+     "price": "$16.99"
+    },
+    {
+     "name": "MOJARRA LOCA EMPERRADA (Sin camarones)",
+     "image": "",
+     "description": "Emperrada preparation. Sin camarones. Choice of two sides. Agrega 6 camarones extra por $5.99.",
+     "price": "$16.99"
+    },
+    {
+     "name": "MOJARRA LOCA EMPERRADA (con 3 camarones)",
+     "image": "",
+     "description": "Emperrada preparation with 3 camarones. Choice of two sides. Agrega 6 camarones extra por $5.99.",
+     "price": "$19.99"
+    },
+    {
+     "name": "PLATILLO DEL MAR - Tradicional",
+     "image": "",
+     "description": "Con sus opciones de salsa: Tradicional. Choice of two sides.",
+     "price": "$21.99"
+    },
+    {
+     "name": "PLATILLO DEL MAR - Al Mojo De Ajo",
+     "image": "",
+     "description": "Con sus opciones de salsa: Al Mojo De Ajo. Choice of two sides.",
+     "price": "$22.99"
+    },
+    {
+     "name": "PLATILLO DEL MAR - Emperrado",
+     "image": "",
+     "description": "Con sus opciones de salsa: Emperrado. Choice of two sides.",
+     "price": "$22.99"
+    },
+    {
+     "name": "Agrega 6 camarones (add 6 shrimp)",
+     "image": "",
+     "description": "Add-on price listed on several mojarra/platillo items: Agrega 6 camarones por $5.99 / Agrega 6 camarones extra por $5.99.",
+     "price": "$5.99"
+    },
+    {
+     "description": "Choice of two sides. Agrega 6 camarones extra por 5.99.",
+     "image": "",
+     "name": "MOJARRA LOCA EMPERRADA",
+     "price": "Sin camarones 17.99 / con 3 camarones 20.99"
+    }
+   ]
+  }
+ ]
+}
