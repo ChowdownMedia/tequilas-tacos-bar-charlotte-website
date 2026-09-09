@@ -9,10 +9,10 @@
   --mb-leader:rgba(27,16,48,.25)}
 
 .mboard{max-width:1460px;margin:0 auto;padding:18px 26px 0;overflow-x:clip;
-  display:grid;grid-template-columns:minmax(0,250px) minmax(0,1fr);align-items:start;gap:0;
+  display:grid;grid-template-columns:minmax(0,285px) minmax(0,1fr);align-items:start;gap:0;
   background:var(--cream,#FFF7EF)}
 .mrail{position:sticky;top:0;max-height:100vh;
-  overflow-y:auto;border-right:1px solid var(--mb-rule);padding:22px 22px 40px 0}
+  overflow-y:auto;border-right:1px solid var(--mb-rule);padding:22px 26px 40px 0}
 .mrail-brand{display:flex;align-items:center;gap:10px;padding-bottom:16px;
   border-bottom:1px solid var(--mb-rule);margin-bottom:18px;text-decoration:none}
 .mrail-brand img{width:46px;height:46px;border-radius:10px}
@@ -21,14 +21,14 @@
 .mrail-brand i{font:700 9px/1 var(--ui);font-style:normal;letter-spacing:.24em;
   text-transform:uppercase;color:#5a5370;display:block;margin-top:4px}
 .mrg{margin-bottom:22px}
-.mrg h4{margin:0 0 8px;font:800 10.5px/1 var(--ui);letter-spacing:.26em;
+.mrg h4{margin:0 0 10px;font:800 11.5px/1 var(--ui);letter-spacing:.22em;
   text-transform:uppercase;color:#ad0f85}
-.mrg a{display:flex;justify-content:space-between;gap:10px;padding:7px 22px 7px 12px;
-  color:var(--mb-muted);font:600 14.5px/1.35 var(--ui);text-decoration:none;
+.mrg a{display:flex;justify-content:space-between;gap:12px;padding:8px 22px 8px 12px;
+  color:var(--mb-muted);font:700 17px/1.32 var(--ui);text-decoration:none;
   border-left:2px solid transparent}
 .mrg a:hover{color:var(--blue,#3B69E6)}
 .mrg a.on{border-left-color:var(--pink,#FE49DB);background:rgba(59,105,230,.08);color:var(--mb-text)}
-.mrg a .ct{font:700 12px/1.35 var(--ui);color:#5a5370}
+.mrg a .ct{font:800 14px/1.32 var(--ui);color:#5a5370}
 .mcontent{padding:22px 0 90px 34px;min-width:0}
 .mcontent section{padding:0;margin:0}
 .mcontent .mlgroup{margin:0 0 40px}
