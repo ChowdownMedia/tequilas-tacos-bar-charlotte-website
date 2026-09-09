@@ -20,8 +20,8 @@
   color:var(--mb-text);display:block;line-height:1}
 .mrail-brand i{font:700 9px/1 var(--ui);font-style:normal;letter-spacing:.24em;
   text-transform:uppercase;color:#5a5370;display:block;margin-top:4px}
-.mrg{margin-bottom:22px}
-.mrg h4{margin:0 0 12px;font:800 12px/1 var(--ui);letter-spacing:.22em;
+.mrg{margin-bottom:28px}
+.mrg h4{margin:0 0 14px;font:900 16px/1 var(--ui);letter-spacing:.2em;
   text-transform:uppercase;color:#ad0f85}
 .mrg a{display:flex;justify-content:space-between;gap:12px;padding:11px 22px 11px 12px;
   color:rgba(27,16,48,.9);font:900 21px/1.24 var(--ui);text-decoration:none;
