@@ -10,8 +10,13 @@ import json, os, re, html, unicodedata
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://tequilastacosbar.com"
 IMG = "/assets/images/menu"
-CSS_VER = "mc18"
+CSS_VER = "mc21"
 ORDER_URL = "https://tequilastacosbar.com/comingsoon"
+PDF_URLS = {
+    "food": "https://storage.googleapis.com/msgsndr/r38meFSUdG3vciQdiMyJ/media/68273a85bb183352e7966c7e.pdf",
+    "seafood": "https://storage.googleapis.com/msgsndr/r38meFSUdG3vciQdiMyJ/media/6724df528bde643e984199e4.pdf",
+    "drinks": "https://storage.googleapis.com/msgsndr/r38meFSUdG3vciQdiMyJ/media/68273a85a3fbc69b120a9d06.pdf",
+}
 BRAND = "Tequilas Tacos & Bar"
 
 e = html.escape
@@ -120,23 +125,27 @@ def cat_photo(cat):
 CATEGORY_PHOTO = {
     "Appetizers / Dips": "elote-hand", "Loaded Fries": "loaded-fries",
     "Soups & Salads": "menudo", "Burritos": "burrito-queso",
-    "Tacos (Orders)": "tacos-asada", "Single Tacos": "tacos-asada",
+    "Tacos (Orders)": "tacos-asada", "Single Tacos": "teq-small-taco",
     "Quesadillas": "quesadilla-board", "Specialties (General)": "trompo-tower",
     "Fajitas Specialties": "skillet-alambre", "All Time Favorites": "combo-board",
     "Sizzling Fajitas": "skillet-held", "Steak Entrees": "carne-asada",
-    "House Specials / Molcajete": "steak-shrimp",
-    "Combinations / Make Your Own Combo": "combo-elote",
+    "House Specials / Molcajete": "teq-molcajete",
+    "Side Orders": "teq-side-elote-june",
+    "Other Noted Items / Specials": "teq-side-elote-june",
+    "Molcajetes & Especiales (Choice of two sides)": "teq-molcajete",
+    "Sopes & Small Tacos": "teq-small-taco",
     "Mariscos (Especialidades)": "camarones-diabla",
     "Camarones - Variedades (Shell on or off where noted)": "camarones-close",
+    "Mojarras & Fish": "teq-mojarra-fish",
     "Cocteles & Micheladas": "chamochela", "Soups & Caldos": "menudo",
     "Lunch Time (Mon-Fri 11:00am-2:00pm)": "quesabirria",
     "Chimichangas": "burrito-queso-2", "Chicken Entrees": "pollo-plate",
     "Margaritas & Frozen Specials": "paleta-margarita",
     "Flights & Frozen Samplers": "tequila-reposado",
-    "Beers & Micheladas": "chamochela", "Cocktails": "tropical-margarita",
-    "Other Cocktails": "mexican-lollipop",
+    "Beers & Micheladas": "chamochela", "Cocktails": "teq-red-cocktail-june",
+    "Other Cocktails": "teq-branded-cocktail-june",
     "Tequilas & Specialty High-End Drinks": "tequila-blanco",
-    "Mimosas & Mojitos": "marg-spicy", "Desserts": "tres-leches",
+    "Desserts": "tres-leches",
 }
 def card_photo(cat):
     b = CATEGORY_PHOTO.get(cat) or cat_photo(cat)
@@ -240,6 +249,15 @@ def utility():
             f'<div class="mfilters" id="mfilters"><div id="mchips">{chips}</div>'
             '<button class="msurprise" id="msurprise" type="button">Surprise me</button></div></div>'
             '<div id="mresults" hidden></div>')
+
+def menu_switcher(active):
+    opts = [("food", "/menu/", "Food"), ("seafood", "/seafood/", "Seafood"), ("drinks", "/drinks/", "Drinks")]
+    links = []
+    for key, href, label in opts:
+        cur = key == active
+        attr = ' aria-current="page"' if cur else ""
+        links.append(f'<a href="{href}"{attr}>{label}</a>')
+    return '<nav class="mswitch" aria-label="Menu sections">' + "".join(links) + "</nav>"
 
 def item_row(it, cat):
     name = it["name"]; desc = (it.get("description") or "").strip()
@@ -353,10 +371,12 @@ def page_category(cat, prev_c, next_c):
     rows = '<div class="mgrid">' + "".join(item_row(it, cat) for it in items) + "</div>"
     prevlink = f'<a href="/menu/{slug(prev_c)}/">&larr; {e(label_of(prev_c))}</a>' if prev_c else "<span></span>"
     nextlink = f'<a href="/menu/{slug(next_c)}/">{e(label_of(next_c))} &rarr;</a>' if next_c else "<span></span>"
-    spread = (f'<section id="mspread"><div class="msec-ey">{e(grp)} &middot; {len(items)} items</div>'
+    back = '<a class="mback" href="/menu/" aria-label="Back to all menu categories">&larr; All categories</a>'
+    spread = (f'<section id="mspread">{back}<div class="msec-ey">{e(grp)} &middot; {len(items)} items</div>'
               f'<h1 class="msec-h">{e(lab.upper())}</h1>{note_html}{band}{feat_html}{rows}'
               f'<div class="mnav">{prevlink}<a href="/menu/">All</a>{nextlink}</div></section>')
-    body = ('<main class="mboard">' + rail(cat) + '<div class="mcontent">' + utility() + spread
+    active_menu = "drinks" if grp in ("Cantina", "Desserts") else ("seafood" if grp == "Seafood House" else "food")
+    body = ('<main class="mboard">' + rail(cat) + '<div class="mcontent">' + utility() + menu_switcher(active_menu) + spread
             + "</div></main>" + sheet_html())
     top, tail = chrome(f"{lab} | {BRAND} Menu",
                        f"{lab} at {BRAND} in Charlotte, NC. {len(items)} items with prices. Search the menu and order online.",
@@ -392,13 +412,16 @@ def page_board_landing(path, hero, groups_subset, title, desc, blurb=None):
     board_ld = {"@context": "https://schema.org", "@type": "Menu", "@id": f"{DOMAIN}{path}#menu",
                 "name": f"{BRAND} {hero.title()} Menu",
                 "hasMenuSection": [section_ld(c) for c in cats_in]}
+    active_menu = "seafood" if path == "/seafood/" else ("drinks" if path == "/drinks/" else "food")
+    pdf_url = PDF_URLS[active_menu]
     intro = (f'<section id="mspread"><div class="msec-ey">Kitchen &amp; cantina &middot; {total} items</div>'
              f'<h1 class="msec-h" style="font-size:clamp(58px,13vw,170px);line-height:.8">{e(hero)}</h1>'
              '<p class="mintro">Every dish photo was shot in this kitchen. Search it, filter it, '
              'browse by course, or hit Surprise Me and let the trompo decide.</p>'
-             f'<div class="mctas"><a class="btn-order" href="{e(ORDER_URL)}" target="_blank" rel="noopener">Order online</a></div>'
+             f'<div class="mctas"><a class="btn-order" href="{e(ORDER_URL)}" target="_blank" rel="noopener">Order online</a>'
+             f'<a class="btn-pdf" href="{e(pdf_url)}" target="_blank" rel="noopener">Download PDF</a></div>'
              f'{groups_html}</section>')
-    body = ('<main class="mboard">' + rail(None) + '<div class="mcontent">' + utility() + intro
+    body = ('<main class="mboard">' + rail(None) + '<div class="mcontent">' + utility() + menu_switcher(active_menu) + intro
             + "</div></main>" + sheet_html())
     top, tail = chrome(title, desc, f"{DOMAIN}{path}", og_img=f"{IMG}/tacos-asada-1600.webp")
     ld = ld_block([board_ld, breadcrumb_ld([("Home", "/"), (hero.title(), path)])])
@@ -407,7 +430,7 @@ def page_board_landing(path, hero, groups_subset, title, desc, blurb=None):
     open(os.path.join(d, "index.html"), "w").write(top + ld + body + tail)
 
 def page_menu_landing():
-    page_board_landing("/menu/", "MENU",
+    page_board_landing("/menu/", "FOOD",
                        [g for g, _ in COURSE_GROUPS],
                        f"Our Menu | {BRAND} - Charlotte",
                        "The full Tequilas Tacos & Bar menu: tacos, quesabirria, fajitas, mariscos, "

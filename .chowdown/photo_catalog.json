@@ -255,6 +255,54 @@
     "pollo-plate-800.webp",
     "pollo-plate-400.webp"
    ]
+  },
+  "teq-side-elote-june": {
+   "orientation": "portrait",
+   "variants": [
+    "teq-side-elote-june-1600.webp",
+    "teq-side-elote-june-800.webp",
+    "teq-side-elote-june-400.webp"
+   ]
+  },
+  "teq-small-taco": {
+   "orientation": "landscape",
+   "variants": [
+    "teq-small-taco-1600.webp",
+    "teq-small-taco-800.webp",
+    "teq-small-taco-400.webp"
+   ]
+  },
+  "teq-molcajete": {
+   "orientation": "landscape",
+   "variants": [
+    "teq-molcajete-1600.webp",
+    "teq-molcajete-800.webp",
+    "teq-molcajete-400.webp"
+   ]
+  },
+  "teq-red-cocktail-june": {
+   "orientation": "portrait",
+   "variants": [
+    "teq-red-cocktail-june-1600.webp",
+    "teq-red-cocktail-june-800.webp",
+    "teq-red-cocktail-june-400.webp"
+   ]
+  },
+  "teq-branded-cocktail-june": {
+   "orientation": "portrait",
+   "variants": [
+    "teq-branded-cocktail-june-1600.webp",
+    "teq-branded-cocktail-june-800.webp",
+    "teq-branded-cocktail-june-400.webp"
+   ]
+  },
+  "teq-mojarra-fish": {
+   "orientation": "portrait",
+   "variants": [
+    "teq-mojarra-fish-1600.webp",
+    "teq-mojarra-fish-800.webp",
+    "teq-mojarra-fish-400.webp"
+   ]
   }
  }
 }

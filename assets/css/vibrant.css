@@ -96,15 +96,15 @@ h1,h2,h3,.hc-head,.order-cta h2,.menu-hero h1,.events-title,.contact-h,.sec-head
   mix-blend-mode:soft-light;opacity:.6}
 .menu-hero,.vip-join-sec{position:relative;isolation:isolate}
 
-/* ---------- NAV : bold royal-blue bar, white logo ---------- */
+/* ---------- NAV : bold royal-blue bar, high-contrast logo ---------- */
 .nav{background:linear-gradient(180deg,#3f6ff0,#3B69E6);border-bottom:0;
   box-shadow:0 2px 0 rgba(254,73,219,.5),0 10px 30px -18px rgba(30,59,160,.9)}
 .nav::before{display:none}
 .nav.scrolled{background:linear-gradient(180deg,#2f5ee0,#2a52c4)}
-.nav-inner{height:116px}
-.nav-logo img{height:96px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+.nav-inner{height:158px}
+.nav-logo img{height:146px;filter:drop-shadow(0 2px 4px rgba(255,255,255,.25))}
 .nav.scrolled .nav-inner{height:92px}
-.nav.scrolled .nav-logo img{height:74px;transition:height .25s}
+.nav.scrolled .nav-logo img{height:82px;transition:height .25s}
 .nav-links{gap:30px}
 .nav-links a{font-family:var(--ui);font-weight:700;color:#fff;opacity:.98;
   letter-spacing:.1em;font-size:18px;text-transform:uppercase}
