@@ -110,13 +110,13 @@
   padding:12px 0;background:none;color:inherit;cursor:pointer}
 .mrow:hover .mr-name{color:var(--blue,#3B69E6)}
 .mr-top{display:flex;align-items:baseline;gap:12px}
-.mr-name{font:800 19px/1.25 var(--ui);color:var(--mb-text);flex:0 0 auto}
+.mr-name{font-family:var(--disp);font-weight:400;font-size:22px;line-height:1.15;color:var(--mb-text);flex:0 0 auto;letter-spacing:.01em}
 .mr-lead{flex:1 1 auto;border-bottom:2px dotted var(--mb-leader);transform:translateY(-4px)}
-.mr-price{flex:0 0 auto;font:800 16px/1 var(--ui);color:var(--blue,#3B69E6);white-space:nowrap}
+.mr-price{flex:0 0 auto;font:800 18px/1 var(--ui);color:var(--blue,#3B69E6);white-space:nowrap}
 .mr-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
 .mtag{font:800 10px/1.4 var(--ui);letter-spacing:.14em;text-transform:uppercase;
   color:var(--mb-warm);border:1px solid var(--mb-leader);border-radius:999px;padding:3px 8px}
-.mr-desc{margin:5px 0 0;font:400 16.5px/1.5 var(--ui);color:var(--mb-muted);max-width:60ch}
+.mr-desc{margin:6px 0 0;font:400 17px/1.55 var(--ui);color:var(--mb-muted);max-width:60ch}
 .mnav{display:flex;justify-content:space-between;gap:14px;margin-top:54px;padding-top:26px;
   border-top:3px double var(--mb-rule);font:800 12px/1 var(--ui);letter-spacing:.16em;text-transform:uppercase}
 .mnav a{color:var(--blue,#3B69E6);text-decoration:none}
@@ -131,7 +131,7 @@
 #mresults .rrow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:16px;
   align-items:baseline;padding:14px 0;border-top:1px solid var(--mb-rule);
   color:inherit;text-decoration:none}
-#mresults .rn{font:700 18px/1.3 var(--ui);color:var(--mb-text)}
+#mresults .rn{font-family:var(--disp);font-weight:400;font-size:20px;line-height:1.2;color:var(--mb-text)}
 #mresults .rrow:hover .rn{color:var(--blue,#3B69E6)}
 #mresults .rc{font:800 10px/1 var(--ui);letter-spacing:.16em;text-transform:uppercase;color:var(--mb-warm)}
 #mresults .rp{font:800 13px/1 var(--ui);color:var(--blue,#3B69E6);white-space:nowrap}
@@ -170,7 +170,7 @@
   .mutil.filters-open #mchips{margin-bottom:10px}
   #mresults .rrow{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"n p" "c c";
     gap:3px 12px;padding:15px 0}
-  #mresults .rn{grid-area:n;font-size:17.5px}
+  #mresults .rn{grid-area:n;font-size:20px}
   #mresults .rp{grid-area:p;font-size:15px}
   #mresults .rc{grid-area:c;font-size:10.5px;letter-spacing:.14em}
   .mfeat-cats .mcard .mc-n{font-size:21px}
