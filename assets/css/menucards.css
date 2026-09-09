@@ -175,6 +175,8 @@
   .mboard{grid-template-columns:1fr;padding:8px 18px 0}
   .mrail{display:none}
   .mcontent{padding:6px 0 70px}
+  .mswitch{display:flex;width:100%;gap:4px;margin:4px 0 18px;padding:4px}
+  .mswitch a{min-width:0;flex:1;padding:10px 12px;font-size:11px;letter-spacing:.16em}
   .mfilter-toggle{display:inline-flex;width:50px;align-self:stretch;align-items:center;
     justify-content:center;border:2px solid var(--mb-rule);border-radius:10px;
     background:var(--mb-panel);color:var(--blue,#3B69E6);cursor:pointer}

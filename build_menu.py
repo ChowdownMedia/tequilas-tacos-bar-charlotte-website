@@ -10,7 +10,7 @@ import json, os, re, html, unicodedata
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://tequilastacosbar.com"
 IMG = "/assets/images/menu"
-CSS_VER = "mc27"
+CSS_VER = "mc28"
 ORDER_URL = "https://tequilastacosbar.com/comingsoon"
 PDF_URLS = {
     "food": "https://storage.googleapis.com/msgsndr/r38meFSUdG3vciQdiMyJ/media/68273a85bb183352e7966c7e.pdf",
