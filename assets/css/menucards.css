@@ -53,10 +53,10 @@
   border:2px solid #ad0f85;border-radius:999px;color:#ad0f85;
   background:none;cursor:pointer}
 .msurprise:hover{background:#ad0f85;color:#fff}
-.mswitch{display:inline-flex;align-items:center;gap:4px;margin:4px 0 18px;padding:4px;
+.mswitch{display:inline-flex;align-items:center;gap:6px;margin:8px 0 24px;padding:5px;
   border:2px solid var(--mb-rule);border-radius:999px;background:var(--mb-panel)}
-.mswitch a{min-width:86px;padding:10px 16px;border-radius:999px;text-align:center;
-  color:var(--mb-muted);font:800 11px/1 var(--ui);letter-spacing:.16em;
+.mswitch a{min-width:128px;padding:14px 24px;border-radius:999px;text-align:center;
+  color:rgba(27,16,48,.78);font:900 16px/1 var(--ui);letter-spacing:.14em;
   text-transform:uppercase;text-decoration:none}
 .mswitch a:hover{color:var(--blue,#3B69E6)}
 .mswitch a[aria-current=page]{background:var(--blue,#3B69E6);color:#fff}
