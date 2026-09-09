@@ -10,7 +10,7 @@ import json, os, re, html, unicodedata
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://tequilastacosbar.com"
 IMG = "/assets/images/menu"
-CSS_VER = "mc3"
+CSS_VER = "mc4"
 ORDER_URL = "https://tequilastacosbar.com/comingsoon"
 BRAND = "Tequilas Tacos & Bar"
 
@@ -89,7 +89,7 @@ CATEGORY_PHOTO = {
     "Mariscos Tequilas (Seafood)": "camarones-diabla",
     "Seafood (Entrées)": "camarones-close",
     "Lunch Time (Mon-Fri 11:00am-2:00pm)": "quesabirria",
-    "Chimichangas": "burrito-queso-2", "Nachos": "loaded-fries-corona",
+    "Chimichangas": "burrito-queso-2", "Chicken Entrees": "pollo-plate",
 }
 def card_photo(cat):
     b = CATEGORY_PHOTO.get(cat) or cat_photo(cat)

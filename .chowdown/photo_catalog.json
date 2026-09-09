@@ -247,6 +247,14 @@
     "hero-photoroom-800.webp",
     "hero-photoroom-400.webp"
    ]
+  },
+  "pollo-plate": {
+   "orientation": "portrait",
+   "variants": [
+    "pollo-plate-1600.webp",
+    "pollo-plate-800.webp",
+    "pollo-plate-400.webp"
+   ]
   }
  }
 }
