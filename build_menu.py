@@ -10,7 +10,7 @@ import json, os, re, html, unicodedata
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://tequilastacosbar.com"
 IMG = "/assets/images/menu"
-CSS_VER = "mc12"
+CSS_VER = "mc13"
 ORDER_URL = "https://tequilastacosbar.com/comingsoon"
 BRAND = "Tequilas Tacos & Bar"
 
@@ -367,11 +367,13 @@ def page_category(cat, prev_c, next_c):
     d = os.path.join(ROOT, "menu", slug(cat)); os.makedirs(d, exist_ok=True)
     open(os.path.join(d, "index.html"), "w").write(top + ld + body + tail)
 
-def page_menu_landing():
-    total = sum(len(c["items"]) for c in CATS_LIST)
+def page_board_landing(path, hero, groups_subset, title, desc, blurb=None):
+    cats_in = [c for g, cats in COURSE_GROUPS if g in groups_subset for c in cats if c in CAT_BY_NAME]
+    total = sum(len(CAT_BY_NAME[c]["items"]) for c in cats_in)
     eager_left = 4
     groups_html = ""
     for g, cats in COURSE_GROUPS:
+        if g not in groups_subset: continue
         present = [c for c in cats if c in CAT_BY_NAME]
         if not present: continue
         cards = ""
@@ -387,23 +389,39 @@ def page_menu_landing():
                       f'<span class="mc-p">{n}</span></div></div></a>')
         groups_html += (f'<section class="mlgroup"><div class="msec-ey">{e(g)}</div>'
                         f'<div class="mfeat mfeat-cats" style="margin:14px 0 0">{cards}</div></section>')
-    full_menu_ld = {"@context": "https://schema.org", "@type": "Menu", "@id": f"{DOMAIN}/menu/#menu",
-                    "name": f"{BRAND} Menu", "hasMenuSection": [section_ld(c["name"]) for c in CATS_LIST]}
+    board_ld = {"@context": "https://schema.org", "@type": "Menu", "@id": f"{DOMAIN}{path}#menu",
+                "name": f"{BRAND} {hero.title()} Menu",
+                "hasMenuSection": [section_ld(c) for c in cats_in]}
     intro = (f'<section id="mspread"><div class="msec-ey">Kitchen &amp; cantina &middot; {total} items</div>'
-             '<h1 class="msec-h" style="font-size:clamp(58px,13vw,170px);line-height:.8">MENU</h1>'
+             f'<h1 class="msec-h" style="font-size:clamp(58px,13vw,170px);line-height:.8">{e(hero)}</h1>'
              '<p class="mintro">Every dish photo was shot in this kitchen. Search it, filter it, '
              'browse by course, or hit Surprise Me and let the trompo decide.</p>'
              f'<div class="mctas"><a class="btn-order" href="{e(ORDER_URL)}" target="_blank" rel="noopener">Order online</a></div>'
              f'{groups_html}</section>')
     body = ('<main class="mboard">' + rail(None) + '<div class="mcontent">' + utility() + intro
             + "</div></main>" + sheet_html())
-    top, tail = chrome(f"Our Menu | {BRAND} - Charlotte",
-                       f"The full {BRAND} menu: {total} dishes across {len(CATS_LIST)} categories. "
-                       "Tacos, quesabirria, fajitas, mariscos and more. Search, filter, order online.",
-                       f"{DOMAIN}/menu/", og_img=f"{IMG}/tacos-asada-1600.webp")
-    ld = ld_block([full_menu_ld, breadcrumb_ld([("Home", "/"), ("Menu", "/menu/")])])
+    top, tail = chrome(title, desc, f"{DOMAIN}{path}", og_img=f"{IMG}/tacos-asada-1600.webp")
+    ld = ld_block([board_ld, breadcrumb_ld([("Home", "/"), (hero.title(), path)])])
     tail = tail.replace("</body>", MENU_SCRIPTS + "</body>")
-    open(os.path.join(ROOT, "menu", "index.html"), "w").write(top + ld + body + tail)
+    d = os.path.join(ROOT, path.strip("/")); os.makedirs(d, exist_ok=True)
+    open(os.path.join(d, "index.html"), "w").write(top + ld + body + tail)
+
+def page_menu_landing():
+    page_board_landing("/menu/", "MENU",
+                       [g for g, _ in COURSE_GROUPS],
+                       f"Our Menu | {BRAND} - Charlotte",
+                       "The full Tequilas Tacos & Bar menu: tacos, quesabirria, fajitas, mariscos, "
+                       "margaritas and more. Search, filter, order online.")
+    page_board_landing("/seafood/", "SEAFOOD", ["Seafood House"],
+                       f"Seafood Menu | {BRAND} - Charlotte",
+                       "Louisiana-style Mexican seafood in Charlotte: aguachiles, mojarras, camarones, "
+                       "ceviches, micheladas. Search the menu and order online.",
+                       blurb="Louisiana-style mariscos, aguachiles and mojarras, shot in this kitchen. Search it, filter it, or browse by course.")
+    page_board_landing("/drinks/", "DRINKS", ["Cantina", "Desserts"],
+                       f"Drinks Menu | {BRAND} - Charlotte",
+                       "Margaritas by the glass or pitcher, tequila flights, micheladas, cocktails and "
+                       "desserts. Search the menu and order online.",
+                       blurb="Margaritas, flights, micheladas and desserts, poured and plated here. Search it, filter it, or hit Surprise Me.")
 
 def build_search_index():
     idx = []
