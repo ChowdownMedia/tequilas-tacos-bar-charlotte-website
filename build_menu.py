@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tequilas Tacos & Bar — menu board generator.
+"""Tequilas Tacos & Bar - menu board generator.
 Faithful port of the Mi Jalapeno menu architecture (mi-jalapeno-website/build.py):
 sticky category rail + search + filter chips + Surprise Me + item detail sheet,
 skinned in Tequilas' bright tokens. Emits /menu/ + /menu/<slug>/ + menu-index.js.
@@ -88,7 +88,7 @@ COURSE_GROUPS = [
 GROUP_OF = {c: g for g, cats in COURSE_GROUPS for c in cats}
 
 # ---------------------------------------------------------------- photos
-# (category, name-substring-lowercase, photo-base) — category-scoped, first match
+# (category, name-substring-lowercase, photo-base) - category-scoped, first match
 # wins, exact dish depicted. No cross-category leaks. All bases visually verified.
 PHOTO_RULES = [
     ("Appetizers / Dips", "mexican street elote", "elote-hand"),
@@ -184,9 +184,9 @@ def parse_price(raw):
             lab = lab.strip("$").strip() or "Price"
             variants.append({"label": lab, "price": price})
         else:
-            variants.append({"label": "Price", "price": part or "—"})
+            variants.append({"label": "Price", "price": part or ""})
     if not variants:
-        variants = [{"label": "Price", "price": raw or "—"}]
+        variants = [{"label": "Price", "price": raw or ""}]
     # unsplittable junk (e.g. "1/2 DOZEN $$$"): fall back to the raw string
     if len(variants) > 1 and any(v["price"] == v["label"] == "Price" for v in variants):
         variants = [{"label": "Price", "price": raw}]
@@ -473,15 +473,15 @@ GALLERY_SHOTS = [
     "quesabirria", "trompo-tower",
     "loaded-fries", "carne-asada",
     "camarones-diabla",       # wide
-    "paleta-margarita", "tropical-margarita",
+    "gallery-red-cocktail", "gallery-white-cocktail",
     "burrito-queso", "pollo-plate",
     "skillet-alambre",        # wide
-    "mexican-lollipop", "chamochela",
-    "menudo",                 # wide
+    "gallery-skillet-server", "gallery-shrimp-plate",
+    "gallery-sizzling-skillet",  # wide
     "quesadilla-board", "loaded-fries-corona",
-    "tres-leches",            # wide
+    "gallery-bar-interior",      # wide
     "hero-photoroom",         # wide
-    "lava-cake",              # wide
+    "gallery-elote-platter",
     "hero-interior",          # wide
 ]
 def page_gallery():

@@ -92,7 +92,7 @@
                 "price": "SM 14oz $10.99 / JUMBO 21oz $16.99"
               },
               {
-                "description": "Crazy grapefruit — grape juice, Teremana Gold, Gran Gala, lime juice, triple sec, gin.",
+                "description": "Crazy grapefruit: grape juice, Teremana Gold, Gran Gala, lime juice, triple sec, gin.",
                 "image": "",
                 "name": "Toronja Loca",
                 "price": "SM 14oz $11.99 / JUMBO 21oz $19.99"
@@ -1798,7 +1798,7 @@
             "description": "",
             "items": [
               {
-                "description": "Option to have enchiladas grilled. No mix please — select one protein to grill.",
+                "description": "Option to have enchiladas grilled. No mix please. Select one protein to grill.",
                 "image": "",
                 "name": "Make Your Enchiladas Grill (No mix please)",
                 "price": "Grilled Chicken $17.99 / Steak $18.99 / Shrimp $19.99"
@@ -2194,7 +2194,7 @@
                 "price": "$17.99"
               },
               {
-                "description": "Five different enchiladas — one beef, one chicken, one shredded beef, one beans and one cheese. Topped with cheese, lettuce, tomatoes, sour cream and special enchilada sauce.",
+                "description": "Five different enchiladas: one beef, one chicken, one shredded beef, one beans and one cheese. Topped with cheese, lettuce, tomatoes, sour cream and special enchilada sauce.",
                 "image": "",
                 "name": "ENCHILADAS SUPER SUPREMAS",
                 "price": "$18.99"
@@ -2206,7 +2206,7 @@
                 "price": "$19.99"
               },
               {
-                "description": "Four fried corn taquitos — two shredded beef and two shredded chicken. Served with rice, lettuce, guacamole, tomatoes and sour cream.",
+                "description": "Four fried corn taquitos: two shredded beef and two shredded chicken. Served with rice, lettuce, guacamole, tomatoes and sour cream.",
                 "image": "",
                 "name": "FLAUTAS",
                 "price": "$17.99"
@@ -2735,7 +2735,7 @@
             "description": "",
             "items": [
               {
-                "description": "Sign text: 'Para los crudos' — shrimp served in a cocktail/glass with an inverted beer bottle (beer garnish), lime wedge; pictured with whole shrimp around glass.",
+                "description": "Sign text: 'Para los crudos' : shrimp served in a cocktail/glass with an inverted beer bottle (beer garnish), lime wedge; pictured with whole shrimp around glass.",
                 "image": "",
                 "name": "Camaron(es) Borrachos",
                 "price": "$10.99"
@@ -2753,7 +2753,7 @@
                 "price": "25.99"
               },
               {
-                "description": "Platter sampler of multiple small seafood preparations (assortment of shrimp and other seafood in several sauces) — pictured as six small dishes with various sauces and lime wedges.",
+                "description": "Platter sampler of multiple small seafood preparations (assortment of shrimp and other seafood in several sauces) , pictured as six small dishes with various sauces and lime wedges.",
                 "image": "",
                 "name": "Sampler de los Reyes",
                 "price": "$43.99"
@@ -2789,7 +2789,7 @@
             "description": "",
             "items": [
               {
-                "description": "Sign text: 'Opción a escoger 2 estilos de Aguachiles: Verde, Rojo, Viagra, Mango, Petróleo' — pictured: six shrimp served with Modelo cans and lime; combo of two aguachile styles (choose two from the listed styles).",
+                "description": "Sign text: 'Opción a escoger 2 estilos de Aguachiles: Verde, Rojo, Viagra, Mango, Petróleo' , pictured: six shrimp served with Modelo cans and lime; combo of two aguachile styles (choose two from the listed styles).",
                 "image": "",
                 "name": "El Seis de Zeus",
                 "price": "$39.99"
@@ -2843,7 +2843,7 @@
                 "price": "$33.99"
               },
               {
-                "description": "(Duplicate visual entry on page) 'Para los crudos' — shrimp with inverted beer bottle garnish, lime.",
+                "description": "(Duplicate visual entry on page) 'Para los crudos' : shrimp with inverted beer bottle garnish, lime.",
                 "image": "",
                 "name": "Camarones Borrachos",
                 "price": "$10.99"
@@ -3314,14 +3314,14 @@
   },
   "signatures": [
     {
-      "body": "A true showstopper of Mexican cuisine, served sizzling in a traditional stone mortar that locks in its bold, smoky flavors. Tender steak, juicy chicken and succulent shrimp with grilled cactus, onions and peppers, topped with bubbling melted cheese — finished with fresh guacamole, salsa and warm tortillas.",
+      "body": "A true showstopper of Mexican cuisine, served sizzling in a traditional stone mortar that locks in its bold, smoky flavors. Tender steak, juicy chicken and succulent shrimp with grilled cactus, onions and peppers, topped with bubbling melted cheese, finished with fresh guacamole, salsa and warm tortillas.",
       "foot": "Build your own perfect bite",
       "image": "molcajete.jpg",
       "name": "Molcajete Perrón",
       "tag": "The showstopper"
     },
     {
-      "body": "A vibrant seafood dish that celebrates the coastal flavors of Mexico. Fresh seafood seasoned with traditional Mexican spices, cooked to tender perfection and complemented by rich, smoky notes — garnished with bright, zesty toppings and a side of Mexican-style slaw. A refreshing taste of the ocean in every savory bite.",
+      "body": "A vibrant seafood dish that celebrates the coastal flavors of Mexico. Fresh seafood seasoned with traditional Mexican spices, cooked to tender perfection and complemented by rich, smoky notes, garnished with bright, zesty toppings and a side of Mexican-style slaw. A refreshing taste of the ocean in every savory bite.",
       "foot": "Straight from the seafood menu",
       "image": "seafood.jpg",
       "name": "Seafood Delight, Louisiana-Style",

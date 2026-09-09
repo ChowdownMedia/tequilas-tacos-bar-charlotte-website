@@ -102,6 +102,26 @@ Required local iteration:
 - After deploy, test the Cloudflare preview URL with cache-busting.
 - Run PSI against the deployed preview for final client-facing score.
 
+## 12. DNS And Domain (GoDaddy to Cloudflare)
+
+Solved once. Do not re-solve per build. The apex-vs-www decision drives both DNS and every canonical/og/JSON-LD/sitemap/internal-absolute URL. Get it wrong and launch URLs 301 or 404 for crawlers (the Roman fleet shipped 1122 apex tags that broke after the apex forward).
+
+Canonical host rule (site side):
+
+- Pick the serving host once. Standard is `www`. Every canonical, `og:url`, JSON-LD `url`/`@id`, sitemap `<loc>`, and internal absolute link uses that exact host.
+- `scripts/preflight.py` fails the build when canonical/og/sitemap hosts disagree, and warns you to confirm the apex-to-www redirect direction against production.
+
+GoDaddy DNS procedure (existing host to Cloudflare Pages):
+
+1. Back up first: EXPORT the current zone file. Never do a zone IMPORT to migrate; it clobbers email.
+2. Keep email untouched: do not change MX or email-auth records (SPF/DKIM/DMARC). Existing GHL/mail keeps working.
+3. Point the site at Cloudflare Pages, then make the apex 301-forward to `www` so there is exactly one canonical host.
+   - CONFIRM EXACT RECIPE WITH CHUCK: `www` CNAME to `<project>.pages.dev`, apex via GoDaddy forwarding vs ALIAS/A vs moving to CF nameservers.
+4. Record changes are automated via the GoDaddy DNS API in the OS; manual inline edit is the fallback.
+5. After propagation, verify:
+   - `curl -sI https://<apex>/ | grep -i ^location` shows a 301 to `https://www.<domain>/`.
+   - `curl -sI https://www.<domain>/` returns 200.
+
 ## 11. Final Handoff
 
 Report:

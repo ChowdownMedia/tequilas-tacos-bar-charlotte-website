@@ -1,12 +1,12 @@
 /* ==========================================================================
-   Liberty Collective — Complete Site-Wide JavaScript
+   Liberty Collective - Complete Site-Wide JavaScript
    Nav, carousels, modals, forms, map, video controls, widgets
    ========================================================================== */
 (function () {
   'use strict';
 
   /* -----------------------------------------------------------------------
-     CONFIG — Endpoints and timing
+     CONFIG - Endpoints and timing
      ----------------------------------------------------------------------- */
   var CONFIG = {
     formEndpoint: '/api/contact',       /* POST target for all forms */
@@ -36,7 +36,7 @@
   function hasClass(el, cls) { return el && el.classList.contains(cls); }
 
   /* -----------------------------------------------------------------------
-     HEADER SCROLL — Add shadow on scroll
+     HEADER SCROLL - Add shadow on scroll
      ----------------------------------------------------------------------- */
   var header = document.getElementById('site-header');
   window.addEventListener('scroll', function () {
@@ -44,7 +44,7 @@
   }, { passive: true });
 
   /* -----------------------------------------------------------------------
-     SCROLL REVEAL — feature bands swoop in when they enter the viewport
+     SCROLL REVEAL - feature bands swoop in when they enter the viewport
      ----------------------------------------------------------------------- */
   (function () {
     var els = document.querySelectorAll('.feature-band');
@@ -58,7 +58,7 @@
   })();
 
   /* -----------------------------------------------------------------------
-     MOBILE NAV — Hamburger toggle + full-screen overlay
+     MOBILE NAV - Hamburger toggle + full-screen overlay
      ----------------------------------------------------------------------- */
   var toggle = document.getElementById('nav-toggle');
   var mobileMenu = document.getElementById('mobile-menu');
@@ -97,7 +97,7 @@
   });
 
   /* -----------------------------------------------------------------------
-     HERO VIDEO CONTROLS — Play/pause + mute/unmute
+     HERO VIDEO CONTROLS - Play/pause + mute/unmute
      ----------------------------------------------------------------------- */
   var video = qs('.hero-video');
   var playBtn = qs('.video-controls-btn');
@@ -130,7 +130,7 @@
   }
 
   /* -----------------------------------------------------------------------
-     GALLERY CAROUSEL — Auto-play with prev/next and pause
+     GALLERY CAROUSEL - Auto-play with prev/next and pause
      ----------------------------------------------------------------------- */
   var galleryTrack = document.getElementById('gallery-track');
   var galleryPrev = document.getElementById('gallery-prev');
@@ -179,7 +179,7 @@
   }, CONFIG.galleryInterval);
 
   /* -----------------------------------------------------------------------
-     REVIEWS CAROUSEL — Auto-rotate with dots, arrows, pause
+     REVIEWS CAROUSEL - Auto-rotate with dots, arrows, pause
      ----------------------------------------------------------------------- */
   var reviewSlides = qsa('.review-slide');
   var reviewDots = qsa('.dot');
@@ -227,7 +227,7 @@
   }, CONFIG.reviewInterval);
 
   /* -----------------------------------------------------------------------
-     MODAL SYSTEM — Open, close, escape, overlay click
+     MODAL SYSTEM - Open, close, escape, overlay click
      ----------------------------------------------------------------------- */
   function openModal(modalId) {
     var overlay = document.getElementById(modalId);
@@ -289,7 +289,7 @@
   window.closeModal = closeModal;
 
   /* -----------------------------------------------------------------------
-     CONTACT MODAL — Radio selector switches between 3 form panels
+     CONTACT MODAL - Radio selector switches between 3 form panels
      ----------------------------------------------------------------------- */
   var contactRadios = qsa('#contact-type-group input[type="radio"]');
   var contactPanels = qsa('.contact-form-panel');
@@ -318,7 +318,7 @@
   });
 
   /* -----------------------------------------------------------------------
-     CONTACT FAB BUTTON — Opens contact modal
+     CONTACT FAB BUTTON - Opens contact modal
      ----------------------------------------------------------------------- */
   var fabContact = qs('.fab-contact');
   if (fabContact) {
@@ -328,7 +328,7 @@
   }
 
   /* -----------------------------------------------------------------------
-     BIRTHDAY WIDGET — Opens birthday modal
+     BIRTHDAY WIDGET - Opens birthday modal
      ----------------------------------------------------------------------- */
   var bdayPill = qs('.bday-pill');
   if (bdayPill) {
@@ -339,7 +339,7 @@
   }
 
   /* -----------------------------------------------------------------------
-     NEWSLETTER POPUP — Triggered after delay or scroll threshold
+     NEWSLETTER POPUP - Triggered after delay or scroll threshold
      ----------------------------------------------------------------------- */
   var newsletterShown = false;
   var nlModalId = 'newsletter-modal';
@@ -379,7 +379,7 @@
   }
 
   /* -----------------------------------------------------------------------
-     FORM SUBMISSION HANDLER — POST to configurable endpoint
+     FORM SUBMISSION HANDLER - POST to configurable endpoint
      ----------------------------------------------------------------------- */
   /* Posts contact / catering / parties / jobs forms to the shared chowdown-forms
      Worker (multipart so a resume can ride along). The Worker resolves the
@@ -432,7 +432,7 @@
     var hp = form.querySelector('input[name="_gotcha"]');
     if (hp && hp.value) return;                                  // honeypot
     if (!vcfg.endpoint || !vcfg.client) {
-      if (errorEl) { addClass(errorEl, 'visible'); errorEl.textContent = 'VIP signup isn\'t set up yet — please check back soon.'; }
+      if (errorEl) { addClass(errorEl, 'visible'); errorEl.textContent = 'VIP signup isn\'t set up yet. Please check back soon.'; }
       return;
     }
     if (submitBtn) addClass(submitBtn, 'loading');
@@ -475,7 +475,7 @@
   });
 
   /* -----------------------------------------------------------------------
-     MOBILE FOOTER BAR — Show after delay
+     MOBILE FOOTER BAR - Show after delay
      ----------------------------------------------------------------------- */
   var mobileFooterBar = qs('.mobile-footer-bar');
   if (mobileFooterBar) {
@@ -512,7 +512,7 @@
   }
 
   /* -----------------------------------------------------------------------
-     SMOOTH SCROLL — Anchor links with offset for fixed header
+     SMOOTH SCROLL - Anchor links with offset for fixed header
      ----------------------------------------------------------------------- */
   qsa('a[href^="#"]').forEach(function (anchor) {
     on(anchor, 'click', function (e) {
@@ -536,7 +536,7 @@
   });
 
   /* -----------------------------------------------------------------------
-     MENU TABS — switch food/drink menu panels
+     MENU TABS - switch food/drink menu panels
      ----------------------------------------------------------------------- */
   qsa('[data-menu-tab]').forEach(function (tab) {
     on(tab, 'click', function () {
@@ -547,7 +547,7 @@
   });
 
   /* -----------------------------------------------------------------------
-     MENU SECTION FILTER — each chip reveals only its section (no page jumping)
+     MENU SECTION FILTER - each chip reveals only its section (no page jumping)
      ----------------------------------------------------------------------- */
   qsa('.menu-chip').forEach(function (chip) {
     on(chip, 'click', function () {
@@ -573,7 +573,7 @@
   });
 
   /* -----------------------------------------------------------------------
-     EVENTS FEED — live calendar layer (opt-in via SITE_CONFIG.eventsFeed).
+     EVENTS FEED - live calendar layer (opt-in via SITE_CONFIG.eventsFeed).
      Fetches upcoming events from the client's Google Calendar at load, so the
      page is always current and past events drop off automatically. Talks
      straight to Google (no server dependency); fails quietly to an empty state.
@@ -587,7 +587,7 @@
       mount.innerHTML = '<div class="events-empty"><h2>No Upcoming Events</h2><p>' + esc(msg || 'Check back soon!') + '</p></div>';
     }
     if (!cfg.calendarId || !cfg.apiKey) {
-      if (cfg.calendarId && !cfg.apiKey) console.warn('[events] calendarId set but no apiKey — live feed disabled');
+      if (cfg.calendarId && !cfg.apiKey) console.warn('[events] calendarId set but no apiKey, live feed disabled');
       empty(); return;
     }
     // Render in the restaurant's timezone (cfg.timezone), not the visitor's, so an
@@ -638,7 +638,7 @@
   })();
 
   /* -----------------------------------------------------------------------
-     BREADCRUMB INTERACTIONS — Active state on current page
+     BREADCRUMB INTERACTIONS - Active state on current page
      ----------------------------------------------------------------------- */
   var breadcrumbLinks = qsa('.breadcrumbs a');
   var currentPath = window.location.pathname.replace(/\/$/, '');
@@ -653,7 +653,7 @@
   });
 
   /* -----------------------------------------------------------------------
-     NAV ACTIVE STATE — Highlight current page in navigation
+     NAV ACTIVE STATE - Highlight current page in navigation
      ----------------------------------------------------------------------- */
   function setActiveNav() {
     var path = window.location.pathname;

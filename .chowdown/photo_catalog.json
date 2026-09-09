@@ -310,6 +310,62 @@
         "nachos-specialties-800.webp",
         "nachos-specialties-400.webp"
       ]
+    },
+    "gallery-red-cocktail": {
+      "orientation": "portrait",
+      "variants": [
+        "gallery-red-cocktail-1600.webp",
+        "gallery-red-cocktail-800.webp",
+        "gallery-red-cocktail-400.webp"
+      ]
+    },
+    "gallery-white-cocktail": {
+      "orientation": "portrait",
+      "variants": [
+        "gallery-white-cocktail-1600.webp",
+        "gallery-white-cocktail-800.webp",
+        "gallery-white-cocktail-400.webp"
+      ]
+    },
+    "gallery-skillet-server": {
+      "orientation": "portrait",
+      "variants": [
+        "gallery-skillet-server-1600.webp",
+        "gallery-skillet-server-800.webp",
+        "gallery-skillet-server-400.webp"
+      ]
+    },
+    "gallery-shrimp-plate": {
+      "orientation": "portrait",
+      "variants": [
+        "gallery-shrimp-plate-1600.webp",
+        "gallery-shrimp-plate-800.webp",
+        "gallery-shrimp-plate-400.webp"
+      ]
+    },
+    "gallery-sizzling-skillet": {
+      "orientation": "landscape",
+      "variants": [
+        "gallery-sizzling-skillet-1600.webp",
+        "gallery-sizzling-skillet-800.webp",
+        "gallery-sizzling-skillet-400.webp"
+      ]
+    },
+    "gallery-bar-interior": {
+      "orientation": "landscape",
+      "variants": [
+        "gallery-bar-interior-1600.webp",
+        "gallery-bar-interior-800.webp",
+        "gallery-bar-interior-400.webp"
+      ]
+    },
+    "gallery-elote-platter": {
+      "orientation": "portrait",
+      "variants": [
+        "gallery-elote-platter-1600.webp",
+        "gallery-elote-platter-800.webp",
+        "gallery-elote-platter-400.webp"
+      ]
     }
   }
 }

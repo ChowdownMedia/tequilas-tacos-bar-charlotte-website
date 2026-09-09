@@ -140,6 +140,79 @@ def check_llms_txt() -> None:
         add_warn('llms.txt appears to contain bare URLs outside Markdown link syntax.')
     print(f'llms_markdown_links={len(md_links)}')
 
+SCRIPT_STYLE_RE = re.compile(r'<(script|style)\b[^>]*>.*?</\1>', re.S | re.I)
+# House style bans em/en dashes and emoji in shipped copy. Emoji ranges kept
+# conservative (pictographs + symbols + flags + variation selector) so ordinary
+# punctuation and math symbols do not false-positive.
+DASH_RE = re.compile('[–—]')
+EMOJI_RE = re.compile(
+    '[\U0001F300-\U0001FAFF\U0001F1E6-\U0001F1FF'
+    '\U00002600-\U000027BF\U00002B00-\U00002BFF️]')
+
+
+def check_typography(files: list[Path]) -> None:
+    """No em/en dashes and no emoji in visible content (scripts/styles stripped)."""
+    for p in files:
+        visible = SCRIPT_STYLE_RE.sub('', p.read_text(errors='ignore'))
+        dashes = DASH_RE.findall(visible)
+        if dashes:
+            add_fail(f'{rel(p)} has {len(dashes)} em/en dash(es) in visible copy; house style forbids em/en dashes (AI tell).')
+        emoji = EMOJI_RE.findall(visible)
+        if emoji:
+            add_fail(f'{rel(p)} contains emoji {sorted(set(emoji))!r}; use inline SVG, no emoji on sites.')
+
+
+def check_tel_links(files: list[Path]) -> None:
+    """A US tel: link must be +1 plus exactly 10 digits (catches doubled country code)."""
+    bad: dict[str, int] = {}
+    for p in files:
+        for m in re.finditer(r'tel:\+1(\d+)', p.read_text(errors='ignore')):
+            if len(m.group(1)) != 10:
+                bad['+1' + m.group(1)] = bad.get('+1' + m.group(1), 0) + 1
+    for token, n in bad.items():
+        add_fail(f'Malformed US tel link {token} on {n} page(s); a US tel: is +1 plus exactly 10 digits.')
+
+
+def check_links_page() -> None:
+    """Every build ships a Linktree-style /links/ page (Roman Group pattern)."""
+    if not (ROOT / 'links' / 'index.html').exists() and not (ROOT / 'links.html').exists():
+        add_warn('No /links/ page found; every build should ship a Linktree-style /links/ page (see GOTCHAS).')
+
+
+def check_canonical_host(files: list[Path]) -> None:
+    """Canonical, og:url, and sitemap must all use one host; flag apex-vs-www to verify against prod."""
+    hosts: set[str] = set()
+    for p in files:
+        text = p.read_text(errors='ignore')
+        for m in re.finditer(r'<link[^>]+rel=["\']canonical["\'][^>]+href=["\']https?://([^/"\']+)', text):
+            hosts.add(m.group(1))
+        for m in re.finditer(r'og:url["\'][^>]+content=["\']https?://([^/"\']+)', text):
+            hosts.add(m.group(1))
+    sm = ROOT / 'sitemap.xml'
+    if sm.exists():
+        for m in re.finditer(r'<loc>\s*https?://([^/<]+)', sm.read_text(errors='ignore')):
+            hosts.add(m.group(1))
+    if len(hosts) > 1:
+        add_fail(f'Mixed canonical/og/sitemap hosts {sorted(hosts)!r}; use one host consistently or launch URLs will 404/redirect for crawlers.')
+    elif hosts:
+        host = next(iter(hosts))
+        print(f'canonical_host={host}')
+        tag = ' (apex, no www)' if not host.startswith('www.') else ''
+        add_warn(f'Canonical host is {host}{tag}; verify production serves this host and does NOT 301 to the other. Check: curl -sI https://{host}/ | grep -i ^location')
+
+
+def check_index_state(files: list[Path]) -> None:
+    """Surface noindex/Disallow so a human confirms it matches preview-vs-production intent."""
+    noindex = sum(1 for p in files
+                  if re.search(r'<meta[^>]+name=["\']robots["\'][^>]+noindex', p.read_text(errors='ignore'), re.I))
+    print(f'noindex_pages={noindex}')
+    if noindex:
+        add_warn(f'{noindex}/{len(files)} pages carry meta robots noindex. Confirm intent (preview=noindex OK; production launch must be indexable).')
+    robots = ROOT / 'robots.txt'
+    if robots.exists() and re.search(r'(?im)^\s*Disallow:\s*/\s*$', robots.read_text(errors='ignore')):
+        add_warn('robots.txt Disallows all crawling; confirm this is an intentional preview state, not a production launch.')
+
+
 def check_menu_generator() -> None:
     if (ROOT / 'build_menu.py').exists():
         generated = ROOT / 'assets' / 'js' / 'menu-index.js'
@@ -158,6 +231,11 @@ def main() -> int:
     check_nav_footer(files)
     check_assets(files)
     check_forms(files)
+    check_typography(files)
+    check_tel_links(files)
+    check_links_page()
+    check_canonical_host(files)
+    check_index_state(files)
     check_menu_generator()
     check_llms_txt()
 
