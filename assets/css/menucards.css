@@ -146,6 +146,11 @@
   .mutil.filters-open .mfilters{display:block;margin-top:8px}
   .mutil.filters-open #mchips{margin-bottom:10px}
   .mfeat-cats{grid-template-columns:1fr 1fr;gap:12px;margin:22px 0 30px}
+  #mresults .rrow{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"n p" "c c";
+    gap:3px 12px;padding:15px 0}
+  #mresults .rn{grid-area:n;font-size:17.5px}
+  #mresults .rp{grid-area:p;font-size:15px}
+  #mresults .rc{grid-area:c;font-size:10.5px;letter-spacing:.14em}
   .mcard .mc-b{padding:12px 13px 15px}
   .mcard .mc-n{font-size:16px;line-height:1.1}
   .mcard .mc-p{font-size:12px}
