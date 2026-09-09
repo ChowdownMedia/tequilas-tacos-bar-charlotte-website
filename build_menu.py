@@ -10,7 +10,7 @@ import json, os, re, html, unicodedata
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://tequilastacosbar.com"
 IMG = "/assets/images/menu"
-CSS_VER = "mc28"
+CSS_VER = "mc29"
 ORDER_URL = "https://tequilastacosbar.com/comingsoon"
 PDF_URLS = {
     "food": "https://storage.googleapis.com/msgsndr/r38meFSUdG3vciQdiMyJ/media/68273a85bb183352e7966c7e.pdf",
@@ -124,7 +124,8 @@ def cat_photo(cat):
 # Decorative card/section photo per category. Reuse is fine (illustrative).
 CATEGORY_PHOTO = {
     "Appetizers / Dips": "elote-hand", "Loaded Fries": "loaded-fries",
-    "Soups & Salads": "menudo", "Burritos": "burrito-queso",
+    "Soups & Salads": "menudo", "Nachos Specialties": "nachos-specialties",
+    "Burritos": "burrito-queso",
     "Tacos (Orders)": "tacos-asada", "Single Tacos": "teq-small-taco",
     "Quesadillas": "quesadilla-board", "Specialties (General)": "trompo-tower",
     "Fajitas Specialties": "skillet-alambre", "All Time Favorites": "combo-board",

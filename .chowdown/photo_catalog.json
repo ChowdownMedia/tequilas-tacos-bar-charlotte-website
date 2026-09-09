@@ -1,308 +1,315 @@
 {
- "dishes": {
-  "tacos-asada": {
-   "orientation": "landscape",
-   "variants": [
-    "tacos-asada-1600.webp",
-    "tacos-asada-800.webp",
-    "tacos-asada-400.webp"
-   ]
-  },
-  "quesabirria": {
-   "orientation": "portrait",
-   "variants": [
-    "quesabirria-1600.webp",
-    "quesabirria-800.webp",
-    "quesabirria-400.webp"
-   ]
-  },
-  "menudo": {
-   "orientation": "landscape",
-   "variants": [
-    "menudo-1600.webp",
-    "menudo-800.webp",
-    "menudo-400.webp"
-   ]
-  },
-  "loaded-fries": {
-   "orientation": "portrait",
-   "variants": [
-    "loaded-fries-1600.webp",
-    "loaded-fries-800.webp",
-    "loaded-fries-400.webp"
-   ]
-  },
-  "loaded-fries-corona": {
-   "orientation": "portrait",
-   "variants": [
-    "loaded-fries-corona-1600.webp",
-    "loaded-fries-corona-800.webp",
-    "loaded-fries-corona-400.webp"
-   ]
-  },
-  "combo-board": {
-   "orientation": "portrait",
-   "variants": [
-    "combo-board-1600.webp",
-    "combo-board-800.webp",
-    "combo-board-400.webp"
-   ]
-  },
-  "quesadilla-board": {
-   "orientation": "portrait",
-   "variants": [
-    "quesadilla-board-1600.webp",
-    "quesadilla-board-800.webp",
-    "quesadilla-board-400.webp"
-   ]
-  },
-  "combo-elote": {
-   "orientation": "landscape",
-   "variants": [
-    "combo-elote-1600.webp",
-    "combo-elote-800.webp",
-    "combo-elote-400.webp"
-   ]
-  },
-  "elote-hand": {
-   "orientation": "portrait",
-   "variants": [
-    "elote-hand-1600.webp",
-    "elote-hand-800.webp",
-    "elote-hand-400.webp"
-   ]
-  },
-  "carne-asada": {
-   "orientation": "portrait",
-   "variants": [
-    "carne-asada-1600.webp",
-    "carne-asada-800.webp",
-    "carne-asada-400.webp"
-   ]
-  },
-  "steak-shrimp": {
-   "orientation": "landscape",
-   "variants": [
-    "steak-shrimp-1600.webp",
-    "steak-shrimp-800.webp",
-    "steak-shrimp-400.webp"
-   ]
-  },
-  "camarones-diabla": {
-   "orientation": "landscape",
-   "variants": [
-    "camarones-diabla-1600.webp",
-    "camarones-diabla-800.webp",
-    "camarones-diabla-400.webp"
-   ]
-  },
-  "camarones-close": {
-   "orientation": "portrait",
-   "variants": [
-    "camarones-close-1600.webp",
-    "camarones-close-800.webp",
-    "camarones-close-400.webp"
-   ]
-  },
-  "skillet-alambre": {
-   "orientation": "landscape",
-   "variants": [
-    "skillet-alambre-1600.webp",
-    "skillet-alambre-800.webp",
-    "skillet-alambre-400.webp"
-   ]
-  },
-  "skillet-held": {
-   "orientation": "portrait",
-   "variants": [
-    "skillet-held-1600.webp",
-    "skillet-held-800.webp",
-    "skillet-held-400.webp"
-   ]
-  },
-  "burrito-queso": {
-   "orientation": "portrait",
-   "variants": [
-    "burrito-queso-1600.webp",
-    "burrito-queso-800.webp",
-    "burrito-queso-400.webp"
-   ]
-  },
-  "burrito-queso-2": {
-   "orientation": "portrait",
-   "variants": [
-    "burrito-queso-2-1600.webp",
-    "burrito-queso-2-800.webp",
-    "burrito-queso-2-400.webp"
-   ]
-  },
-  "trompo-tower": {
-   "orientation": "portrait",
-   "variants": [
-    "trompo-tower-1600.webp",
-    "trompo-tower-800.webp",
-    "trompo-tower-400.webp"
-   ]
-  },
-  "trompo-tower-tall": {
-   "orientation": "portrait",
-   "variants": [
-    "trompo-tower-tall-1600.webp",
-    "trompo-tower-tall-800.webp",
-    "trompo-tower-tall-400.webp"
-   ]
-  },
-  "lava-cake": {
-   "orientation": "landscape",
-   "variants": [
-    "lava-cake-1600.webp",
-    "lava-cake-800.webp",
-    "lava-cake-400.webp"
-   ]
-  },
-  "tres-leches": {
-   "orientation": "landscape",
-   "variants": [
-    "tres-leches-1600.webp",
-    "tres-leches-800.webp",
-    "tres-leches-400.webp"
-   ]
-  },
-  "paleta-margarita": {
-   "orientation": "portrait",
-   "variants": [
-    "paleta-margarita-1600.webp",
-    "paleta-margarita-800.webp",
-    "paleta-margarita-400.webp"
-   ]
-  },
-  "tropical-margarita": {
-   "orientation": "portrait",
-   "variants": [
-    "tropical-margarita-1600.webp",
-    "tropical-margarita-800.webp",
-    "tropical-margarita-400.webp"
-   ]
-  },
-  "mexican-lollipop": {
-   "orientation": "portrait",
-   "variants": [
-    "mexican-lollipop-1600.webp",
-    "mexican-lollipop-800.webp",
-    "mexican-lollipop-400.webp"
-   ]
-  },
-  "chamochela": {
-   "orientation": "portrait",
-   "variants": [
-    "chamochela-1600.webp",
-    "chamochela-800.webp",
-    "chamochela-400.webp"
-   ]
-  },
-  "tequila-blanco": {
-   "orientation": "portrait",
-   "variants": [
-    "tequila-blanco-1600.webp",
-    "tequila-blanco-800.webp",
-    "tequila-blanco-400.webp"
-   ]
-  },
-  "tequila-reposado": {
-   "orientation": "landscape",
-   "variants": [
-    "tequila-reposado-1600.webp",
-    "tequila-reposado-800.webp",
-    "tequila-reposado-400.webp"
-   ]
-  },
-  "marg-jar": {
-   "orientation": "portrait",
-   "variants": [
-    "marg-jar-1600.webp",
-    "marg-jar-800.webp",
-    "marg-jar-400.webp"
-   ]
-  },
-  "marg-spicy": {
-   "orientation": "portrait",
-   "variants": [
-    "marg-spicy-1600.webp",
-    "marg-spicy-800.webp",
-    "marg-spicy-400.webp"
-   ]
-  },
-  "hero-interior": {
-   "orientation": "landscape",
-   "variants": [
-    "hero-interior-1600.webp",
-    "hero-interior-800.webp",
-    "hero-interior-400.webp"
-   ]
-  },
-  "hero-photoroom": {
-   "orientation": "landscape",
-   "variants": [
-    "hero-photoroom-1600.webp",
-    "hero-photoroom-800.webp",
-    "hero-photoroom-400.webp"
-   ]
-  },
-  "pollo-plate": {
-   "orientation": "portrait",
-   "variants": [
-    "pollo-plate-1600.webp",
-    "pollo-plate-800.webp",
-    "pollo-plate-400.webp"
-   ]
-  },
-  "teq-side-elote-june": {
-   "orientation": "portrait",
-   "variants": [
-    "teq-side-elote-june-1600.webp",
-    "teq-side-elote-june-800.webp",
-    "teq-side-elote-june-400.webp"
-   ]
-  },
-  "teq-small-taco": {
-   "orientation": "landscape",
-   "variants": [
-    "teq-small-taco-1600.webp",
-    "teq-small-taco-800.webp",
-    "teq-small-taco-400.webp"
-   ]
-  },
-  "teq-molcajete": {
-   "orientation": "landscape",
-   "variants": [
-    "teq-molcajete-1600.webp",
-    "teq-molcajete-800.webp",
-    "teq-molcajete-400.webp"
-   ]
-  },
-  "teq-red-cocktail-june": {
-   "orientation": "portrait",
-   "variants": [
-    "teq-red-cocktail-june-1600.webp",
-    "teq-red-cocktail-june-800.webp",
-    "teq-red-cocktail-june-400.webp"
-   ]
-  },
-  "teq-branded-cocktail-june": {
-   "orientation": "portrait",
-   "variants": [
-    "teq-branded-cocktail-june-1600.webp",
-    "teq-branded-cocktail-june-800.webp",
-    "teq-branded-cocktail-june-400.webp"
-   ]
-  },
-  "teq-mojarra-fish": {
-   "orientation": "portrait",
-   "variants": [
-    "teq-mojarra-fish-1600.webp",
-    "teq-mojarra-fish-800.webp",
-    "teq-mojarra-fish-400.webp"
-   ]
+  "dishes": {
+    "tacos-asada": {
+      "orientation": "landscape",
+      "variants": [
+        "tacos-asada-1600.webp",
+        "tacos-asada-800.webp",
+        "tacos-asada-400.webp"
+      ]
+    },
+    "quesabirria": {
+      "orientation": "portrait",
+      "variants": [
+        "quesabirria-1600.webp",
+        "quesabirria-800.webp",
+        "quesabirria-400.webp"
+      ]
+    },
+    "menudo": {
+      "orientation": "landscape",
+      "variants": [
+        "menudo-1600.webp",
+        "menudo-800.webp",
+        "menudo-400.webp"
+      ]
+    },
+    "loaded-fries": {
+      "orientation": "portrait",
+      "variants": [
+        "loaded-fries-1600.webp",
+        "loaded-fries-800.webp",
+        "loaded-fries-400.webp"
+      ]
+    },
+    "loaded-fries-corona": {
+      "orientation": "portrait",
+      "variants": [
+        "loaded-fries-corona-1600.webp",
+        "loaded-fries-corona-800.webp",
+        "loaded-fries-corona-400.webp"
+      ]
+    },
+    "combo-board": {
+      "orientation": "portrait",
+      "variants": [
+        "combo-board-1600.webp",
+        "combo-board-800.webp",
+        "combo-board-400.webp"
+      ]
+    },
+    "quesadilla-board": {
+      "orientation": "portrait",
+      "variants": [
+        "quesadilla-board-1600.webp",
+        "quesadilla-board-800.webp",
+        "quesadilla-board-400.webp"
+      ]
+    },
+    "combo-elote": {
+      "orientation": "landscape",
+      "variants": [
+        "combo-elote-1600.webp",
+        "combo-elote-800.webp",
+        "combo-elote-400.webp"
+      ]
+    },
+    "elote-hand": {
+      "orientation": "portrait",
+      "variants": [
+        "elote-hand-1600.webp",
+        "elote-hand-800.webp",
+        "elote-hand-400.webp"
+      ]
+    },
+    "carne-asada": {
+      "orientation": "portrait",
+      "variants": [
+        "carne-asada-1600.webp",
+        "carne-asada-800.webp",
+        "carne-asada-400.webp"
+      ]
+    },
+    "steak-shrimp": {
+      "orientation": "landscape",
+      "variants": [
+        "steak-shrimp-1600.webp",
+        "steak-shrimp-800.webp",
+        "steak-shrimp-400.webp"
+      ]
+    },
+    "camarones-diabla": {
+      "orientation": "landscape",
+      "variants": [
+        "camarones-diabla-1600.webp",
+        "camarones-diabla-800.webp",
+        "camarones-diabla-400.webp"
+      ]
+    },
+    "camarones-close": {
+      "orientation": "portrait",
+      "variants": [
+        "camarones-close-1600.webp",
+        "camarones-close-800.webp",
+        "camarones-close-400.webp"
+      ]
+    },
+    "skillet-alambre": {
+      "orientation": "landscape",
+      "variants": [
+        "skillet-alambre-1600.webp",
+        "skillet-alambre-800.webp",
+        "skillet-alambre-400.webp"
+      ]
+    },
+    "skillet-held": {
+      "orientation": "portrait",
+      "variants": [
+        "skillet-held-1600.webp",
+        "skillet-held-800.webp",
+        "skillet-held-400.webp"
+      ]
+    },
+    "burrito-queso": {
+      "orientation": "portrait",
+      "variants": [
+        "burrito-queso-1600.webp",
+        "burrito-queso-800.webp",
+        "burrito-queso-400.webp"
+      ]
+    },
+    "burrito-queso-2": {
+      "orientation": "portrait",
+      "variants": [
+        "burrito-queso-2-1600.webp",
+        "burrito-queso-2-800.webp",
+        "burrito-queso-2-400.webp"
+      ]
+    },
+    "trompo-tower": {
+      "orientation": "portrait",
+      "variants": [
+        "trompo-tower-1600.webp",
+        "trompo-tower-800.webp",
+        "trompo-tower-400.webp"
+      ]
+    },
+    "trompo-tower-tall": {
+      "orientation": "portrait",
+      "variants": [
+        "trompo-tower-tall-1600.webp",
+        "trompo-tower-tall-800.webp",
+        "trompo-tower-tall-400.webp"
+      ]
+    },
+    "lava-cake": {
+      "orientation": "landscape",
+      "variants": [
+        "lava-cake-1600.webp",
+        "lava-cake-800.webp",
+        "lava-cake-400.webp"
+      ]
+    },
+    "tres-leches": {
+      "orientation": "landscape",
+      "variants": [
+        "tres-leches-1600.webp",
+        "tres-leches-800.webp",
+        "tres-leches-400.webp"
+      ]
+    },
+    "paleta-margarita": {
+      "orientation": "portrait",
+      "variants": [
+        "paleta-margarita-1600.webp",
+        "paleta-margarita-800.webp",
+        "paleta-margarita-400.webp"
+      ]
+    },
+    "tropical-margarita": {
+      "orientation": "portrait",
+      "variants": [
+        "tropical-margarita-1600.webp",
+        "tropical-margarita-800.webp",
+        "tropical-margarita-400.webp"
+      ]
+    },
+    "mexican-lollipop": {
+      "orientation": "portrait",
+      "variants": [
+        "mexican-lollipop-1600.webp",
+        "mexican-lollipop-800.webp",
+        "mexican-lollipop-400.webp"
+      ]
+    },
+    "chamochela": {
+      "orientation": "portrait",
+      "variants": [
+        "chamochela-1600.webp",
+        "chamochela-800.webp",
+        "chamochela-400.webp"
+      ]
+    },
+    "tequila-blanco": {
+      "orientation": "portrait",
+      "variants": [
+        "tequila-blanco-1600.webp",
+        "tequila-blanco-800.webp",
+        "tequila-blanco-400.webp"
+      ]
+    },
+    "tequila-reposado": {
+      "orientation": "landscape",
+      "variants": [
+        "tequila-reposado-1600.webp",
+        "tequila-reposado-800.webp",
+        "tequila-reposado-400.webp"
+      ]
+    },
+    "marg-jar": {
+      "orientation": "portrait",
+      "variants": [
+        "marg-jar-1600.webp",
+        "marg-jar-800.webp",
+        "marg-jar-400.webp"
+      ]
+    },
+    "marg-spicy": {
+      "orientation": "portrait",
+      "variants": [
+        "marg-spicy-1600.webp",
+        "marg-spicy-800.webp",
+        "marg-spicy-400.webp"
+      ]
+    },
+    "hero-interior": {
+      "orientation": "landscape",
+      "variants": [
+        "hero-interior-1600.webp",
+        "hero-interior-800.webp",
+        "hero-interior-400.webp"
+      ]
+    },
+    "hero-photoroom": {
+      "orientation": "landscape",
+      "variants": [
+        "hero-photoroom-1600.webp",
+        "hero-photoroom-800.webp",
+        "hero-photoroom-400.webp"
+      ]
+    },
+    "pollo-plate": {
+      "orientation": "portrait",
+      "variants": [
+        "pollo-plate-1600.webp",
+        "pollo-plate-800.webp",
+        "pollo-plate-400.webp"
+      ]
+    },
+    "teq-side-elote-june": {
+      "orientation": "portrait",
+      "variants": [
+        "teq-side-elote-june-1600.webp",
+        "teq-side-elote-june-800.webp",
+        "teq-side-elote-june-400.webp"
+      ]
+    },
+    "teq-small-taco": {
+      "orientation": "landscape",
+      "variants": [
+        "teq-small-taco-1600.webp",
+        "teq-small-taco-800.webp",
+        "teq-small-taco-400.webp"
+      ]
+    },
+    "teq-molcajete": {
+      "orientation": "landscape",
+      "variants": [
+        "teq-molcajete-1600.webp",
+        "teq-molcajete-800.webp",
+        "teq-molcajete-400.webp"
+      ]
+    },
+    "teq-red-cocktail-june": {
+      "orientation": "portrait",
+      "variants": [
+        "teq-red-cocktail-june-1600.webp",
+        "teq-red-cocktail-june-800.webp",
+        "teq-red-cocktail-june-400.webp"
+      ]
+    },
+    "teq-branded-cocktail-june": {
+      "orientation": "portrait",
+      "variants": [
+        "teq-branded-cocktail-june-1600.webp",
+        "teq-branded-cocktail-june-800.webp",
+        "teq-branded-cocktail-june-400.webp"
+      ]
+    },
+    "teq-mojarra-fish": {
+      "orientation": "portrait",
+      "variants": [
+        "teq-mojarra-fish-1600.webp",
+        "teq-mojarra-fish-800.webp",
+        "teq-mojarra-fish-400.webp"
+      ]
+    },
+    "nachos-specialties": {
+      "variants": [
+        "nachos-specialties-1600.webp",
+        "nachos-specialties-800.webp",
+        "nachos-specialties-400.webp"
+      ]
+    }
   }
- }
 }
