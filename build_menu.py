@@ -26,7 +26,7 @@ def slug(s):
     s = re.sub(r"\(.*?\)", "", s)
     s = re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-") or "x"
     return {"appetizers-dips": "appetizers",
-            "lunch-time-mon-fri-11-00am-2-00pm": "lunch",
+            "lunch-time": "lunch",
             "combinations-make-your-own-combo": "combos",
             "house-specials-molcajete": "house-specials",
             "mariscos-tequilas": "mariscos",
