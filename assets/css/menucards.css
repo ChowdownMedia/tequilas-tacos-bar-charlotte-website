@@ -21,14 +21,14 @@
 .mrail-brand i{font:700 9px/1 var(--ui);font-style:normal;letter-spacing:.24em;
   text-transform:uppercase;color:#5a5370;display:block;margin-top:4px}
 .mrg{margin-bottom:22px}
-.mrg h4{margin:0 0 10px;font:800 11.5px/1 var(--ui);letter-spacing:.22em;
+.mrg h4{margin:0 0 12px;font:800 12px/1 var(--ui);letter-spacing:.22em;
   text-transform:uppercase;color:#ad0f85}
-.mrg a{display:flex;justify-content:space-between;gap:12px;padding:8px 22px 8px 12px;
-  color:var(--mb-muted);font:700 17px/1.32 var(--ui);text-decoration:none;
+.mrg a{display:flex;justify-content:space-between;gap:12px;padding:10px 22px 10px 12px;
+  color:rgba(27,16,48,.84);font:800 19px/1.28 var(--ui);text-decoration:none;
   border-left:2px solid transparent}
 .mrg a:hover{color:var(--blue,#3B69E6)}
 .mrg a.on{border-left-color:var(--pink,#FE49DB);background:rgba(59,105,230,.08);color:var(--mb-text)}
-.mrg a .ct{font:800 14px/1.32 var(--ui);color:#5a5370}
+.mrg a .ct{font:900 15px/1.28 var(--ui);color:rgba(27,16,48,.7)}
 .mcontent{padding:22px 0 90px clamp(34px,3vw,56px);min-width:0}
 .mcontent section{padding:0;margin:0}
 .mcontent .mlgroup{margin:0 0 40px}
