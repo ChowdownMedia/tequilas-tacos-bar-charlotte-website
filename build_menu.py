@@ -491,7 +491,6 @@ def page_gallery():
     body = ('<main class="galmain"><div class="wrap">'
             '<div class="msec-ey">From the kitchen &amp; cantina</div>'
             '<h1 class="msec-h" style="font-size:clamp(58px,13vw,170px);line-height:.8">GALLERY</h1>'
-            '<p class="mintro">Every shot below was taken here: the food, the drinks, the room.</p>'
             f'{hero}<div class="gal-mosaic">{tiles}</div></div></main>')
     top, tail = chrome(f"Gallery | {BRAND} - Charlotte",
                        "Photos from Tequilas Tacos & Bar in Charlotte: tacos, quesabirria, the trompo, "
