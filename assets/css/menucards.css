@@ -4,14 +4,14 @@
    Palette map: ink->cream page, panel->white, bone->plum, corn->blue,
    red-accent->pink, sage->teal. Fonts: Alfa Slab->var(--disp) Anton,
    Archivo->var(--ui) Alumni Sans. */
-:root{--mb-hdr:120px;--mb-rule:rgba(27,16,48,.16);--mb-panel:#fff;
+:root{--mb-hdr:0px;--mb-rule:rgba(27,16,48,.16);--mb-panel:#fff;
   --mb-text:#1b1030;--mb-muted:rgba(27,16,48,.72);--mb-warm:rgba(27,16,48,.55);
   --mb-leader:rgba(27,16,48,.25)}
 
-.mboard{max-width:1460px;margin:0 auto;padding:calc(var(--mb-hdr) + 8px) 26px 0;
+.mboard{max-width:1460px;margin:0 auto;padding:18px 26px 0;
   display:grid;grid-template-columns:minmax(0,250px) minmax(0,1fr);align-items:start;gap:0;
   background:var(--cream,#FFF7EF)}
-.mrail{position:sticky;top:var(--mb-hdr);max-height:calc(100vh - var(--mb-hdr));
+.mrail{position:sticky;top:0;max-height:100vh;
   overflow-y:auto;border-right:1px solid var(--mb-rule);padding:22px 22px 40px 0}
 .mrail-brand{display:flex;align-items:center;gap:10px;padding-bottom:16px;
   border-bottom:1px solid var(--mb-rule);margin-bottom:18px;text-decoration:none}
@@ -32,7 +32,7 @@
 .mcontent{padding:22px 0 90px 34px;min-width:0}
 
 /* utility bar */
-.mutil{position:sticky;top:var(--mb-hdr);z-index:40;background:rgba(255,247,239,.96);
+.mutil{position:sticky;top:0;z-index:40;background:rgba(255,247,239,.96);
   backdrop-filter:blur(8px);border-bottom:1px solid var(--mb-rule);display:flex;
   flex-wrap:wrap;gap:10px;align-items:center;padding:14px 0;margin-bottom:12px}
 .msearch{flex:1 1 260px;display:flex;align-items:center;gap:8px;
@@ -135,11 +135,9 @@
   font:800 12px/1 var(--ui);letter-spacing:.16em;text-transform:uppercase;color:var(--mb-warm)}
 
 @media(max-width:860px){
-  :root{--mb-hdr:96px}
-  .mboard{grid-template-columns:1fr;padding:var(--mb-hdr) 18px 0}
+  .mboard{grid-template-columns:1fr;padding:8px 18px 0}
   .mrail{display:none}
   .mcontent{padding:6px 0 70px}
-  .mutil{top:var(--mb-hdr)}
   .mfilter-toggle{display:inline-flex;width:50px;align-self:stretch;align-items:center;
     justify-content:center;border:2px solid var(--mb-rule);border-radius:10px;
     background:var(--mb-panel);color:var(--blue,#3B69E6);cursor:pointer}
