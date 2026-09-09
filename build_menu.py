@@ -1,52 +1,82 @@
 #!/usr/bin/env python3
-"""Tequilas Tacos & Bar — menu generator (Mi Jalapeno card treatment, Tequilas skin).
-
-Reads .chowdown/content.json (menu source of truth) + .chowdown/photo_catalog.json
-(real Drive shoot, every photo visually verified) and emits:
-  /menu/index.html            — card landing grouped by course, full Menu schema
-  /menu/<slug>/index.html     — per-category page, section schema
-Chrome (head/nav/footer) comes from .chowdown/chrome/{top,tail}.html captured from
-the live menu page, with paths made absolute so it works at any depth.
+"""Tequilas Tacos & Bar — menu board generator.
+Faithful port of the Mi Jalapeno menu architecture (mi-jalapeno-website/build.py):
+sticky category rail + search + filter chips + Surprise Me + item detail sheet,
+skinned in Tequilas' bright tokens. Emits /menu/ + /menu/<slug>/ + menu-index.js.
 Run:  python3 build_menu.py
 """
-import json, os, re, html
+import json, os, re, html, unicodedata
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://tequilastacosbar.com"
 IMG = "/assets/images/menu"
-CSS_VER = "mc1"
+CSS_VER = "mc2"
+ORDER_URL = "https://tequilastacosbar.com/comingsoon"
+BRAND = "Tequilas Tacos & Bar"
 
 e = html.escape
 content = json.load(open(os.path.join(ROOT, ".chowdown/content.json")))
 catalog = json.load(open(os.path.join(ROOT, ".chowdown/photo_catalog.json")))["dishes"]
 
-CATS = [c for t in content["menu"]["tabs"] for c in t["categories"]]
-CAT_BY_NAME = {c["name"]: c for c in CATS}
+CATS_LIST = [c for t in content["menu"]["tabs"] for c in t["categories"]]
+CAT_BY_NAME = {c["name"]: c for c in CATS_LIST}
 
-def slug(name):
-    s = re.sub(r"\(.*?\)", "", name).lower()
-    s = re.sub(r"[^a-z0-9]+", "-", s).strip("-")
-    return {"appetizers-dips": "appetizers", "tacos": "tacos",
+def slug(s):
+    s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode()
+    s = re.sub(r"\(.*?\)", "", s)
+    s = re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-") or "x"
+    return {"appetizers-dips": "appetizers",
             "lunch-time-mon-fri-11-00am-2-00pm": "lunch",
             "combinations-make-your-own-combo": "combos",
             "house-specials-molcajete": "house-specials",
             "mariscos-tequilas": "mariscos",
             "side-orders-add-ons": "add-ons"}.get(s, s)
 
+def label_of(name):
+    if name == "Lunch Time (Mon-Fri 11:00am-2:00pm)": return "Lunch Time"
+    return re.sub(r"\s*\(.*?\)", "", name).strip()
+
 COURSE_GROUPS = [
-    ("Starters", ["Appetizers / Dips", "Loaded Fries", "Fresh Guacamoles", "Nachos",
+    ("To start", ["Appetizers / Dips", "Loaded Fries", "Fresh Guacamoles", "Nachos",
                   "Nachos Specialties", "Soups & Salads"]),
-    ("Tacos & Street", ["Tacos (Orders)", "Single Tacos"]),
-    ("Burritos, Quesadillas & More", ["Burritos", "Chimichangas", "Quesadillas", "Enchiladas"]),
-    ("Fajitas & Grill", ["Sizzling Fajitas", "Fajitas Specialties", "Steak Entrees", "Chicken Entrees"]),
-    ("House Specials", ["House Specials / Molcajete", "Specialties (General)", "All Time Favorites",
-                        "Combinations / Make Your Own Combo"]),
-    ("Mariscos", ["Mariscos Tequilas (Seafood)", "Mojarras", "Aguachiles", "Ceviches", "Seafood (Entrées)"]),
-    ("Lunch, Kids & Sides", ["Lunch Time (Mon-Fri 11:00am-2:00pm)", "Vegetarian", "Kids", "Eggs",
+    ("Plates", ["Tacos (Orders)", "Single Tacos", "Burritos", "Chimichangas", "Quesadillas",
+                "Enchiladas", "Sizzling Fajitas", "Fajitas Specialties", "Steak Entrees",
+                "Chicken Entrees", "House Specials / Molcajete", "Specialties (General)",
+                "All Time Favorites", "Combinations / Make Your Own Combo", "Vegetarian"]),
+    ("Mariscos", ["Mariscos Tequilas (Seafood)", "Mojarras", "Aguachiles", "Ceviches",
+                  "Seafood (Entrées)"]),
+    ("Lunch, kids & sides", ["Lunch Time (Mon-Fri 11:00am-2:00pm)", "Kids", "Eggs",
                              "Side Orders", "Side Orders / Add-Ons"]),
 ]
+GROUP_OF = {c: g for g, cats in COURSE_GROUPS for c in cats}
 
-# Category card photos — representative real shots (photo verified). Missing = honest text tile.
+# ---------------------------------------------------------------- photos
+# (category, name-substring-lowercase, photo-base) — category-scoped, first match
+# wins, exact dish depicted. No cross-category leaks. All bases visually verified.
+PHOTO_RULES = [
+    ("Appetizers / Dips", "mexican street elote", "elote-hand"),
+    ("Loaded Fries", "loaded fries", "loaded-fries"),
+    ("Soups & Salads", "menudo", "menudo"),
+    ("House Specials / Molcajete", "quesabirria", "quesabirria"),
+    ("All Time Favorites", "lunch quesabirria", "quesabirria"),
+    ("Steak Entrees", "carne asada", "carne-asada"),
+    ("Sizzling Fajitas", "steak and shrimp", "steak-shrimp"),
+    ("Seafood (Entrées)", "camarones a la diabla", "camarones-diabla"),
+    ("Specialties (General)", "trompo de pastor", "trompo-tower"),
+]
+def _has(base): return base in catalog
+def item_photo(cat, name):
+    nl = name.lower()
+    for c, sub, base in PHOTO_RULES:
+        if c == cat and sub in nl and _has(base):
+            return base
+    return None
+def cat_photo(cat):
+    for it in CAT_BY_NAME.get(cat, {}).get("items", []):
+        b = item_photo(cat, it["name"])
+        if b: return b
+    return None
+# Decorative card/section photo per category. Reuse is fine (illustrative).
 CATEGORY_PHOTO = {
     "Appetizers / Dips": "elote-hand", "Loaded Fries": "loaded-fries",
     "Soups & Salads": "menudo", "Burritos": "burrito-queso",
@@ -59,19 +89,123 @@ CATEGORY_PHOTO = {
     "Mariscos Tequilas (Seafood)": "camarones-diabla",
     "Seafood (Entrées)": "camarones-close",
     "Lunch Time (Mon-Fri 11:00am-2:00pm)": "quesabirria",
+    "Chimichangas": "burrito-queso-2", "Nachos": "loaded-fries-corona",
 }
+def card_photo(cat):
+    b = CATEGORY_PHOTO.get(cat) or cat_photo(cat)
+    return b if (b and _has(b)) else None
 
-# Item-level photos. Tier 1: EXACT matches (dish in photo == dish on menu).
-ITEM_PHOTO = {
-    "menudo": "menudo", "loaded fries": "loaded-fries",
-    "quesabirria (3)": "quesabirria", "lunch quesabirria (2)": "quesabirria",
-    "*carne asada": "carne-asada", "*steak and shrimp (5)": "steak-shrimp",
-    "camarones a la diabla": "camarones-diabla", "trompo de pastor": "trompo-tower",
-    "mexican street elote": "elote-hand",
-}
-# Tier 2: keyword matches for the SCHEMA only (the fleet standard: a real photo of
-# this kitchen's version of the dish type). Ordered most-specific first; salads
-# and soups (other than menudo) never get a photo.
+def pic(base, ratio, sizes, alt="", eager=False):
+    v = catalog[base]["variants"]
+    srcset = ", ".join(f"{IMG}/{fn} {fn.rsplit('-',1)[1].split('.')[0]}w" for fn in v)
+    load = 'fetchpriority="high"' if eager else 'loading="lazy"'
+    return (f'<div class="mph" style="aspect-ratio:{ratio}">'
+            f'<img src="{IMG}/{base}-800.webp" srcset="{srcset}" sizes="{sizes}" '
+            f'alt="{e(alt)}" {load} decoding="async"></div>')
+
+# ---------------------------------------------------------------- price / tags
+_MONEY = re.compile(r"\d+(?:\.\d{1,2})?")
+def parse_price(raw):
+    raw = (raw or "").strip().lstrip("$")
+    amounts = [float(x) for x in _MONEY.findall(raw)]
+    minp = min(amounts) if amounts else None
+    variants = []
+    if "/" in raw:
+        for part in raw.split("/"):
+            part = part.strip()
+            m = _MONEY.search(part)
+            if m:
+                price = "$" + m.group()
+                lab = (part[:m.start()] + part[m.end():]).strip().strip("()$").strip() or "Price"
+            else:
+                price, lab = part, "Price"
+            variants.append({"label": lab, "price": price})
+    else:
+        m = _MONEY.search(raw)
+        if m:
+            variants.append({"label": "Price", "price": "$" + m.group()})
+        else:
+            variants.append({"label": "Price", "price": raw or "—"})
+    return variants, minp
+def price_str(variants):
+    if len(variants) == 1 and variants[0]["label"] == "Price":
+        return variants[0]["price"]
+    return "  ".join(f'{v["label"]} {v["price"]}' for v in variants)
+
+_SEAFOOD = ["shrimp", "camaron", "pulpo", "octopus", "fish", "tilapia", "mojarra", "scallop",
+            "crab", "ceviche", "aguachile", "mariscos", "seafood", "del mar", "jaiba", "louisiana"]
+_SPICY = ["diabla", "jalape", "chipotle", "toreado", "habanero", "spicy", "cucaracha", "picoso"]
+_VEG = ["veggie", "vegetable", "vegetarian", "cheese quesadilla", "bean burrito", "spinach"]
+def derive_tags(name, desc, cat):
+    s = f"{name} {desc} {cat}".lower()
+    t = []
+    if "(new)" in s or re.search(r"\bnew\b", s): t.append("New")
+    if any(k in s for k in _SEAFOOD): t.append("Seafood")
+    if any(k in s for k in _SPICY): t.append("Spicy")
+    if cat == "Vegetarian" or any(k in s for k in _VEG): t.append("Veggie")
+    if "for two" in s or "para dos" in s or "family" in s: t.append("For two")
+    return t
+
+FILTERS = ["New", "Featured", "Spicy", "Seafood", "Veggie", "Under $10", "For two"]
+
+# ---------------------------------------------------------------- board pieces
+def rail(active=None):
+    out = ['<aside class="mrail"><a class="mrail-brand" href="/menu/">'
+           '<img src="/assets/images/favicon-180.png" alt="" width="46" height="46">'
+           '<span><b>TEQUILAS</b><i>Full Menu</i></span></a>']
+    for g, cats in COURSE_GROUPS:
+        present = [c for c in cats if c in CAT_BY_NAME]
+        if not present: continue
+        out.append(f'<div class="mrg"><h4>{e(g)}</h4>')
+        for c in present:
+            n = len(CAT_BY_NAME[c]["items"])
+            on = ' class="on"' if c == active else ""
+            out.append(f'<a{on} href="/menu/{slug(c)}/">{e(label_of(c))}<span class="ct">{n}</span></a>')
+        out.append("</div>")
+    out.append("</aside>")
+    return "".join(out)
+
+def utility():
+    chips = "".join(f'<button class="mchip" type="button" data-t="{e(f)}" aria-pressed="false">{e(f)}</button>' for f in FILTERS)
+    return ('<div class="mutil"><label class="msearch"><span>&#8981;</span>'
+            '<input id="msearch" type="search" placeholder="Search the menu" aria-label="Search the menu"></label>'
+            f'<div id="mchips">{chips}</div>'
+            '<button class="msurprise" id="msurprise" type="button">Surprise me</button></div>'
+            '<div id="mresults" hidden></div>')
+
+def item_row(it, cat):
+    name = it["name"]; desc = (it.get("description") or "").strip()
+    variants, minp = parse_price(it.get("price", ""))
+    tags = derive_tags(name, desc, cat)
+    base = item_photo(cat, name)
+    data = {"n": name, "c": label_of(cat), "d": desc, "vars": variants, "tags": tags,
+            "img": (IMG + "/" + base) if base else "", "order": ORDER_URL}
+    data_attr = e(json.dumps(data, ensure_ascii=False))
+    ename, epr, islug = e(name), e(price_str(variants)), slug(name)
+    tag_html = ('<div class="mr-tags">' + "".join(f'<span class="mtag">{e(t)}</span>' for t in tags) + "</div>") if tags else ""
+    desc_html = f'<p class="mr-desc">{e(desc)}</p>' if desc else ""
+    return (f'<div class="mrow" id="{islug}" data-item=\'{data_attr}\' tabindex="0" role="button" aria-label="{ename}">'
+            f'<div class="mr-top"><span class="mr-name">{ename}</span><span class="mr-lead"></span><span class="mr-price">{epr}</span></div>'
+            f'{tag_html}{desc_html}</div>')
+
+def feat_card(it, cat, base):
+    variants, _ = parse_price(it.get("price", ""))
+    ename, epr, islug = e(it["name"]), e(price_str(variants)), slug(it["name"])
+    desc = (it.get("description") or "").strip()
+    desc_html = f'<p class="mc-d">{e(desc)}</p>' if desc else ""
+    return (f'<a class="mcard" href="/menu/{slug(cat)}/#{islug}">'
+            f'{pic(base, "4/3", "(max-width:860px) 90vw, 320px", alt=it["name"])}'
+            f'<div class="mc-b"><div class="mc-h"><span class="mc-n">{ename}</span><span class="mc-p">{epr}</span></div>{desc_html}</div></a>')
+
+def sheet_html():
+    return ('<button id="mscrim" hidden aria-label="Close menu item"></button>'
+            '<div id="msheet" role="dialog" aria-modal="true" aria-label="Menu item" hidden></div>')
+
+MENU_SCRIPTS = f'<script defer src="/assets/js/menu-index.js?v={CSS_VER}"></script><script defer src="/assets/js/menu.js?v={CSS_VER}"></script>'
+
+# ---------------------------------------------------------------- schema
+# schema-only keyword tier (fleet standard: real photo of this kitchen's version
+# of the dish type). Never salads/soups.
 KEYWORD_PHOTO = [
     ("quesabirria", "quesabirria"), ("birria", "quesabirria"),
     ("quesadilla", "quesadilla-board"), ("burrito", "burrito-queso"),
@@ -80,184 +214,152 @@ KEYWORD_PHOTO = [
     ("camaron", "camarones-diabla"), ("taco", "tacos-asada"),
     ("shrimp", "camarones-close"), ("fries", "loaded-fries"),
 ]
-def item_photo(name, schema=False):
-    n = name.lower().strip()
-    if n in ITEM_PHOTO:
-        return ITEM_PHOTO[n]
-    if not schema:
-        return None
-    if "salad" in n or ("soup" in n or "caldo" in n):
-        return None
+def schema_photo(cat, name):
+    n = name.lower()
+    if "salad" in n or "soup" in n or "caldo" in n: return None
     for kw, b in KEYWORD_PHOTO:
-        if kw in n:
-            return b
+        if kw in n and _has(b): return b
     return None
 
-def pic(base, ratio, sizes, alt="", cls="", eager=False):
-    v = catalog[base]["variants"]
-    srcset = ", ".join(f"{IMG}/{fn} {fn.rsplit('-',1)[1].split('.')[0]}w" for fn in v)
-    load = 'fetchpriority="high"' if eager else 'loading="lazy"'
-    return (f'<div class="mph {cls}" style="aspect-ratio:{ratio}">'
-            f'<img src="{IMG}/{base}-800.webp" srcset="{srcset}" sizes="{sizes}" '
-            f'alt="{e(alt)}" {load} decoding="async"></div>')
-
-def price_of(raw):
-    m = re.search(r"(\d+(?:\.\d{1,2})?)", str(raw or ""))
-    return m.group(1) if m else None
-
-# ---------------------------------------------------------------- schema
-def item_ld(it):
-    node = {"@type": "MenuItem", "name": it["name"].strip()}
-    if it.get("description"): node["description"] = it["description"].strip()
-    p = price_of(it.get("price"))
-    if p: node["offers"] = {"@type": "Offer", "price": p, "priceCurrency": "USD"}
-    b = item_photo(it["name"], schema=True)
+def menu_item_ld(it, cat):
+    variants, _ = parse_price(it.get("price", ""))
+    offers = []
+    for v in variants:
+        amt = _MONEY.search(v["price"])
+        if amt:
+            o = {"@type": "Offer", "price": amt.group(), "priceCurrency": "USD"}
+            if v["label"] != "Price": o["name"] = v["label"]
+            offers.append(o)
+    node = {"@type": "MenuItem", "@id": f"{DOMAIN}/menu/{slug(cat)}/#{slug(it['name'])}",
+            "name": it["name"].strip()}
+    if (it.get("description") or "").strip(): node["description"] = it["description"].strip()
+    b = item_photo(cat, it["name"]) or schema_photo(cat, it["name"])
     if b: node["image"] = f"{DOMAIN}{IMG}/{b}-1600.webp"
+    if offers: node["offers"] = offers if len(offers) > 1 else offers[0]
     return node
 
 def section_ld(cat):
-    return {"@type": "MenuSection", "name": cat["name"],
-            "hasMenuItem": [item_ld(i) for i in cat["items"]]}
+    c = CAT_BY_NAME[cat]
+    return {"@type": "MenuSection", "@id": f"{DOMAIN}/menu/{slug(cat)}/#section", "name": cat,
+            "hasMenuItem": [menu_item_ld(it, cat) for it in c["items"]]}
 
-def ld_block(obj):
-    return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False) + '</script>'
+def breadcrumb_ld(pairs):
+    return {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": i + 1, "name": n, "item": DOMAIN + u}
+        for i, (n, u) in enumerate(pairs)]}
+
+def ld_block(objs):
+    return "".join('<script type="application/ld+json">' + json.dumps(o, ensure_ascii=False) + '</script>' for o in objs)
 
 # ---------------------------------------------------------------- chrome
-def chrome(depth_title, desc, canon, og_img=None):
+def chrome(title, desc, canon, og_img=None):
     top = open(os.path.join(ROOT, ".chowdown/chrome/top.html")).read()
     top = top.replace('href="../', 'href="/').replace('src="../', 'src="/')
     top = top.replace("url(../", "url(/")
-    # strip old ld+json blocks (page-specific schema gets injected per page)
     top = re.sub(r'<script type="application/ld\+json">.*?</script>', "", top, flags=re.S)
-    top = re.sub(r"<title>.*?</title>", f"<title>{e(depth_title)}</title>", top, flags=re.S)
+    top = re.sub(r"<title>.*?</title>", f"<title>{e(title)}</title>", top, flags=re.S)
     top = re.sub(r'(<meta name="description" content=")[^"]*(")', r"\g<1>" + e(desc) + r"\2", top)
     top = re.sub(r'(<link rel="canonical" href=")[^"]*(")', r"\g<1>" + canon + r"\2", top)
     top = re.sub(r'(<meta property="og:url" content=")[^"]*(")', r"\g<1>" + canon + r"\2", top)
-    top = re.sub(r'(<meta property="og:title" content=")[^"]*(")', r"\g<1>" + e(depth_title) + r"\2", top)
+    top = re.sub(r'(<meta property="og:title" content=")[^"]*(")', r"\g<1>" + e(title) + r"\2", top)
     if og_img:
-        top = re.sub(r'(<meta property="og:image" content=")[^"]*(")',
-                     r"\g<1>" + DOMAIN + og_img + r"\2", top)
-    # menu-cards stylesheet after the site css
+        top = re.sub(r'(<meta property="og:image" content=")[^"]*(")', r"\g<1>" + DOMAIN + og_img + r"\2", top)
     top = top.replace("</head>", f'<link rel="stylesheet" href="/assets/css/menucards.css?v={CSS_VER}"></head>', 1)
     tail = open(os.path.join(ROOT, ".chowdown/chrome/tail.html")).read()
     tail = tail.replace('href="../', 'href="/').replace('src="../', 'src="/')
     return top, tail
 
-# ---------------------------------------------------------------- landing
-def build_landing():
-    total = sum(len(c["items"]) for c in CATS)
-    tiles_i = 0
-    eager_left = 4  # first-viewport card photos load eagerly (LCP)
-    groups_html = ""
-    for g, names in COURSE_GROUPS:
-        cards = ""
-        for name in names:
-            cat = CAT_BY_NAME.get(name)
-            if not cat: continue
-            n = len(cat["items"]); s = slug(name)
-            b = CATEGORY_PHOTO.get(name)
-            label = re.sub(r"\s*\(.*?\)", "", name)
-            if name == "Lunch Time (Mon-Fri 11:00am-2:00pm)": label = "Lunch Time"
-            if b:
-                photo = pic(b, "16/10", "(max-width:860px) 92vw, 300px", alt=label,
-                            eager=eager_left > 0)
-                eager_left -= 1 if eager_left > 0 else 0
-                cards += (f'<a class="mcard" href="/menu/{s}/">{photo}'
-                          f'<div class="mcb"><span class="mcn">{e(label)}</span>'
-                          f'<span class="mcp">{n}</span></div></a>')
-            else:
-                tone = ["t-blue", "t-pink", "t-teal"][tiles_i % 3]; tiles_i += 1
-                cards += (f'<a class="mcard mtile {tone}" href="/menu/{s}/">'
-                          f'<span class="mti">{e(label[:1])}</span>'
-                          f'<div class="mcb"><span class="mcn">{e(label)}</span>'
-                          f'<span class="mcp">{n}</span></div></a>')
-        groups_html += (f'<section class="mgroup"><div class="mgey">{e(g)}</div>'
-                        f'<div class="mgrid">{cards}</div></section>')
-    ld = {"@context": "https://schema.org", "@type": "Menu", "@id": f"{DOMAIN}/menu/#menu",
-          "name": "Tequilas Tacos & Bar Menu", "hasMenuSection": [section_ld(c) for c in CATS]}
-    crumb = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN + "/"},
-        {"@type": "ListItem", "position": 2, "name": "Menu", "item": DOMAIN + "/menu/"}]}
-    top, tail = chrome("Our Menu | Tequilas Tacos & Bar - Charlotte",
-                       f"Browse the full Tequilas Tacos & Bar menu - {total} dishes across "
-                       f"{len(CATS)} categories. Tacos, quesabirria, fajitas, mariscos, margaritas and more in Charlotte, NC.",
-                       f"{DOMAIN}/menu/", og_img=f"{IMG}/tacos-asada-1600.webp")
-    hero = ('<main id="top" class="menu-main"><section class="mhero"><div class="wrap">'
-            '<p class="mhey">Kitchen &amp; Cantina &middot; ' + str(total) + ' dishes</p>'
-            '<h1 class="mht">OUR<br>MENU</h1>'
-            '<p class="mhsub">Every photo below was shot in this kitchen. Browse by course, '
-            'or come hungry and let the trompo decide.</p></div></section>'
-            '<div class="wrap mwrap">' + groups_html + "</div></main>")
-    page = top + ld_block(ld) + ld_block(crumb) + hero + tail
-    out = os.path.join(ROOT, "menu", "index.html")
-    open(out, "w").write(page)
-    return out
+# ---------------------------------------------------------------- pages
+def page_category(cat, prev_c, next_c):
+    c = CAT_BY_NAME[cat]; items = c["items"]
+    lab = label_of(cat); grp = GROUP_OF.get(cat, "Menu")
+    note = (c.get("description") or "").strip()
+    note_html = f'<p class="msec-note">{e(note)}</p>' if note else ""
+    feats = [(it, item_photo(cat, it["name"])) for it in items]
+    feats = [(it, b) for it, b in feats if b][:3]
+    feat_html = ('<div class="mfeat">' + "".join(feat_card(it, cat, b) for it, b in feats) + "</div>") if feats else ""
+    cb = card_photo(cat)
+    band = pic(cb, "16/7", "(max-width:860px) 94vw, 900px", alt=lab, eager=True) if (cb and not feats) else ""
+    rows = '<div class="mgrid">' + "".join(item_row(it, cat) for it in items) + "</div>"
+    prevlink = f'<a href="/menu/{slug(prev_c)}/">&larr; {e(label_of(prev_c))}</a>' if prev_c else "<span></span>"
+    nextlink = f'<a href="/menu/{slug(next_c)}/">{e(label_of(next_c))} &rarr;</a>' if next_c else "<span></span>"
+    spread = (f'<section id="mspread"><div class="msec-ey">{e(grp)} &middot; {len(items)} items</div>'
+              f'<h1 class="msec-h">{e(lab.upper())}</h1>{note_html}{band}{feat_html}{rows}'
+              f'<div class="mnav">{prevlink}{nextlink}</div></section>')
+    body = ('<main class="mboard">' + rail(cat) + '<div class="mcontent">' + utility() + spread
+            + "</div></main>" + sheet_html())
+    top, tail = chrome(f"{lab} | {BRAND} Menu",
+                       f"{lab} at {BRAND} in Charlotte, NC. {len(items)} items with prices. Search the menu and order online.",
+                       f"{DOMAIN}/menu/{slug(cat)}/",
+                       og_img=(f"{IMG}/{cb}-1600.webp" if cb else None))
+    ld = ld_block([section_ld(cat), breadcrumb_ld([("Home", "/"), ("Menu", "/menu/"), (lab, f"/menu/{slug(cat)}/")])])
+    tail = tail.replace("</body>", MENU_SCRIPTS + "</body>")
+    d = os.path.join(ROOT, "menu", slug(cat)); os.makedirs(d, exist_ok=True)
+    open(os.path.join(d, "index.html"), "w").write(top + ld + body + tail)
 
-# ---------------------------------------------------------------- category pages
-def build_category(cat, prev_cat, next_cat):
-    name = cat["name"]; s = slug(name)
-    label = re.sub(r"\s*\(.*?\)", "", name)
-    if name == "Lunch Time (Mon-Fri 11:00am-2:00pm)": label = "Lunch Time"
-    n = len(cat["items"])
-    b = CATEGORY_PHOTO.get(name)
-    # header
-    head_photo = pic(b, "16/11", "(max-width:860px) 94vw, 560px", alt=label, eager=True) if b else ""
-    sub = e(cat.get("description") or "")
-    header = (f'<section class="cphero{" nophoto" if not b else ""}"><div class="wrap cph-in">'
-              f'<div class="cph-txt"><a class="cpback" href="/menu/">&larr; Full menu</a>'
-              f'<h1 class="mht cph-t">{e(label.upper())}</h1>'
-              f'<p class="mhey">{n} item{"s" if n != 1 else ""}'
-              + (f' &middot; {sub}' if sub else "") + "</p></div>"
-              + (f'<div class="cph-ph">{head_photo}</div>' if b else "") + "</div></section>")
-    # items: photo feature rows first (exact matches), then clean list
-    feats, rows = "", ""
-    for it in cat["items"]:
-        ib = item_photo(it["name"])
-        p = price_of(it.get("price"))
-        price_html = f'<span class="mip">${e(p)}</span>' if p else ""
-        desc = f'<p class="mid">{e(it["description"].strip())}</p>' if it.get("description") else ""
-        if ib:
-            feats += (f'<div class="mfeat">{pic(ib, "4/3", "(max-width:860px) 94vw, 420px", alt=it["name"])}'
-                      f'<div class="mfb"><div class="mih"><span class="min">{e(it["name"])}</span>{price_html}</div>{desc}</div></div>')
-        else:
-            rows += (f'<div class="mitem"><div class="mih"><span class="min">{e(it["name"])}</span>'
-                     f'<span class="mdots"></span>{price_html}</div>{desc}</div>')
-    nav_html = '<nav class="cpnav">'
-    if prev_cat is not None:
-        pl = re.sub(r"\s*\(.*?\)", "", prev_cat["name"])
-        nav_html += f'<a href="/menu/{slug(prev_cat["name"])}/">&larr; {e(pl)}</a>'
-    nav_html += '<a href="/menu/">All categories</a>'
-    if next_cat is not None:
-        nl = re.sub(r"\s*\(.*?\)", "", next_cat["name"])
-        nav_html += f'<a href="/menu/{slug(next_cat["name"])}/">{e(nl)} &rarr;</a>'
-    nav_html += "</nav>"
-    ld = {"@context": "https://schema.org", **section_ld(cat),
-          "@id": f"{DOMAIN}/menu/{s}/#section"}
-    crumb = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN + "/"},
-        {"@type": "ListItem", "position": 2, "name": "Menu", "item": DOMAIN + "/menu/"},
-        {"@type": "ListItem", "position": 3, "name": label, "item": f"{DOMAIN}/menu/{s}/"}]}
-    top, tail = chrome(f"{label} | Menu | Tequilas Tacos & Bar - Charlotte",
-                       f"{label} at Tequilas Tacos & Bar in Charlotte, NC - {n} dishes with prices.",
-                       f"{DOMAIN}/menu/{s}/",
-                       og_img=(f"{IMG}/{b}-1600.webp" if b else None))
-    body = (f'<main id="top" class="menu-main">{header}<div class="wrap mwrap">'
-            + (f'<div class="mfeats">{feats}</div>' if feats else "")
-            + f'<div class="mlist">{rows}</div>{nav_html}</div></main>')
-    page = top + ld_block(ld) + ld_block(crumb) + body + tail
-    d = os.path.join(ROOT, "menu", s)
-    os.makedirs(d, exist_ok=True)
-    open(os.path.join(d, "index.html"), "w").write(page)
-    return s
+def page_menu_landing():
+    total = sum(len(c["items"]) for c in CATS_LIST)
+    eager_left = 4
+    groups_html = ""
+    for g, cats in COURSE_GROUPS:
+        present = [c for c in cats if c in CAT_BY_NAME]
+        if not present: continue
+        cards = ""
+        for c in present:
+            n = len(CAT_BY_NAME[c]["items"])
+            b = card_photo(c)
+            photo = ""
+            if b:
+                photo = pic(b, "16/10", "(max-width:860px) 90vw, 300px", alt=label_of(c), eager=eager_left > 0)
+                eager_left -= 1 if eager_left > 0 else 0
+            cards += (f'<a class="mcard" href="/menu/{slug(c)}/">{photo}'
+                      f'<div class="mc-b"><div class="mc-h"><span class="mc-n">{e(label_of(c))}</span>'
+                      f'<span class="mc-p">{n}</span></div></div></a>')
+        groups_html += (f'<section class="mlgroup"><div class="msec-ey">{e(g)}</div>'
+                        f'<div class="mfeat" style="margin:14px 0 0">{cards}</div></section>')
+    full_menu_ld = {"@context": "https://schema.org", "@type": "Menu", "@id": f"{DOMAIN}/menu/#menu",
+                    "name": f"{BRAND} Menu", "hasMenuSection": [section_ld(c["name"]) for c in CATS_LIST]}
+    intro = (f'<section id="mspread"><div class="msec-ey">Kitchen &amp; cantina &middot; {total} items</div>'
+             '<h1 class="msec-h" style="font-size:clamp(58px,13vw,170px);line-height:.8">MENU</h1>'
+             '<p class="mintro">Every dish photo was shot in this kitchen. Search it, filter it, '
+             'browse by course, or hit Surprise Me and let the trompo decide.</p>'
+             f'<div class="mctas"><a class="btn-order" href="{e(ORDER_URL)}" target="_blank" rel="noopener">Order online</a></div>'
+             f'{groups_html}</section>')
+    body = ('<main class="mboard">' + rail(None) + '<div class="mcontent">' + utility() + intro
+            + "</div></main>" + sheet_html())
+    top, tail = chrome(f"Our Menu | {BRAND} - Charlotte",
+                       f"The full {BRAND} menu: {total} dishes across {len(CATS_LIST)} categories. "
+                       "Tacos, quesabirria, fajitas, mariscos and more. Search, filter, order online.",
+                       f"{DOMAIN}/menu/", og_img=f"{IMG}/tacos-asada-1600.webp")
+    ld = ld_block([full_menu_ld, breadcrumb_ld([("Home", "/"), ("Menu", "/menu/")])])
+    tail = tail.replace("</body>", MENU_SCRIPTS + "</body>")
+    open(os.path.join(ROOT, "menu", "index.html"), "w").write(top + ld + body + tail)
+
+def build_search_index():
+    idx = []
+    for c in CATS_LIST:
+        cat = c["name"]
+        for it in c["items"]:
+            variants, minp = parse_price(it.get("price", ""))
+            tags = derive_tags(it["name"], it.get("description", ""), cat)
+            idx.append({"n": it["name"], "c": label_of(cat),
+                        "u": f"/menu/{slug(cat)}/#{slug(it['name'])}",
+                        "p": minp, "v": price_str(variants), "t": "|".join(tags),
+                        "f": 1 if item_photo(cat, it["name"]) else 0,
+                        "d": it.get("description", "")})
+    os.makedirs(os.path.join(ROOT, "assets", "js"), exist_ok=True)
+    open(os.path.join(ROOT, "assets", "js", "menu-index.js"), "w").write(
+        "window.MENU_INDEX=" + json.dumps(idx, ensure_ascii=False, separators=(",", ":")) + ";")
+    return len(idx)
 
 if __name__ == "__main__":
-    out = build_landing()
-    print("landing:", out)
-    slugs = []
-    for i, cat in enumerate(CATS):
-        prev_cat = CATS[i-1] if i > 0 else None
-        next_cat = CATS[i+1] if i < len(CATS)-1 else None
-        slugs.append(build_category(cat, prev_cat, next_cat))
-    print(f"{len(slugs)} category pages:", ", ".join(slugs[:8]), "...")
+    n = build_search_index()
+    names = [c["name"] for c in CATS_LIST]
+    slugs = [slug(x) for x in names]
     dup = [s for s in slugs if slugs.count(s) > 1]
     assert not dup, f"SLUG COLLISION: {set(dup)}"
+    page_menu_landing()
+    for i, cat in enumerate(names):
+        page_category(cat, names[i-1] if i > 0 else None,
+                      names[i+1] if i < len(names)-1 else None)
+    print(f"landing + {len(names)} category pages + search index ({n} items)")
