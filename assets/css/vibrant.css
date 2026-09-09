@@ -355,3 +355,11 @@ footer::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:no
 @media(prefers-reduced-motion:reduce){
   .hero-c::before,.neon-sign,.menu-card .ic,.btn-amber{animation:none!important}
 }
+
+/* mobile footer: stack brand, then Explore/Visit two-up (was 3 crushed cols) */
+@media (max-width:700px){
+  .foot-grid{grid-template-columns:1fr 1fr;gap:30px 18px}
+  .foot-grid > div:first-child{grid-column:1 / -1}
+  .foot-grid img{height:96px}
+  .foot-grid p{max-width:52ch}
+}
