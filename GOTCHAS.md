@@ -63,3 +63,17 @@ If a project has `build_menu.py` or another generator, update source data/templa
 ## Preview SEO Exceptions Must Be Intentional
 
 Low SEO from `noindex` is fine on preview builds only when documented. Production builds need the index/crawl state checked before launch.
+
+## `tel:` Links With a Doubled Country Code
+
+The harvested phone number produced `tel:+119802265008` (extra leading 1) across all 58 pages — taps dialed a wrong number. Grep every build for `tel:+1` followed by an 11-digit remainder:
+
+```sh
+grep -rEo 'tel:\+1[0-9]{11,}' --include='*.html' .
+```
+
+A US `tel:` should be `+1` + exactly 10 digits. Fixed site-wide 2026-09-10.
+
+## Every Build Ships a `/links/` Page
+
+Linktree-style page following the Roman Group pattern (`el-jinete/athens/links/` is the reference): logo, name, beads divider, then rows — VIP (gold hi), Order, each menu, Review (Google place id), Gallery, Directions, Call. Self-contained inline styles, brand tokens, self-hosted fonts. Tequilas was missing one until 2026-09-10.
