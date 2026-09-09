@@ -195,18 +195,18 @@
 }
 @media (prefers-reduced-motion:reduce){.mcard{transition:none;transform:none}}
 
-/* gallery page: Mi Jalapeno live pattern - portrait pairs + wide breaks, seamless */
+/* gallery page: one cinematic hero + natural-orientation masonry (no square crop) */
 .galmain{padding:26px 0 90px;background:var(--cream,#FFF7EF)}
-.galmain .wrap{max-width:1240px;margin:0 auto;padding:0 26px}
-.gal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:30px}
-.gal-grid .mph{width:100%;height:100%;background:#efe9df}
-.gal-grid .mph img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-.gal-grid .mph:hover img{transform:scale(1.04)}
-.gal-t .mph{aspect-ratio:1/1!important}
-.gal-w{grid-column:1 / -1}
-.gal-w .mph{aspect-ratio:4/3!important}
-@media(min-width:861px){
-  .gal-grid{grid-template-columns:repeat(4,1fr);gap:12px}
-  .gal-w{grid-column:span 2}
-  .gal-w .mph{aspect-ratio:1/1!important}
-}
+.galmain .wrap{max-width:1280px;margin:0 auto;padding:0 26px}
+.gal-hero{margin-top:26px;border-radius:16px;overflow:hidden;background:#efe9df}
+.gal-hero .mph{aspect-ratio:21/9!important}
+.gal-hero .mph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+.gal-hero:hover .mph img{transform:scale(1.03)}
+.gal-mosaic{column-count:2;column-gap:14px;margin-top:14px}
+.gal-mosaic .gtile{break-inside:avoid;margin:0 0 14px;border-radius:12px;overflow:hidden;background:#efe9df}
+.gal-mosaic .mph{aspect-ratio:auto!important;width:100%}
+.gal-mosaic .mph img{width:100%;height:auto;display:block;transition:transform .5s ease}
+.gal-mosaic .gtile:hover .mph img{transform:scale(1.04)}
+@media(min-width:700px){.gal-mosaic{column-count:3}}
+@media(min-width:1050px){.gal-mosaic{column-count:4}}
+@media (prefers-reduced-motion:reduce){.gal-hero .mph img,.gal-mosaic .mph img{transition:none}}

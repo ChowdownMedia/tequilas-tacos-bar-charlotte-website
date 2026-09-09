@@ -10,7 +10,7 @@ import json, os, re, html, unicodedata
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://tequilastacosbar.com"
 IMG = "/assets/images/menu"
-CSS_VER = "mc29"
+CSS_VER = "mc30"
 ORDER_URL = "https://tequilastacosbar.com/comingsoon"
 PDF_URLS = {
     "food": "https://storage.googleapis.com/msgsndr/r38meFSUdG3vciQdiMyJ/media/68273a85bb183352e7966c7e.pdf",
@@ -466,38 +466,33 @@ def build_search_index():
 
 
 # ---------------------------------------------------------------- gallery
-# Mi Jalapeno live pattern: portrait tiles in pairs, seamless, full-width
-# landscape breaks; images keep natural orientation. Curated distinct scenes.
+# One cinematic hero opens the gallery, then a natural-orientation masonry (no
+# square-cropping). Subjects are interleaved (food / drink / people / room) so
+# no two similar shots sit adjacent. Curated distinct scenes, no duplicates.
+GALLERY_HERO = "tacos-asada"
 GALLERY_SHOTS = [
-    "tacos-asada",            # wide
-    "quesabirria", "trompo-tower",
-    "loaded-fries", "carne-asada",
-    "camarones-diabla",       # wide
-    "gallery-red-cocktail", "gallery-white-cocktail",
-    "burrito-queso", "pollo-plate",
-    "skillet-alambre",        # wide
-    "gallery-skillet-server", "gallery-shrimp-plate",
-    "gallery-sizzling-skillet",  # wide
-    "quesadilla-board", "loaded-fries-corona",
-    "gallery-bar-interior",      # wide
-    "hero-photoroom",         # wide
-    "gallery-elote-platter",
-    "hero-interior",          # wide
+    "quesabirria", "gallery-red-cocktail", "gallery-skillet-server",
+    "carne-asada", "camarones-diabla", "gallery-bottle-pop",
+    "trompo-tower", "gallery-white-cocktail", "gallery-bar-interior",
+    "pollo-plate", "quesadilla-board", "skillet-alambre",
+    "gallery-shrimp-plate", "loaded-fries", "hero-photoroom",
+    "burrito-queso", "gallery-elote-platter", "hero-interior",
 ]
 def page_gallery():
+    hero = (f'<div class="gal-hero">{pic(GALLERY_HERO, "21/9", "100vw", alt="Tequilas Tacos &amp; Bar", eager=True)}</div>'
+            if _has(GALLERY_HERO) else "")
     tiles = ""
     for bs in GALLERY_SHOTS:
         if not _has(bs): continue
-        wide = catalog[bs]["orientation"] == "landscape"
-        cls = "gal-w" if wide else "gal-t"
-        ratio = "16/9" if wide else "4/5"
-        sizes = "(max-width:860px) 96vw, 1200px" if wide else "(max-width:860px) 48vw, 300px"
-        tiles += f'<div class="{cls}">{pic(bs, ratio, sizes, alt="Tequilas Tacos & Bar")}</div>'
+        land = catalog[bs]["orientation"] == "landscape"
+        ratio = "3/2" if land else "4/5"
+        sizes = "(max-width:700px) 100vw, (max-width:1050px) 33vw, 25vw"
+        tiles += f'<div class="gtile">{pic(bs, ratio, sizes, alt="Tequilas Tacos &amp; Bar")}</div>'
     body = ('<main class="galmain"><div class="wrap">'
             '<div class="msec-ey">From the kitchen &amp; cantina</div>'
             '<h1 class="msec-h" style="font-size:clamp(58px,13vw,170px);line-height:.8">GALLERY</h1>'
-            '<p class="mintro">Every shot below was taken here - the food, the drinks, the room.</p>'
-            f'<div class="gal-grid">{tiles}</div></div></main>')
+            '<p class="mintro">Every shot below was taken here: the food, the drinks, the room.</p>'
+            f'{hero}<div class="gal-mosaic">{tiles}</div></div></main>')
     top, tail = chrome(f"Gallery | {BRAND} - Charlotte",
                        "Photos from Tequilas Tacos & Bar in Charlotte: tacos, quesabirria, the trompo, "
                        "margaritas, desserts and the dining room.",
