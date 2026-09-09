@@ -363,3 +363,7 @@ footer::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:no
   .foot-grid img{height:96px}
   .foot-grid p{max-width:52ch}
 }
+
+/* page never scrolls sideways: pre-animation reveal-l/r transforms sit off-canvas
+   and otherwise widen the scrollable area (54px wobble on iOS) */
+html,body{overflow-x:clip}
