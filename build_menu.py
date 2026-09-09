@@ -10,7 +10,7 @@ import json, os, re, html, unicodedata
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://tequilastacosbar.com"
 IMG = "/assets/images/menu"
-CSS_VER = "mc7"
+CSS_VER = "mc8"
 ORDER_URL = "https://tequilastacosbar.com/comingsoon"
 BRAND = "Tequilas Tacos & Bar"
 
@@ -181,7 +181,8 @@ def rail(active=None):
     return "".join(out)
 
 def utility():
-    chips = "".join(f'<button class="mchip" type="button" data-t="{e(f)}" aria-pressed="false">{e(f)}</button>' for f in FILTERS)
+    chips = '<button class="mchip" type="button" data-t="All" aria-pressed="true">All</button>'
+    chips += "".join(f'<button class="mchip" type="button" data-t="{e(f)}" aria-pressed="false">{e(f)}</button>' for f in FILTERS)
     return ('<div class="mutil"><label class="msearch"><span>&#8981;</span>'
             '<input id="msearch" type="search" placeholder="Search the menu" aria-label="Search the menu"></label>'
             '<button class="mfilter-toggle" type="button" aria-label="Filters" aria-expanded="false" aria-controls="mfilters" '

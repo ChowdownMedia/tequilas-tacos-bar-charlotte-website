@@ -45,14 +45,21 @@
   function clearAll() {
     q = ""; active = {}; if (box) box.value = "";
     $$(".mchip").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
-    render();
+    syncAll(); render();
+  }
+  function syncAll() {
+    var any = q || Object.keys(active).some(function (k) { return active[k]; });
+    var a = $('.mchip[data-t="All"]');
+    if (a) a.setAttribute("aria-pressed", any ? "false" : "true");
   }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-  if (box) box.addEventListener("input", function () { q = norm(box.value.trim()); render(); });
+  if (box) box.addEventListener("input", function () { q = norm(box.value.trim()); syncAll(); render(); });
   if (chipwrap) $$(".mchip", chipwrap).forEach(function (b) {
     b.addEventListener("click", function () {
-      var t = b.getAttribute("data-t"); active[t] = !(b.getAttribute("aria-pressed") === "true");
-      b.setAttribute("aria-pressed", active[t] ? "true" : "false"); render();
+      var t = b.getAttribute("data-t");
+      if (t === "All") { clearAll(); return; }
+      active[t] = !(b.getAttribute("aria-pressed") === "true");
+      b.setAttribute("aria-pressed", active[t] ? "true" : "false"); syncAll(); render();
     });
   });
 

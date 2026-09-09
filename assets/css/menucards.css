@@ -30,11 +30,13 @@
 .mrg a.on{border-left-color:var(--pink,#FE49DB);background:rgba(59,105,230,.08);color:var(--mb-text)}
 .mrg a .ct{font:700 12px/1.35 var(--ui);color:#5a5370}
 .mcontent{padding:22px 0 90px 34px;min-width:0}
+.mcontent section{padding:0;margin:0}
+.mcontent .mlgroup{margin:0 0 40px}
 
 /* utility bar */
 .mutil{position:sticky;top:0;z-index:40;background:var(--cream,#FFF7EF);
   border-bottom:1px solid var(--mb-rule);display:flex;
-  flex-wrap:wrap;gap:10px;align-items:center;padding:14px 0;margin-bottom:12px}
+  flex-wrap:wrap;gap:10px;align-items:center;padding:12px 0;margin-bottom:6px}
 .msearch{flex:1 1 260px;display:flex;align-items:center;gap:8px;
   border:2px solid var(--mb-rule);background:var(--mb-panel);border-radius:10px;padding:0 12px}
 .msearch span{color:var(--mb-warm)}
