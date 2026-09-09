@@ -369,11 +369,14 @@ footer{border-top:1px solid var(--line);padding:56px 0 34px;background:var(--ink
   text-shadow:0 8px 44px rgba(0,0,0,.65);transition:opacity .38s ease}
 .hc-head.swap{opacity:0}
 .hero-c .hero-cta{justify-content:center;margin-top:30px}
-.hc-dots{display:flex;gap:10px;justify-content:center;margin-top:34px}
-.hc-dot{width:11px;height:11px;padding:0;border-radius:50%;border:1.5px solid rgba(243,239,231,.7);
-  background:transparent;cursor:pointer;transition:width .3s,background .3s,border-color .3s}
-.hc-dot:hover{border-color:var(--agave)}
-.hc-dot.active{width:30px;border-radius:6px;background:var(--agave);border-color:var(--agave)}
+.hc-dots{display:flex;gap:2px;justify-content:center;margin-top:20px}
+.hc-dot{position:relative;width:48px;height:48px;padding:0;border:0;border-radius:50%;
+  background:transparent;cursor:pointer}
+.hc-dot::before{content:"";position:absolute;left:50%;top:50%;width:11px;height:11px;border-radius:50%;
+  border:1.5px solid rgba(243,239,231,.7);background:transparent;transform:translate(-50%,-50%);
+  transition:width .3s,background .3s,border-color .3s}
+.hc-dot:hover::before{border-color:var(--agave)}
+.hc-dot.active::before{width:30px;border-radius:6px;background:var(--agave);border-color:var(--agave)}
 @media(prefers-reduced-motion:reduce){.hc-slide{transition:none}.hc-head{transition:none}}
 
 /* ===== Order Online CTA band =============================================== */

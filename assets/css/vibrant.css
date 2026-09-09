@@ -156,9 +156,9 @@ h1,h2,h3,.hc-head,.order-cta h2,.menu-hero h1,.events-title,.contact-h,.sec-head
 .hc-head{font-size:clamp(56px,10.5vw,148px);color:#fff;
   text-shadow:0 6px 40px rgba(10,4,24,.7),0 0 40px rgba(254,73,219,.34),0 0 90px rgba(59,105,230,.3)}
 .hero-c .hero-lede{max-width:44ch;margin:22px auto 0;font-size:20px;color:rgba(255,247,239,.92)}
-.hc-dot{border-color:rgba(255,255,255,.75)}
-.hc-dot.active{background:var(--gold);border-color:var(--gold);box-shadow:0 0 16px rgba(249,232,124,.9)}
-.hc-dot:hover{border-color:var(--pink)}
+.hc-dot::before{border-color:rgba(255,255,255,.75)}
+.hc-dot.active::before{background:var(--gold);border-color:var(--gold);box-shadow:0 0 16px rgba(249,232,124,.9)}
+.hc-dot:hover::before{border-color:var(--pink)}
 /* lit "¡Salud!" neon sign */
 .neon-sign{position:absolute;top:118px;right:6%;z-index:4;font-family:var(--disp);
   font-weight:400;font-style:normal;text-transform:uppercase;letter-spacing:.02em;
