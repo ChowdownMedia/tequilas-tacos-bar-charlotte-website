@@ -10,7 +10,7 @@ import json, os, re, html, unicodedata
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://tequilastacosbar.com"
 IMG = "/assets/images/menu"
-CSS_VER = "mc30"
+CSS_VER = "mc31"
 NOIR_VER = "noir1"
 ORDER_URL = "https://tequilastacosbar.com/comingsoon"
 PDF_URLS = {
@@ -278,9 +278,15 @@ def item_row(it, cat):
     ename, epr, islug = e(name), e(row_price(variants, minp)), slug(name)
     tag_html = ('<div class="mr-tags">' + "".join(f'<span class="mtag">{e(t)}</span>' for t in tags) + "</div>") if tags else ""
     desc_html = f'<p class="mr-desc">{e(desc)}</p>' if desc else ""
+    more_html = ""
+    if len(variants) > 1:
+        more_html = (f'<div class="mr-more"><span>{len(variants)} options</span>'
+                     '<svg viewBox="0 0 8 12" width="7" height="10" aria-hidden="true">'
+                     '<path d="M1.5 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" '
+                     'stroke-linecap="round" stroke-linejoin="round"/></svg></div>')
     return (f'<div class="mrow" id="{islug}" data-item=\'{data_attr}\' tabindex="0" role="button" aria-label="{ename}">'
             f'<div class="mr-top"><span class="mr-name">{ename}</span><span class="mr-lead"></span><span class="mr-price">{epr}</span></div>'
-            f'{tag_html}{desc_html}</div>')
+            f'{more_html}{tag_html}{desc_html}</div>')
 
 def feat_card(it, cat, base):
     variants, minp = parse_price(it.get("price", ""))

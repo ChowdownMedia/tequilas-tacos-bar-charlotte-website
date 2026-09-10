@@ -127,6 +127,11 @@
 .mr-name{font-family:var(--disp);font-weight:400;font-size:22px;line-height:1.15;color:var(--mb-text);flex:0 0 auto;letter-spacing:.01em}
 .mr-lead{flex:1 1 auto;border-bottom:2px dotted var(--mb-leader);transform:translateY(-4px)}
 .mr-price{flex:0 0 auto;font:800 21px/1 var(--ui);color:var(--blue,#3B69E6);white-space:nowrap}
+.mr-more{display:inline-flex;align-items:center;gap:5px;margin-top:6px;
+  font:800 10px/1 var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--blue,#3B69E6)}
+.mr-more svg{transition:transform .15s ease}
+.mrow:hover .mr-more{color:var(--pink,#FE49DB)}
+.mrow:hover .mr-more svg{transform:translateX(2px)}
 .mr-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
 .mtag{font:800 10px/1.4 var(--ui);letter-spacing:.14em;text-transform:uppercase;
   color:var(--mb-warm);border:1px solid var(--mb-leader);border-radius:999px;padding:3px 8px}

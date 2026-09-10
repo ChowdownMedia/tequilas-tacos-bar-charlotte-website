@@ -91,7 +91,6 @@
       '<div class="sh-vars">' + variants + '</div>' +
       (v.d ? '<p class="sh-desc">' + esc(v.d) + '</p>' : '') +
       (tags ? '<div class="sh-tags">' + tags + '</div>' : '') +
-      '<a class="btn-red" href="' + v.order + '" target="_blank" rel="noopener">Add to online order</a>' +
       '<button type="button" class="sh-close" id="mshclose" aria-label="Close">Close ✕</button></div>';
     scrim.hidden = false; sheet.hidden = false; document.body.style.overflow = "hidden";
     var cl = $("#mshclose"); if (cl) { cl.focus(); cl.onclick = closeSheet; }
