@@ -11,6 +11,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://tequilastacosbar.com"
 IMG = "/assets/images/menu"
 CSS_VER = "mc30"
+NOIR_VER = "noir1"
 ORDER_URL = "https://tequilastacosbar.com/comingsoon"
 PDF_URLS = {
     "food": "https://storage.googleapis.com/msgsndr/r38meFSUdG3vciQdiMyJ/media/68273a85bb183352e7966c7e.pdf",
@@ -222,20 +223,26 @@ FILTERS = ["New", "Featured", "Spicy", "Seafood", "Veggie", "Under $10", "For tw
 
 # ---------------------------------------------------------------- board pieces
 def rail(active=None):
-    out = ['<aside class="mrail"><a class="mrail-brand" href="/menu/">'
-           '<img src="/assets/images/favicon-180.png" alt="" width="46" height="46">'
-           '<span><b>TEQUILAS</b><i>Full Menu</i></span></a>']
+    # Neon Noir left-rail header: tracked "Browse by course" label + gold meta line.
+    # Counts are derived from the rail itself so they can never drift from the data:
+    #   courses = number of category links, items = sum of the per-course counts.
+    groups = []
+    courses = 0
+    items_total = 0
     for g, cats in COURSE_GROUPS:
         present = [c for c in cats if c in CAT_BY_NAME]
         if not present: continue
-        out.append(f'<div class="mrg"><h4>{e(g)}</h4>')
+        groups.append(f'<div class="mrg"><h4>{e(g)}</h4>')
         for c in present:
             n = len(CAT_BY_NAME[c]["items"])
+            courses += 1
+            items_total += n
             on = ' class="on"' if c == active else ""
-            out.append(f'<a{on} href="/menu/{slug(c)}/">{e(label_of(c))}<span class="ct">{n}</span></a>')
-        out.append("</div>")
-    out.append("</aside>")
-    return "".join(out)
+            groups.append(f'<a{on} href="/menu/{slug(c)}/">{e(label_of(c))}<span class="ct">{n}</span></a>')
+        groups.append("</div>")
+    brand = ('<a class="mrail-brand" href="/menu/#mspread">'
+             f'<span><b>Browse by course</b><i>{courses} courses &middot; {items_total} items</i></span></a>')
+    return '<aside class="mrail">' + brand + "".join(groups) + "</aside>"
 
 def utility():
     chips = '<button class="mchip" type="button" data-t="All" aria-pressed="true">All</button>'
@@ -345,6 +352,8 @@ def chrome(title, desc, canon, og_img=None):
     top = open(os.path.join(ROOT, ".chowdown/chrome/top.html")).read()
     top = top.replace('href="../', 'href="/').replace('src="../', 'src="/')
     top = top.replace("url(../", "url(/")
+    # Neon Noir: nav sits on a dark ground now, so use the white-artwork logo.
+    top = top.replace("kit-logo-nav.webp", "kit-logo-white.webp")
     top = re.sub(r'<script type="application/ld\+json">.*?</script>', "", top, flags=re.S)
     top = re.sub(r"<title>.*?</title>", f"<title>{e(title)}</title>", top, flags=re.S)
     top = re.sub(r'(<meta name="description" content=")[^"]*(")', r"\g<1>" + e(desc) + r"\2", top)
@@ -353,7 +362,7 @@ def chrome(title, desc, canon, og_img=None):
     top = re.sub(r'(<meta property="og:title" content=")[^"]*(")', r"\g<1>" + e(title) + r"\2", top)
     if og_img:
         top = re.sub(r'(<meta property="og:image" content=")[^"]*(")', r"\g<1>" + DOMAIN + og_img + r"\2", top)
-    top = top.replace("</head>", f'<link rel="stylesheet" href="/assets/css/menucards.css?v={CSS_VER}"></head>', 1)
+    top = top.replace("</head>", f'<link rel="stylesheet" href="/assets/css/menucards.css?v={CSS_VER}"><link rel="stylesheet" href="/assets/css/tq-noir.css?v={NOIR_VER}"></head>', 1)
     tail = open(os.path.join(ROOT, ".chowdown/chrome/tail.html")).read()
     tail = tail.replace('href="../', 'href="/').replace('src="../', 'src="/')
     return top, tail
@@ -507,7 +516,9 @@ if __name__ == "__main__":
     dup = [s for s in slugs if slugs.count(s) > 1]
     assert not dup, f"SLUG COLLISION: {set(dup)}"
     page_menu_landing()
-    page_gallery()
+    # Gallery is now a hand-maintained Neon Noir page (new nav/footer + lightbox), not
+    # generated here. Leaving page_gallery() out so a rebuild never clobbers that design.
+    # page_gallery()
     for i, cat in enumerate(names):
         page_category(cat, names[i-1] if i > 0 else None,
                       names[i+1] if i < len(names)-1 else None)
