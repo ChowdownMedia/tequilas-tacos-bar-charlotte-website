@@ -69,8 +69,7 @@ input,textarea,button{font-family:inherit}
 
 <section id="heroC" style="position:relative;isolation:isolate;min-height:clamp(660px,100vh,1000px);display:grid;align-items:end;overflow:hidden">
   <div style="position:absolute;inset:0;z-index:0">
-    <video data-herovid muted loop playsinline preload="none" poster="assets/images/hero-video-poster.webp" aria-hidden="true" tabindex="-1" style="width:100%;height:100%;object-fit:cover;display:block">
-      <source src="assets/video/hero.webm" type="video/webm">
+    <video data-herovid autoplay muted loop playsinline preload="auto" poster="assets/images/hero-video-poster.webp" aria-hidden="true" tabindex="-1" style="width:100%;height:100%;object-fit:cover;display:block">
       <source src="assets/video/hero.mp4" type="video/mp4">
     </video>
   </div>
@@ -501,16 +500,13 @@ input,textarea,button{font-family:inherit}
   q('[data-sheet] a').forEach(function(a){a.addEventListener('click',function(){setNav(false);});});
 
   layout();wireReveal();wireScroll();wireDropdown();
-  // Hero video: defer load until after first paint so it never competes with LCP;
-  // honor reduced-motion and Data Saver (poster stays as the still hero).
+  // Hero video: always-on muted autoplay loop; nudge it back if the browser pauses it.
   (function(){
     var hv=q('[data-herovid]')[0];if(!hv)return;
-    var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var sd=navigator.connection&&navigator.connection.saveData;
-    if(rm||sd)return;
-    var go=function(){hv.load();var p=hv.play();if(p&&p.catch)p.catch(function(){});};
-    if(document.readyState==='complete')setTimeout(go,150);
-    else window.addEventListener('load',function(){setTimeout(go,150);});
+    var kick=function(){var p=hv.play();if(p&&p.catch)p.catch(function(){});};
+    kick();
+    hv.addEventListener('pause',function(){if(!document.hidden)kick();});
+    document.addEventListener('visibilitychange',function(){if(!document.hidden)kick();});
   })();
   window.addEventListener('resize',layout);
 })();
